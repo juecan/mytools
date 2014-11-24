@@ -12,7 +12,6 @@
 ## linux
 
 	linux tools
-	msmtp-mutt: 邮件相关
 
 ## openelec
 
@@ -24,7 +23,5 @@
 
 ## voip
 
-	asterisk tools
-	openvox gsmgateway tools
-	sipp tools
+	VOIP tools
 
