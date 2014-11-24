@@ -1,0 +1,24 @@
+# help_info script_name new_dir
+help_info()
+{
+	script_name=$1
+	new_dir=$2
+
+	echo "Usage: ${script_name} first|passwd|end|--help|-h|--version"
+	echo "Modify OpenELEC read-only system."
+	echo
+	echo -e "\t1. ${script_name} first"
+	echo -e "\t2. Modify, eg: ${script_name} passwd"
+	echo -e "\t3. ${script_name} end"
+	echo
+	echo "About arguments:"
+	echo -e "\tfirst\t\tThe first step: mount and copy SYSTEM to ${new_dir}."
+	echo -e "\t\t\tso that you can edit the configuration files in ${new_dir}."
+	echo -e "\tend\t\tThe end step: General the new SYSTEN and KERNEL file to update folder."
+	echo -e "\tpasswd\t\tChange user's password."
+	echo
+	echo -e "\t-h\t\tDisplay short usage."
+	echo -e "\t--help\t\tDisplay this help and exit"
+	echo -e "\t--version\tOutput version information and exit"
+	echo
+}

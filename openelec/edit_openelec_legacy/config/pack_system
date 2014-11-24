@@ -1,0 +1,26 @@
+# pack_system new_dir
+pack_system()
+{
+	new_dir=$1
+
+	#echo "压缩新的 SYSTEM，拷贝到更新目录..."
+	echo "Squashing new SYSTEM, copying to update directory..."
+	if [ ! -d "/storage/.update" ]
+	then
+		mkdir -p /storage/.update
+	fi
+	chmod +x ./scripts/mksquashfs
+	./scripts/mksquashfs ${new_dir} /storage/.update/SYSTEM
+	chmod -x ./scripts/mksquashfs
+	chmod 755 /storage/.update/SYSTEM
+	cp /flash/KERNEL /storage/.update/
+
+	#echo "产生 md5 校验文件..."
+	echo "General md5 file..."
+	md5sum /storage/.update/SYSTEM > /storage/.update/SYSTEM.md5
+	md5sum /storage/.update/KERNEL > /storage/.update/KERNEL.md5
+
+	rm -r ${new_dir}
+	#echo "所有工作完成，重启后更新！"
+	echo "All done. Reboot to upgrade!"
+}

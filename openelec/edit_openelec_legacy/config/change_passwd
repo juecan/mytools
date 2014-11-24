@@ -1,0 +1,22 @@
+# change_passwd new_dir
+change_passwd()
+{
+	new_dir=$1
+
+	#echo -n "请输入用户名："
+	echo -n "Please input usename: "
+	read user
+	#echo -n "请输入新的密码："
+	echo -n "Please input new password: "
+	read -s password
+	echo
+
+	#echo "正在更改 ${USER} 的密码，请稍后……"
+	echo "Changing ${USER}'s password, please wait..."
+	chmod +x scripts/change_password.py
+	./scripts/change_password.py -p ${new_dir}/etc/ -u ${user} ${password}
+	chmod -x scripts/change_password.py
+
+	#echo "密码修改完毕。"
+	echo "Password has been changed."
+}

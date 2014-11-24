@@ -1,0 +1,47 @@
+# copy_system orig_dir new_dir
+copy_system()
+{
+	orig_dir=$1
+	new_dir=$2
+
+	#echo "检查空闲空间..."
+	echo "Verifying free space..."
+	free_space=`df /storage | grep dev | awk {'print $4'}`
+	if [ ${free_space} -lt 400000 ]
+	then
+		#echo "/storage 没有足够空间！"
+		echo "Not enough space left in /storage!"
+		exit
+	fi
+
+	#echo "创建文件夹"
+	echo "Making directories..."
+	mkdir ${orig_dir}
+	mkdir ${new_dir}
+
+	#echo "挂载 SYSTEM..."
+	echo "Mounting SYSTEM..."
+	mount -t squashfs -o loop /flash/SYSTEM ${orig_dir}
+	sleep 10
+	if mount | grep "on ${orig_dir} type" > /dev/null
+	then
+		#echo "SYSTEM 已经挂载。"
+		echo "SYSTEM mounted."
+	else
+		#echo "挂载 SYSTEM 出错！"
+		echo "Error mounting SYSTEM!"
+		exit
+	fi
+
+	#echo "拷贝文件，请稍后..."
+	echo "Copy files, please wait..."
+	cp -a ${orig_dir}/* ${new_dir}
+
+	#echo "卸载 SYSTEM。"
+	echo "Umounting SYSTEM."
+	umount ${orig_dir}
+	rm -r ${orig_dir}
+
+	#echo "你可以修改 /storage/system.new 中的文件。"
+	echo "You can edit files in ${new_dir}."
+}

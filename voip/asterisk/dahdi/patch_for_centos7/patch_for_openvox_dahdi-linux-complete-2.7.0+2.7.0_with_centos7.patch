@@ -1,0 +1,31 @@
+diff -Nur dahdi-linux-complete-2.7.0+2.7.0/linux/drivers/dahdi/wcb4xxp/base.c dahdi-linux-complete-2.7.0+2.7.0_openvox/linux/drivers/dahdi/wcb4xxp/base.c
+--- dahdi-linux-complete-2.7.0+2.7.0/linux/drivers/dahdi/wcb4xxp/base.c	2013-11-22 10:08:46.000000000 +0800
++++ dahdi-linux-complete-2.7.0+2.7.0_openvox/linux/drivers/dahdi/wcb4xxp/base.c	2014-07-24 14:38:31.942623269 +0800
+@@ -35,7 +35,9 @@
+ #include <linux/spinlock.h>
+ #include <linux/device.h>	/* dev_err() */
+ #include <linux/interrupt.h>
++#if kernel_version_openvox < 3
+ #include <asm/system.h>		/* cli(), *_flags */
++#endif
+ #include <asm/uaccess.h>	/* copy_*_user */
+ #include <linux/workqueue.h>	/* work_struct */
+ #include <linux/timer.h>	/* timer_struct */
+diff -Nur dahdi-linux-complete-2.7.0+2.7.0/linux/drivers/dahdi/wcb4xxp/Kbuild dahdi-linux-complete-2.7.0+2.7.0_openvox/linux/drivers/dahdi/wcb4xxp/Kbuild
+--- dahdi-linux-complete-2.7.0+2.7.0/linux/drivers/dahdi/wcb4xxp/Kbuild	2012-05-30 09:34:42.000000000 +0800
++++ dahdi-linux-complete-2.7.0+2.7.0_openvox/linux/drivers/dahdi/wcb4xxp/Kbuild	2014-07-24 14:38:31.942623269 +0800
+@@ -2,6 +2,7 @@
+ obj-m += opvxec.o
+ 
+ EXTRA_CFLAGS += -I$(src)/.. -Wno-undef
++EXTRA_CFLAGS += -Dkernel_version_openvox=$(shell uname -r | cut -c 1)
+ 
+ DAHDI_KERNEL_H_NAME:=kernel.h
+ DAHDI_KERNEL_H_PATH:=$(DAHDI_INCLUDE)/dahdi/$(DAHDI_KERNEL_H_NAME)
+@@ -21,4 +22,4 @@
+ opvxec-objs := opvx_lib.o hfcopvx.o
+ 
+ $(obj)/base.o: $(src)/wcb4xxp.h
+-$(obj)/opvx_lib.o: $(src)/hfcopvx.h
+\ No newline at end of file
++$(obj)/opvx_lib.o: $(src)/hfcopvx.h
