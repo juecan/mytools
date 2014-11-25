@@ -73,7 +73,7 @@ set_sip_usage()
 case $1 in
 "--dynamic") options=dynamic ;;
 "--ip2ip") options=ip2ip ;;
-"-h"|*) set_sip_usage $1 && exit 0 ;;
+"-h"|*) set_sip_usage $0 && exit 0 ;;
 esac
 [ "$2" == "" ] && echo "You need input a filename: `basename $0` --dynamic|--ip2ip new_sip_file" && exit 0
 
