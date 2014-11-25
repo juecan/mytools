@@ -81,13 +81,14 @@ set_sip_help()
 # Main function
 ##################################################
 
-[ "$#" != "1" -a "$#" != "2" ] && set_sip_usage $0 && exit 0
+[ "$#" != "1" -a "$#" != "2" ] && echo "You need 1 or 2 parameter!" && set_sip_usage $0 && exit 0
 
 case $1 in
 "--dynamic") options=dynamic ;;
 "--ip2ip") options=ip2ip ;;
 "-h") set_sip_usage $0 && exit 0 ;;
 "--help") set_sip_help $0 && exit 0 ;;
+*) echo "invalid parameter!" && exit 0 ;;
 esac
 [ "$2" == "" ] && echo "You need input a filename: `basename $0` --dynamic|--ip2ip new_sip_file" && exit 0
 
