@@ -61,7 +61,20 @@ function set_sip()
 
 set_sip_usage()
 {
-	echo "Usage: `basename $1` --dynamic|--ip2ip|-h [new_sip_file]"
+	echo "Usage: `basename $1` --dynamic|--ip2ip|-h <new_sip_file>"
+}
+
+set_sip_help()
+{
+	echo
+	set_sip_usage $1
+	echo "Function: setup multiple sip account"
+	echo
+	echo -e "\t--dynamic\tSet host=dynamic"
+	echo -e "\t--ip2ip\t\tSet host=IP"
+	echo -e "\t-h\t\tDisplay usage"
+	echo -e "\t--help\t\tDisplay this help"
+	echo
 }
 
 ##################################################
@@ -73,7 +86,8 @@ set_sip_usage()
 case $1 in
 "--dynamic") options=dynamic ;;
 "--ip2ip") options=ip2ip ;;
-"-h"|*) set_sip_usage $0 && exit 0 ;;
+"-h") set_sip_usage $0 && exit 0 ;;
+"--help") set_sip_help $0 && exit 0 ;;
 esac
 [ "$2" == "" ] && echo "You need input a filename: `basename $0` --dynamic|--ip2ip new_sip_file" && exit 0
 
