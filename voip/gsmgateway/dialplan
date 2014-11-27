@@ -1,0 +1,13 @@
+Dial Patterns:
+	prepend + prefix | match pattern / CallerID
+	prepend: 送出号码的前缀
+	prefix: 呼叫时需加拨的前缀
+	match pattern: 匹配规则
+	CallerID: 被允许的主叫
+
+设置主叫名称与号码
+	去掉来电号码的第一位，在呼入路由中设置：
+	Set the Caller ID Name to: ${CALLERID(name):1}
+	Set the Caller ID Number to: ${CALLERID(number):1}
+
+Forward Number: 设置要呼叫的号码
