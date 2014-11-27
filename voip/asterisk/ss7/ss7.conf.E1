@@ -1,0 +1,39 @@
+[linkset-siuc]
+enabled => yes
+enable_st => no
+use_connect => yes
+hunting_policy => even_mru
+context => from-ss7
+language => en
+t35 => 15000,timeout
+subservice => auto
+;variant => CHINA
+
+[link-l1]
+linkset => siuc
+channels => 1-15,17-31
+schannel => 16
+firstcic => 1
+sltm => no
+enabled => yes
+
+[link-l2]
+linkset => siuc
+channels => 1-31
+schannel =>
+firstcic => 33
+enabled => yes
+
+[link-l3]
+linkset => siuc
+channels => 1-31
+schannel =>
+firstcic => 65
+enabled => yes
+
+[host-centos61]
+enabled => yes
+opc => 0x2
+dpc => siuc:0x1
+links => l1:1,l2:2,l3:3
+

@@ -1,0 +1,4 @@
+Changes since 1.4.8:
+
+Added a large number French extra recordings, courtesy of Clod Patry and the
+fine folks at the Montreal Asterisk Users Group.

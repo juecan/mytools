@@ -1,0 +1,91 @@
+[linkset-siuc1]
+enabled => yes
+enable_st => no
+use_connect => yes
+hunting_policy => even_mru
+context => from-ss7
+language => en
+t35 => 15000,timeout
+subservice => auto
+variant => CHINA
+opc => 0x2
+dpc => 0x1
+
+[linkset-siuc2]
+enabled => yes
+enable_st => no
+use_connect => yes
+hunting_policy => even_mru
+context => from-ss7
+language => en
+t35 => 15000,timeout
+subservice => auto
+variant => CHINA
+opc => 0x1
+dpc => 0x2
+
+[link-l1]
+linkset => siuc1
+channels => 1-23
+schannel => 24
+firstcic => 1
+sltm => no
+enabled => yes
+
+[link-l2]
+linkset => siuc1
+channels => 1-24
+schannel =>
+firstcic => 33
+enabled => yes
+
+[link-l3]
+linkset => siuc1
+channels => 1-24
+schannel =>
+firstcic => 65
+enabled => yes
+
+[link-l4]
+linkset => siuc1
+channels => 1-24
+schannel =>
+firstcic => 97
+enabled => yes
+
+[link-l5]
+linkset => siuc2
+channels => 1-23
+schannel => 24
+firstcic => 1
+sltm => no
+enabled => yes
+
+[link-l6]
+linkset => siuc2
+channels => 1-24
+schannel =>
+firstcic => 33
+enabled => yes
+
+[link-l7]
+linkset => siuc2
+channels => 1-24
+schannel =>
+firstcic => 65
+enabled => yes
+
+[link-l8]
+linkset => siuc2
+channels => 1-24
+schannel =>
+firstcic => 97
+enabled => yes
+
+[host-centos61]
+enabled => yes
+default_linkset => siuc1
+;opc => 0x2
+;dpc => siuc:0x1
+links => l1:1,l2:2,l3:3,l4:4,l5:5,l6:6,l7:7,l8:8
+

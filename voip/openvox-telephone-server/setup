@@ -1,0 +1,115 @@
+分机设置：
+Elastix Add an Extension:
+	Generic SIP Device
+		User Extension: 657
+		Display Name: 657
+		secret: 123456
+
+[657]
+deny=0.0.0.0/0.0.0.0
+secret=123456
+dtmfmode=rfc2833
+canreinvite=no
+context=from-internal
+host=dynamic
+type=friend
+nat=yes
+port=5060
+qualify=yes
+callgroup=
+pickupgroup=
+dial=SIP/657
+mailbox=657@device
+permit=0.0.0.0/0.0.0.0
+callerid=device <657>
+callcounter=yes
+faxdetect=no
+
+Elastix Add a SIP Trunk:
+	General Settings
+		Trunk Name: ims-61828726
+		Maximum Channels: 1
+	Outgoing Settings
+		Trunk Name: 8675561828726
+		PEER Details:
+			host=10.211.0.241
+			username=8675561828726@ims.gd.chinamobile.com
+			secret=123456
+			type=friend
+			insecure=port,invite
+			fromdomain=ims.gd.chinamobile.com
+			fromuser=+8675561828726
+			disallow=all
+			allow=alaw,ulaw
+	Registration	
+		Register String: +8675561828726@ims.gd.chinamobile.com:123456:8675561828726@ims.gd.chinamobile.com@10.211.0.241/+8675561828726
+
+Elastix Add a Outbound Route:
+	Route Settings
+		Route Name: ims
+	Dial Patterns that will use this Route
+		prepend + prefix | . / CallerID
+	Trunk Sequence for Matched Routes
+		ims-66630978
+		ims-61828726
+
+Elastix Inbound Routes:
+	any DID / any CID
+		Set Destination: IVR - first_ivr
+
+Elastix Add an IVR:
+	Change Name: first_ivr
+	Announcement: firstcall-1
+	Enable Direct Dial: Yes
+	Timeout Message: invild-en
+	Invalid Message: invild-en
+	Repeat Loops: 3
+	1	IVR		chinese_ivr
+	2	IVR		english_ivr
+	8	Conferences	miao <789>
+
+	Change Name: chinese_ivr
+	Announcement: chinese_ivr
+	Enable Direct Dial: Yes
+	Timeout Message: invild-cn
+	Invalid Message: invild-cn
+	Repeat Loops: 3
+	0	Extensions	<819> 819
+	1	Ring Groups	NmarketCN <100>
+	2	Ring Groups	XingZhengCN <100>
+	3	Ring Groups	supportCN <100>
+	4	Ring Groups	VmarketCN <100>
+
+	Change Name: english_ivr
+	Announcement: English_ivr
+	Enable Direct Dial: Yes
+	Timeout Message: invild-en
+	Invalid Message: invild-en
+	Repeat Loops: 3
+	0	Extensions	<819> 819
+	1	Ring Groups	NmarketCN <100>
+	2	Ring Groups	XingZhengCN <100>
+	3	Ring Groups	supportCN <100>
+	4	Ring Groups	VmarketCN <100>
+
+Elastix Add a Conference:
+	Conference Number: 789
+	Conference Name: miao
+
+Elastix Add a Ring Group
+	Add Ring Group
+		Ring-Group Number: 102
+		Group Description: supportCN
+		Ring Strategy: memoryhunt
+		Ring Time (max 60 sec): 10
+		Extension List:
+			651
+			652
+		Announcement: luyin
+		Play Music On Hold? new
+		Destination if no answer: Terminate Call - Hangup
+
+Elastix On Hold Music
+	Category: new
+	wav_hello.wav
+	wav_wuxian.wav

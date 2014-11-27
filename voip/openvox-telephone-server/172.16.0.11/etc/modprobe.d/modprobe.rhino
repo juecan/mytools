@@ -1,0 +1,14 @@
+#add drivers to blacklist to prevent the kernels AUTO LOAD
+blacklist rcbfx
+blacklist r1t1
+blacklist r4fxo
+blacklist rxt1
+#dahdi_cfg after modprobe...
+install r1t1 modprobe --ignore-install r1t1   && dahdi_cfg -vvv || /bin/true
+install rxt1 modprobe --ignore-install rxt1   && dahdi_cfg -vvv || /bin/true
+install rcbfx modprobe --ignore-install rcbfx   && dahdi_cfg -vvv || /bin/true
+install r4fxo modprobe --ignore-install r4fxo   && dahdi_cfg -vvv || /bin/true
+#set options for drivers
+options r1t1 e1=0 ec_disable=0 debug=0 
+options rxt1 t1e1override=0 ec_disable_1=0 ec_disable_2=0 ec_disable_3=0 ec_disable_4=0 debug=0
+options rcbfx debug=0

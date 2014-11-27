@@ -1,0 +1,59 @@
+For 172.16.0.2
+
+Trunk:
+General Settings
+	Trunk Name: 		ims-61828726
+	CID Options: 		Allow Any CID
+	Maximum Channels:	1
+Outgoing Settings
+	Trunk Name:		8675561828726
+	PEER Details:
+		host=10.211.0.241
+		username=8675561828726@ims.gd.chinamobile.com
+		secret=123456
+		type=friend
+		insecure=port,invite
+		fromdomain=ims.gd.chinamobile.com
+		fromuser=+8675561828726
+		disallow=all
+		allow=alaw,ulaw
+	Register String:
+		+8675561828726@ims.gd.chinamobile.com:123456:8675561828726@ims.gd.chinamobile.com@10.211.0.241/+8675561828726
+
+General Settings
+	Trunk Name: 		ims-66630978
+	CID Options: 		Allow Any CID
+	Maximum Channels:	2
+Outgoing Settings
+	Trunk Name:		8675566630978
+	PEER Details:
+		host=172.16.0.11
+		insecure=invite
+		disallow=all
+		allow=ulaw,alaw
+		canreinvite=no
+		context=from-pstn
+		type=friend
+
+For 172.16.0.11
+Trunk:
+General Settings
+	Trunk Name: 		ims-66630978
+	CID Options: 		Allow Any CID
+	Maximum Channels:	
+Outgoing Settings
+	Trunk Name:		8675566630978
+	PEER Details:
+		host=10.211.0.241
+		username=8675566630978@ims.gd.chinamobile.com
+		secret=123456
+		type=friend
+		insecure=port,invite
+		fromdomain=ims.gd.chinamobile.com
+		fromuser=+8675566630978
+		disallow=all
+		allow=alaw
+		context=from-pstn
+	Register String:
+		+8675566630978@ims.gd.chinamobile.com:123456:8675566630978@ims.gd.chinamobile.com@10.211.0.241/+8675566630978
+

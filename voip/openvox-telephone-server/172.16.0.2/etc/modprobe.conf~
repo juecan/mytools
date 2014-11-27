@@ -1,0 +1,9 @@
+alias eth0 r8169
+alias scsi_hostadapter ahci
+alias scsi_hostadapter1 usb-storage
+alias net-pf-10 off
+alias ipv6 off
+options ipv6 disable=1
+options snd-hda-intel index=0
+remove snd-hda-intel { /usr/sbin/alsactl store 0 >/dev/null 2>&1 || : ; }; /sbin/modprobe -r --ignore-remove snd-hda-intel
+alias eth1 8139too

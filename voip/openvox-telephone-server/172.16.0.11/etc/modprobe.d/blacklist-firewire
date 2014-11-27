@@ -1,0 +1,2 @@
+# Comment out the next line to enable the firewire drivers
+blacklist firewire-ohci
