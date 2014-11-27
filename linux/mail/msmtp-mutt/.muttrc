@@ -1,0 +1,5 @@
+set sendmail="/usr/local/bin/msmtp"
+set from=zouhualong1012@163.com
+set use_from=yes
+set realname="Along"
+set editor="vim"
