@@ -1,4 +1,3 @@
-
 ## OpenVox GSM Gateway SMS Demo
 
 ### 注意
