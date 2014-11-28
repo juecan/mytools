@@ -21,3 +21,8 @@
 
 	PDU 解码工具（Win）：http://www.scampers.org/steve/sms/tools.htm#decoder
 
+### pdu.php
+
+	http://www.rednaxela.net/pdu.php
+	http://smstools3.kekekasvi.com/topic.php?id=288
+	pdu decoder php script
