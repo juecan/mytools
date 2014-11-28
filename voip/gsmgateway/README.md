@@ -6,3 +6,4 @@
 	g400: G400 相关
 	gsm_call_test: GSM Gateway 呼叫测试
 	SMSdemo: SMS to HTTP and HTTP to SMS 的 demo 页面
+	callback: 网关添加 Callback 功能
