@@ -1655,7 +1655,7 @@ LinkedIn</a> and <a href="/">contact me</a>.
 
 
 
-	<textarea name="smsText" rows="8" wrap="virtual" onchange="change(this)" onkeyup="change(this)" cols="24">Hi there...Mon 01st Dec 2014 02:05.35 am (GMT+1)</textarea> 
+	<textarea name="smsText" rows="8" wrap="virtual" onchange="change(this)" onkeyup="change(this)" cols="24">Hi there...Fri 28th Nov 2014 04:44.28 am (GMT+1)</textarea> 
     </td>
 
 

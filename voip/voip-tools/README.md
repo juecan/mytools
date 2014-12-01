@@ -2,8 +2,7 @@
 
 ### fping
 
-	fping is a program to send ICMP echo probes to network hosts, similar to ping.
-	https://github.com/schweikert/fping/releases
+	可 ping 多个主机: https://github.com/schweikert/fping/releases
 
 ### arping
 
@@ -17,14 +16,13 @@
 
 	svmap: OPTIONS -> Dest -> Receive Server Name or another Message
 
-### PDUDecoder
-
-	PDU 解码工具（Win）：http://www.scampers.org/steve/sms/tools.htm#decoder
-
 ### pdu-converter
 
 	rednaxela pdu converter: http://www.rednaxela.net/pdu.php
 	smstools3 pdu converter: http://smstools3.kekekasvi.com/topic.php?id=288
+	PDUDecoder: PDU 解码工具（Win）, http://www.scampers.org/steve/sms/tools.htm#decoder
 
-	dtmf2num: http://aluigi.altervista.org/mytoolz.htm#dtmf2num
+### dtmf2num
+	提取音频文件中的DTMF信号: http://aluigi.altervista.org/mytoolz.htm#dtmf2num
+
 	sipsak-0.9.6-1.tar.gz
