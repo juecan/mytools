@@ -21,10 +21,10 @@
 
 	PDU 解码工具（Win）：http://www.scampers.org/steve/sms/tools.htm#decoder
 
-### pdu.php
+### pdu-converter
 
-	pdu.php: http://www.rednaxela.net/pdu.php
-	pduconvert.php: http://smstools3.kekekasvi.com/topic.php?id=288
+	rednaxela pdu converter: http://www.rednaxela.net/pdu.php
+	smstools3 pdu converter: http://smstools3.kekekasvi.com/topic.php?id=288
 
 	dtmf2num: http://aluigi.altervista.org/mytoolz.htm#dtmf2num
 	sipsak-0.9.6-1.tar.gz

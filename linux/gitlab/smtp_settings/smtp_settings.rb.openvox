@@ -1,0 +1,18 @@
+# To enable smtp email delivery for your GitLab instance do next: 
+# 1. Rename this file to smtp_settings.rb
+# 2. Edit settings inside this file
+# 3. Restart GitLab instance
+#
+if Rails.env.production?
+  Gitlab::Application.config.action_mailer.delivery_method = :smtp
+
+  ActionMailer::Base.smtp_settings = {
+    address: "mail.openvox.cn",
+    port: 25,
+    user_name: "Michael.zou@openvox.cn",
+    password: "6(SlFkely7d[",
+    domain: "openvox.com",
+    authentication: :login,
+    enable_starttls_auto: false
+  }
+end
