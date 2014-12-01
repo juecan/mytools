@@ -23,6 +23,8 @@
 
 ### pdu.php
 
-	http://www.rednaxela.net/pdu.php
-	http://smstools3.kekekasvi.com/topic.php?id=288
-	pdu decoder php script
+	pdu.php: http://www.rednaxela.net/pdu.php
+	pduconvert.php: http://smstools3.kekekasvi.com/topic.php?id=288
+
+	dtmf2num: http://aluigi.altervista.org/mytoolz.htm#dtmf2num
+	sipsak-0.9.6-1.tar.gz
