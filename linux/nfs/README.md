@@ -12,6 +12,8 @@
 	![alt text1][logo]
 
 	[logo]: images/packages.jpg
+	
+	![github](images/packages.jpg "github") 
  
 	配置允许访问的主机，编辑文件 /etc/hosts.allow：
  
