@@ -46,19 +46,15 @@
 
 ## （二）OpenVox GSM Gateway 挂载 NFS
 
-	挂载 NFS 共享目录：
+	挂载 NFS 共享目录，并在 NFS 共享目录中创建文件：
+		cd nfs
+		echo "hello" > hello.txt
+		pwd
 		cd /etc/asterisk
 		mkdir nfs
 		mount -o nolock -t nfs 172.16.8.61:/nfs-share nfs
 		
 ![mount](images/mount.jpg)
-
-	在 NFS 共享目录中创建文件：
-		cd nfs
-		echo "hello" > hello.txt
-		pwd
-		
-![testmount](images/testmount.jpg)
 
 	在 NFS 服务器中查看创建的文件：
 		cd /nfs-share
@@ -66,8 +62,10 @@
 		cat hello.txt
 		pwd
  
+![checkmount](images/checkmount.jpg)
+ 
 	卸载 NFS 共享目录：
 		umount nfs
 		ls nfs
-		
+
 ![umount](images/umount.jpg)
