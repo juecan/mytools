@@ -17,15 +17,15 @@ Reference-style:
 	安装相关软件：
 		yum install nfs-utils portmap
 		
-	images/packages.jpg
+images/packages.jpg
 	
-	![hello](images/packages.jpg)
+![hello](images/packages.jpg)
 
-	![hello][logo]
+![hello][logo]
 
-	[logo]: images/packages.jpg
+[logo]: images/packages.jpg
 	
-	![github](http://172.16.0.222/zouhualong/mytools/tree/master/linux/nfsimages/packages.jpg "github") 
+![github](http://172.16.0.222/zouhualong/mytools/tree/master/linux/nfsimages/packages.jpg "github") 
  
 	配置允许访问的主机，编辑文件 /etc/hosts.allow：
 		vi /etc/hosts.allow
