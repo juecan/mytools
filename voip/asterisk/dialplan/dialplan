@@ -1,0 +1,9 @@
+拨号规则
+
+截取字符串：
+|--> exten => 123456,n,Dial(dahdi/${EXTEN:0:1}/${EXTEN:1})
+|--> exten => 123456,n,Dial(dahdi/1/23456)
+
+|--> exten => 123456,n,Dial(dahdi/${EXTEN:0:1}/${EXTEN:1:4})
+|--> exten => 123456,n,Dial(dahdi/1/2345)
+
