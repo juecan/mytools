@@ -1,12 +1,12 @@
 # OpenVox GSM Gateway 上挂载 NFS
 
-	Here's our logo (hover to see the title text):
+Here's our logo (hover to see the title text):
 
-	Inline-style:
-	![alt text](assets/logo-white.png)
+Inline-style:
+![alt text](assets/logo-white.png)
 
-	Reference-style:
-	![alt text1][logo]
+Reference-style:
+![alt text1][logo]
 
 [logo]: assets/logo-white.png
 
