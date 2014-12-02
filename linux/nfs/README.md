@@ -41,7 +41,7 @@
 
 	检查NFS共享目录设置：
 		showmount -e 172.16.8.61
-		
+
 ![showmount](images/showmount.jpg)
 
 ## （二）OpenVox GSM Gateway 挂载 NFS
