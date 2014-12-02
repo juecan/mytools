@@ -2,13 +2,13 @@
 
     My tools in my work
 
-## linux
+## Linux
 
-	linux tools
+	Linux tools
 
-## openelec
+## OpenELEC
 
-	openelec tools
+	Tools for OpenELEC
 
 ## raspberrypi
 
@@ -20,5 +20,5 @@
 
 ## windows
 
-	windows tools
+	Tools for windows
 	
