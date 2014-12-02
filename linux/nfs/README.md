@@ -1,5 +1,15 @@
 # OpenVox GSM Gateway 上挂载 NFS
 
+	Here's our logo (hover to see the title text):
+
+	Inline-style:
+	![alt text](assets/logo-white.png)
+
+	Reference-style:
+	![alt text1][logo]
+
+[logo]: assets/logo-white.png
+
 ## （一）NFS 服务器配置
 
 	本 NFS 服务器为 CentOS 5.9，CentOS 6 以上请将以下 portmap 改为 rpcbind
