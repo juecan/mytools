@@ -52,3 +52,8 @@ create-sip.sh --dynamic|--ip2ip|-h [new_sip_file]
 	--ip2ip		批量创建IP2IP类型SIP账号
 	-h		帮助
 
+# 注
+
+	最后一个register 超时时间设成0，asterisk就有unregister
+	register Expires: 0
+	unregister Expires: 3600
