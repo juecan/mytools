@@ -7,13 +7,13 @@
 	安装相关软件：
 	images/packages.jpg
 	
-	![alt text](images/packages.jpg)
+	![hello](images/packages.jpg)
 
-	![alt text1][logo]
+	![hello][logo]
 
 	[logo]: images/packages.jpg
 	
-	![github](images/packages.jpg "github") 
+	![github](http://172.16.0.222/zouhualong/mytools/tree/master/linux/nfsimages/packages.jpg "github") 
  
 	配置允许访问的主机，编辑文件 /etc/hosts.allow：
  
