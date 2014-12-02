@@ -45,12 +45,12 @@
 
 #### .xml 描述SIP流程
 
-===== create-sip.sh 说明 =====
-为Asterisk批量创建SIP账号
-create-sip.sh --dynamic|--ip2ip|-h [new_sip_file]
-	--dynamic	批量创建host=dynamic类型SIP账号
-	--ip2ip		批量创建IP2IP类型SIP账号
-	-h		帮助
+	===== create-sip.sh 说明 =====
+	为Asterisk批量创建SIP账号
+	create-sip.sh --dynamic|--ip2ip|-h [new_sip_file]
+		--dynamic	批量创建host=dynamic类型SIP账号
+		--ip2ip		批量创建IP2IP类型SIP账号
+		-h		帮助
 
 # 注
 
