@@ -10,3 +10,13 @@
 
 	pdugenerator.zip: 将短信内容转化为 PDU 码
 
+### playsms
+
+	短信web接口：http://playsms.org/
+		clickatell: API Additional URL parameter: deliv_ack=1&callback=3
+		infobip: API Additional URL parameter
+		kannel: sender ID, timezone, delivery report, additional url parameter, restart
+		msgtoolbox
+		nexmo
+		openvox
+		twilio
