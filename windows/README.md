@@ -10,3 +10,6 @@
 
 	CoolFormat: https://code.google.com/p/coolformat/
 
+### 绿化版 Xshell
+
+	XshellXftp，需要的依赖包：Microsoft Visual C++ 2008/2012
