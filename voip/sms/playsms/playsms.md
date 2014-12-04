@@ -15,7 +15,11 @@
 		DBPASS 为 mysql 密码
 		WEBSERVERUSER="apache"(/etc/httpd/conf/httpd.conf: User apache)
 		WEBSERVERUSER="apache"(/etc/httpd/conf/httpd.conf: Group apache)
-
+	5. playsmsd start|restart|stop|status
+	6. YourServerIP/playsms
+		username: admin
+		password: admin
+	
 ### 发送短信
 
 	1. Settings - Manage gateway and SMSC - openvox - add
