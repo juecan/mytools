@@ -2,6 +2,8 @@
 
 ### 安装
 
+	推荐使用 CentOS6.x
+
 	1. 安装依赖：
 		apache or nginx or lighttpd
 		mysql >= 5
