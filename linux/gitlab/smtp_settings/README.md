@@ -1,5 +1,10 @@
 ## 配置 GITLAB 邮件
 
+### 邮箱设置
+
+	163 - 设置 - 邮箱设置 - POP3/SMTP/IMAP - 开启SMTP邮件 - 保存
+	gmail、openvox 不用另外配置
+
 ### /opt/gitlab/embedded/service/gitlab-rails/config/gitlab.yml
 
 	email_from: Git@openvox.cn
