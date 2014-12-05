@@ -1,22 +1,22 @@
-## 设置 mysql 默认 root 密码
+## MySQL 操作
+
+### 设置 mysql 默认 root 密码
 
 	[~]# mysql
-	Welcome to the MySQL monitor.  Commands end with ; or \g.
-	Your MySQL connection id is 2
-	Server version: 5.1.73 Source distribution
-
-	Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
-
-	Oracle is a registered trademark of Oracle Corporation and/or its
-	affiliates. Other names may be trademarks of their respective owners.
-
-	Type 'help;' or '\h' for help. Type '\c' to clear the current input statement
-
 	mysql> set password=password('111111');
-	Query OK, 0 rows affected (0.00 sec)
-
 	mysql> flush privileges;
-	Query OK, 0 rows affected (0.00 sec)
-
 	mysql> quit
-	Bye
+	
+### 设置远程访问 MySQL
+
+	[~]# mysql -u root -p
+	mysql> show databases;
+	mysql> use mysql;
+	mysql> show tables;
+	mysql> select host, user from user;
+	mysql> update user set host = '%' where user = 'root' and host = 'localhost';
+	[~]# service mysqld restart
+	
+	这样可能导致无法本地登录数据库，解决办法：
+		远端登录数据库，复制 user 表中的 host = '%' where user = 'root' and host = 'localhost'，将 % 改为 localhost
+		[~]# service mysqld restart
