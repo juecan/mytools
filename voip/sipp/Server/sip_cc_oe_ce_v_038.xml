@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE scenario SYSTEM "sipp.dtd">
+
+<scenario name="Basic UAS responder">
+
+  <recv request="INVITE" crlf="true"></recv>
+
+  <send>
+    <![CDATA[
+      SIP/2.0 600 Busy Everywhere
+      [last_Call-ID:]
+      [last_CSeq:]
+      [last_From:]
+      [last_To:];tag=[pid]SIPpTag01[call_number]
+      [last_Via:]
+      Contact: <sip:[local_ip]:[local_port];transport=[transport]>
+      Content-Length: 0
+    ]]>
+  </send>
+
+  <send>
+    <![CDATA[
+      SIP/2.0 500 Server Internal Error
+      [last_Call-ID:]
+      [last_CSeq:]
+      [last_From:]
+      [last_To:];tag=[pid]SIPpTag01[call_number]
+      [last_Via:]
+      Contact: <sip:[local_ip]:[local_port];transport=[transport]>
+      Content-Length: 0
+    ]]>
+  </send>
+
+  <recv request="ACK" rtd="true" crlf="true"></recv>
+
+  <!-- <recv request="ACK" rtd="true" crlf="true"></recv> -->
+
+  <timewait milliseconds="4000"/>
+  <ResponseTimeRepartition value="10, 20, 30, 40, 50, 100, 150, 200"/>
+  <CallLengthRepartition value="10, 50, 100, 500, 1000, 5000, 10000"/>
+
+</scenario>
