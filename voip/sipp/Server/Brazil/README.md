@@ -13,7 +13,6 @@
 ### 测试设备
 
 	SIM卡短号：66379，长号：15728748691
-	
 
 ## 以下为测试场景
 	
@@ -42,6 +41,13 @@
 		3. 检查 SIPp 或数据包，看是否在重传 REGISTER 32s 后接收到 Unexpected Message
 
 ![sip_rg_rt_v_010](images/sip_rg_rt_v_010.jpg)
+
+### SIP_RG_RT_TI_006
+
+	Q: GW 发送 REGISTER，PBX 回应 100 Trying，网关重发 REGISTER，第二次与第一次重发间隔应为 4s
+	
+	测试场景：sip_rg_rt_ti_006.xml
+	测试方法：基本同 SIP_RG_RT_V_010，检查第二次与第一次重发 REGISTER 的时间间隔
 		
 ### SIP_CC_OE_CE_V_038
 
