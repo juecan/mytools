@@ -61,7 +61,9 @@
 				NAT Traversal: Yes
 			2)将上面的 Registration: None 改为 Registration: This gateway register with the endpoint
 		3. 检查 SIPp 或数据包，检查第二次与第一次重发 REGISTER 的时间间隔
-	
+
+![sip_rg_rt_ti_006](images/sip_rg_rt_ti_006.jpg)
+
 ### sip_cc_oe_ce_v_019
 
 	Q: 网关收到第二个 200 OK 之后，应当回复 ACK
@@ -109,7 +111,7 @@
 
 ### SIP_CC_TE_CE_V_022
 
-	Q: 网关重发同样的 INVITE 之后应该收到上一个 INVITE 的 183 的重发消息
+	Q: 网关重发同样的 INVITE 之后应该发送回复上一个 INVITE 的 100, 183 的重发消息，而不是回复 482，然后手机振铃
 	
 	测试场景：sip_cc_te_ce_v_022.xml
 	测试方法：
@@ -125,6 +127,8 @@
 			2）路由：SIPp -> 8888 -> GSM -> Mobile
 		2. SIPp 端：sipp -sf sip_cc_te_ce_v_022.xml -i 172.16.8.88 172.16.8.186:5060 -m 1 -trace_msg
 		3. 第二个 INVITE 之后应收到 100 Trying, 183 然后手机振铃
+
+![sip_cc_te_ce_v_022](images/sip_cc_te_ce_v_022.jpg)
 
 ### SIP_CC_TE_CE_TI_001
 
@@ -230,16 +234,16 @@
 		
 ![sip_mg_te_v_015](images/sip_mg_te_v_015.jpg)
 
-### SIP_RG_RT_V_010			OK 配置问题
-### SIP_RG_RT_TI_006		暂时不测
-### SIP_CC_OE_CE_V_019		OK
-### SIP_CC_OE_CE_V_038		OK
-### SIP_CC_OE_CE_TI_012		NO
-### SIP_CC_OE_CR_TI_006		NO
-### SIP_CC_TE_CE_V_022		尚未测试
-### SIP_CC_TE_CE_TI_001		NO
-### SIP_CC_TE_CE_TI_011		OK
-### SIP_CC_TE_SM_I_001		OK
-### SIP_MG_RT_V_008			尚未测试
-### SIP_MG_OE_V_003			OK
-### sip_mg_te_v_015 		OK 配置问题
+	SIP_RG_RT_V_010			OK 配置问题
+	SIP_RG_RT_TI_006		暂时不测
+	SIP_CC_OE_CE_V_019		OK
+	SIP_CC_OE_CE_V_038		OK
+	SIP_CC_OE_CE_TI_012		NO
+	SIP_CC_OE_CR_TI_006		NO
+	SIP_CC_TE_CE_V_022		尚未测试
+	SIP_CC_TE_CE_TI_001		NO
+	SIP_CC_TE_CE_TI_011		OK
+	SIP_CC_TE_SM_I_001		OK
+	SIP_MG_RT_V_008			尚未测试
+	SIP_MG_OE_V_003			OK
+	sip_mg_te_v_015 		OK 配置问题
