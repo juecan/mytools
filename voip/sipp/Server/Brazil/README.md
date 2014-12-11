@@ -235,7 +235,7 @@
 ![sip_mg_te_v_015](images/sip_mg_te_v_015.jpg)
 
 	SIP_RG_RT_V_010			OK 配置问题
-	SIP_RG_RT_TI_006		暂时不测
+	SIP_RG_RT_TI_006		尚未测试
 	SIP_CC_OE_CE_V_019		OK
 	SIP_CC_OE_CE_V_038		OK
 	SIP_CC_OE_CE_TI_012		NO
@@ -244,6 +244,6 @@
 	SIP_CC_TE_CE_TI_001		NO
 	SIP_CC_TE_CE_TI_011		OK
 	SIP_CC_TE_SM_I_001		OK
-	SIP_MG_RT_V_008			尚未测试
+	SIP_MG_RT_V_008			OK
 	SIP_MG_OE_V_003			OK
 	sip_mg_te_v_015 		OK 配置问题
