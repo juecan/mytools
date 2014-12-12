@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE scenario SYSTEM "sipp.dtd">
 <!-- Author: Michael.zou -->
-<!-- Date: 2014-12-10    -->
+<!-- Date: 2014-12-11    -->
 
 <scenario name="SIP_CC_TE_CE_TI_011">
   <send retrans="500">
@@ -24,6 +24,7 @@
 
   <recv response="420"></recv>
 
+  <timewait milliseconds="120000"/>
   <ResponseTimeRepartition value="10, 20, 30, 40, 50, 100, 150, 200"/>
   <CallLengthRepartition value="10, 50, 100, 500, 1000, 5000, 10000"/>
 
