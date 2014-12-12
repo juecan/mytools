@@ -7,3 +7,4 @@
 	gsm_call_test: GSM Gateway 呼叫测试
 	SMSdemo: SMS to HTTP and HTTP to SMS 的 demo 页面
 	callback: 网关添加 Callback 功能
+	OpenVoxGateway出厂配置.txt：OpenVox Gateway 出厂配置
