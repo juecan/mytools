@@ -1,10 +1,5 @@
 ## 针对巴西大客户的网关测试
 
-	SIPp 作为服务器端响应 GW 的 SIP 消息
-	例如：sipp -sf uas_basic.xml -p 5060 -i 172.16.8.88 -rsa 172.16.179.1:5060 -trace_msg
-
-	sipp -sf XML_FILE -p 5060 -i SIPpIP -rsa Gateway:5060 -trace_msg
-
 ### 客户问题
 
 	voxmundi_sip_logs：包含客户的问题及网络数据包文件
@@ -12,7 +7,8 @@
 	
 ### 测试设备
 
-	SIM卡短号：66379，长号：15728748691
+	OpenVox GSM Gateway: 172.16.8.186
+	SIPp Server: 172.16.8.88
 
 ## 以下为测试场景
 	
@@ -97,7 +93,7 @@
 				User Name: 8888
 				Password: 8888
 				Registration: None
-				Hostname or IP Address: 172.16.8.181
+				Hostname or IP Address: 172.16.8.88
 				Transport: UDP
 				NAT Traversal: Yes
 			2)用手机呼叫网关：Mobile -> GSM -> 8888 -> SIPp
@@ -107,7 +103,45 @@
 
 ### SIP_CC_OE_CE_TI_012
 
+	Q:32s 后网关收到 200OK，不应再回复 ACK
+	
+	测试场景：sip_cc_oe_ce_ti_012.xml
+	测试方法：
+		1. SIPp 端：sipp -sf sip_cc_oe_ce_ti_012.xml -p 5060 -i 172.16.8.88 -rsa 172.16.8.186:5060 -trace_msg
+		2. GW 端：
+			1)建立 SIP Trunk
+				Name: 8888
+				User Name: 8888
+				Password: 8888
+				Registration: None
+				Hostname or IP Address: 172.16.8.88
+				Transport: UDP
+				NAT Traversal: Yes
+			2)用手机呼叫网关：Mobile -> GSM -> 8888 -> SIPp
+		3. 通话 32s 后 SIPp 向网关发送 200OK，网关不应该回复 ACK
+
+![sip_cc_oe_ce_ti_012](images/sip_cc_oe_ce_ti_012.jpg)
+
 ### SIP_CC_OE_CR_TI_006
+
+	Q: 第二个重发的 BYE 消息与第一个重发的 BYE 消息间隔应为 4s
+	
+	测试场景：sip_cc_oe_cr_ti_006.xml
+	测试方法：
+		1. SIPp 端：sipp -sf sip_cc_oe_cr_ti_006.xml -p 5060 -i 172.16.8.88 -rsa 172.16.8.186:5060 -trace_msg
+		2. GW 端：
+			1)建立 SIP Trunk
+				Name: 8888
+				User Name: 8888
+				Password: 8888
+				Registration: None
+				Hostname or IP Address: 172.16.8.88
+				Transport: UDP
+				NAT Traversal: Yes
+			2)用手机呼叫网关：Mobile -> GSM -> 8888 -> SIPp
+		3. 第二个重发的 BYE 消息与第一个重发的 BYE 消息间隔应为 4s
+
+![sip_cc_oe_cr_ti_006](images/sip_cc_oe_cr_ti_006.jpg)
 
 ### SIP_CC_TE_CE_V_022
 
@@ -121,7 +155,7 @@
 				User Name: 8888
 				Password: 8888
 				Registration: None
-				Hostname or IP Address: 172.16.8.181
+				Hostname or IP Address: 172.16.8.88
 				Transport: UDP
 				NAT Traversal: Yes
 			2）路由：SIPp -> 8888 -> GSM -> Mobile
@@ -131,6 +165,25 @@
 ![sip_cc_te_ce_v_022](images/sip_cc_te_ce_v_022.jpg)
 
 ### SIP_CC_TE_CE_TI_001
+
+	Q: 网关接收到不支持扩展的 INVITE，回复 420 后应重发一次 420
+	
+	测试场景：
+	测试方法：
+		1. GW 端：
+			1)建立 SIP Trunk
+				Name: 8888
+				User Name: 8888
+				Password: 8888
+				Registration: None
+				Hostname or IP Address: 172.16.8.88
+				Transport: UDP
+				NAT Traversal: Yes
+			2）路由：SIPp -> 8888 -> GSM -> Mobile
+		2. SIPp 端：sipp -sf sip_cc_te_ce_ti_001.xml -i 172.16.8.88 172.16.8.186:5060 -m 1 -trace_msg
+		3. 查看是否收到重发的 420
+		
+![sip_cc_te_ce_ti_001](images/sip_cc_te_ce_ti_001.jpg)
 
 ### SIP_CC_TE_CE_TI_011
 
@@ -144,7 +197,7 @@
 				User Name: 8888
 				Password: 8888
 				Registration: None
-				Hostname or IP Address: 172.16.8.181
+				Hostname or IP Address: 172.16.8.88
 				Transport: UDP
 				NAT Traversal: Yes
 			2）路由：SIPp -> 8888 -> GSM -> Mobile
@@ -165,7 +218,7 @@
 				User Name: 8888
 				Password: 8888
 				Registration: None
-				Hostname or IP Address: 172.16.8.181
+				Hostname or IP Address: 172.16.8.88
 				Transport: UDP
 				NAT Traversal: Yes
 			2)路由：SIPp -> 8888 -> GSM -> Mobile
@@ -209,7 +262,7 @@
 				User Name: 8888
 				Password: 8888
 				Registration: None
-				Hostname or IP Address: 172.16.8.181
+				Hostname or IP Address: 172.16.8.88
 				Transport: UDP
 				NAT Traversal: Yes
 			2)用手机呼叫网关：Mobile -> GSM -> 8888 -> SIPp
@@ -225,7 +278,7 @@
 				User Name: 8888
 				Password: 8888
 				Registration: None
-				Hostname or IP Address: 172.16.8.181
+				Hostname or IP Address: 172.16.8.88
 				Transport: TCP
 				NAT Traversal: Yes
 			2)SIP - Advanced SIP Settings - Enable TCP: Yes - TCP Bind Port: 5060
@@ -233,17 +286,3 @@
 		2. SIPp 端：sipp -sf sip_mg_te_v_015.xml -i 172.16.8.88 172.16.8.186:5060 -m 1 -t t1 -trace_msg
 		
 ![sip_mg_te_v_015](images/sip_mg_te_v_015.jpg)
-
-	SIP_RG_RT_V_010			OK 配置问题
-	SIP_RG_RT_TI_006		尚未测试
-	SIP_CC_OE_CE_V_019		OK
-	SIP_CC_OE_CE_V_038		OK
-	SIP_CC_OE_CE_TI_012		NO
-	SIP_CC_OE_CR_TI_006		NO
-	SIP_CC_TE_CE_V_022		尚未测试
-	SIP_CC_TE_CE_TI_001		NO
-	SIP_CC_TE_CE_TI_011		OK
-	SIP_CC_TE_SM_I_001		OK
-	SIP_MG_RT_V_008			OK
-	SIP_MG_OE_V_003			OK
-	sip_mg_te_v_015 		OK 配置问题
