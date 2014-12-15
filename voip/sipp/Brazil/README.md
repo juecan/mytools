@@ -146,7 +146,7 @@
 
 ### SIP_CC_TE_CE_V_022
 
-	Q: 网关重发同样的 INVITE 之后应该发送回复上一个 INVITE 的 100, 183 的重发消息，而不是回复 482，然后手机振铃
+	Q: 网关重发同样的 INVITE 之后应该重发上一个 INVITE 的 183 的消息，而不是仅回复 100
 	
 	测试场景：sip_cc_te_ce_v_022.xml
 	测试方法：
@@ -161,7 +161,7 @@
 				NAT Traversal: Yes
 			2）路由：SIPp -> 8888 -> GSM -> Mobile
 		2. SIPp 端：sipp -sf sip_cc_te_ce_v_022.xml -i 172.16.8.88 172.16.8.186:5060 -m 1 -trace_msg
-		3. 第二个 INVITE 之后应收到 100 Trying, 183 然后手机振铃
+		3. 第二个 INVITE 之后应该重发上一个 INVITE 的 183 的消息
 
 ![sip_cc_te_ce_v_022](images/sip_cc_te_ce_v_022.jpg)
 
