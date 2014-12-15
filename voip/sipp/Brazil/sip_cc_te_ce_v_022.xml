@@ -11,7 +11,7 @@
       CSeq: 1 INVITE
       From: 8888 <sip:8888@[local_ip]:[local_port]>;tag=[call_number]
       To: <sip:18898569016@[remote_ip]>
-      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=66535362
       Max-Forwards: 70
       Contact: <sip:8888@[local_ip]:[local_port]>
       Content-Disposition: session
@@ -31,7 +31,7 @@
       CSeq: 1 INVITE
       From: 8888 <sip:8888@[local_ip]:[local_port]>;tag=[call_number]
       To: <sip:18898569016@[remote_ip]>
-      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=66535362
       Max-Forwards: 70
       Contact: <sip:8888@[local_ip]:[local_port]>
       Content-Disposition: session
