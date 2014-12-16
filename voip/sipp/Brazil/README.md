@@ -273,6 +273,10 @@
 
 ### sip_mg_te_v_015
 
+	Q: 收到 INVITE 后网关应发送 200OK
+	
+	测试场景：sipp -sf sip_mg_te_v_015.xml
+	测试方法：
 		1. GW 端：
 			1)建立 SIP Trunk
 				Name: 8888
@@ -285,5 +289,6 @@
 			2)SIP - Advanced SIP Settings - Enable TCP: Yes - TCP Bind Port: 5060
 			3)路由：SIPp -> 8888 -> GSM -> Mobile
 		2. SIPp 端：sipp -sf sip_mg_te_v_015.xml -i 172.16.8.88 172.16.8.186:5060 -m 1 -t t1 -trace_msg
+		3. 收到 INVITE 后网关应发送 200OK
 		
 ![sip_mg_te_v_015](images/sip_mg_te_v_015.jpg)
