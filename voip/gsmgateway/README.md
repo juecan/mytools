@@ -8,3 +8,4 @@
 	SMSdemo: SMS to HTTP and HTTP to SMS 的 demo 页面
 	callback: 网关添加 Callback 功能
 	OpenVoxGateway出厂配置.txt：OpenVox Gateway 出厂配置
+	Brazil_test: 针对巴西客户 SIP 环境进行的相关测试

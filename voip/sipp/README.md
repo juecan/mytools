@@ -2,6 +2,8 @@
 
 	SIPp 是一个测试 SIP 协议性能的工具软件
 	
+	工作中曾使用此工具针对巴西客户的 SIP 环境进行测试，测试文件在 voip/gsmgateway/Brazil_test
+	
 ### 安装
 
 	安装依赖：
