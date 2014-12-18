@@ -1,0 +1,147 @@
+#!/bin/bash
+# Author: Michael.zou
+# Date: 2014-12-18
+
+# 保存 SIPp 相关配置信息到文件 $1.conf
+config_sipp_options()
+{
+	filename=$1
+
+	# Config CSV file
+	echo -n "Read type(SEQUENCE/RANDOM/USER, default is SEQUENTIAL): "
+	read readtype
+	echo -n "Your first username of SIP: "
+	read firstusername
+	echo -n "Your SIP count: "
+	read sipcount
+	echo -n "The number what you want to call: "
+	read callee
+
+	# Config SIPp options
+	echo -n "Server or Client(server/client): "
+	read mode
+	echo -n "Call method (register/outgoing-au/outgoing-unau/registered/incoming-au/incoming-unau): "
+	read method
+	default_ip=`ifconfig eth0 | sed -n "2p" | awk '{print substr($2,1)}' | cut -d ':' -f 2`
+	echo -n "Your local ip (SIPp) (default: ${default_ip}): "
+	read local_ip
+	echo -n "Remote IP: "
+	read remote_ip
+	echo -n "remote_port (default: 5060): "
+	read remote_port
+	echo -n "Call duration for every call (default: 60000ms): "
+	read duration
+	echo -n "Total of all calls: "
+	read total_calls
+	echo -n "Max simultaneous calls: "
+	read max_simultaneous
+	# call rate
+	# if call_rate=10 and call_rate_period=60000, it will general 10 calls every 60s
+	echo -n "Calls for every period: "
+	read call_rate
+	echo -n "Call rate period (default is 1000ms): "
+	read call_rate_period
+
+	{
+		echo "# CSV arguments"
+		echo "readtype=${readtype:=SEQUENTIAL}"
+		echo "firstusername=${firstusername}"
+		echo "sipcount=${sipcount}"
+		echo "callee=${callee}"
+		echo
+		echo "# SIPp options"
+		echo "mode=${mode}"
+		echo "method=${method}"
+		echo "csv_file=csv/${filename}.csv"
+		echo "local_ip=${local_ip:=${default_ip}}"
+		echo "remote_ip=${remote_ip}"
+		echo "remote_port=${remote_port:=5060}"
+		echo "duration=${duration:=60000}"
+		echo "total_calls=${total_calls}"
+		echo "max_simultaneous=${max_simultaneous}"
+		echo "call_rate=${call_rate}"
+		echo "call_rate_period=${call_rate_period:=1000}"
+	} > config/${filename}.conf
+}
+
+# 通过 SIPp 相关配置信息生成 SIP 用户信息文件：$1.csv
+general_csv_file()
+{
+	filename=$1
+	. config/${filename}.conf
+
+	# csv file format: field0;field1;...;fieldn;
+	#	field0: username
+	#	field1: authentication info
+	#	field2: call num
+	echo "${readtype}" > ${csv_file}
+	for username in `seq ${firstusername} $[${firstusername} + ${sipcount} - 1]`
+	do
+		case ${method} in
+		"register"|"outgoing-au")
+			echo "${username};${callee};[authentication username=${username} password=${username}]" >> ${csv_file}
+			;;
+		"outgoing-unau") echo "${username};${callee}" >> ${csv_file} ;;
+		*) echo "Invalid value!" ;;
+		esac
+
+		callee=$[ ${callee} + 1 ]
+	done
+}
+
+# 通过 SIPp 相关配置信息生成 SIPp 选项
+general_sipp_options()
+{
+	filename=$1
+	. config/${filename}.conf
+
+	sipp_options="-i ${local_ip}"
+
+	if [ "${mode}" == "server" ]
+	then
+		sipp_options+=" -p 5060"
+		sipp_options+=" -rsa ${remote_ip}:${remote_port}"
+	elif [ "${mode}" == "client" ]
+	then
+		sipp_options+=" ${remote_ip}:${remote_port}"
+		[ "${max_simultaneous}" != "" ] && sipp_options+=" -l ${max_simultaneous}"
+		[ "${max_calls}" != "" ] && sipp_options+=" -m ${max_calls}"
+		[ "${duration}" != "" ] && sipp_options+=" -d ${duration}"
+		[ "${call_rate}" != "" ] && sipp_options+=" -r ${call_rate}"
+		[ "${call_rate_period}" != "" ] && sipp_options+=" -rp ${call_rate_period}"
+	else
+		echo "[mode]: Invalid value!"
+		exit
+	fi
+
+	case ${method} in
+	"register") sipp_options+=" -sf ${xml_file:=xml/sipp-uac-register.xml}" ;;
+	"outgoing-au") sipp_options+=" -sf ${xml_file:=xml/sipp-uac-outgoing-au.xml}" ;;
+	"outgoing-unau") sipp_options+=" -sf ${xml_file:=xml/sipp-uac-outgoing-unau.xml}" ;;
+	"registered") ;;
+	"incoming-au") ;;
+	"incoming-unau") ;;
+	*) exit 1 ;;
+	esac
+	sipp_options+=" -inf ${csv_file}"
+
+	today=`date "+%Y%m%d%H%M%S"`
+	#sipp_options+=" -aa -default_behaviors all -oocsf xml/ooc_default.xml"
+	#sipp_options+=" -trace_stat -stf log/${filename}-$$.scv"
+	[ ! -d "log" ] && mkdir log
+	[ ! -d "message" ] && mkdir message
+	[ ! -d "shortmessage" ] && mkdir shortmessage
+	[ ! -d "error" ] && mkdir error
+	#touch log/${filename}-${today}.scv
+	#touch message/${filename}-msg-${today}.log
+	#touch shortmessage/${filename}-shortmsg-${today}.log
+	#touch error/${filename}-error-${today}.log
+	sipp_options+=" -trace_stat -stf log/${filename}-${today}.scv"
+	sipp_options+=" -trace_msg -message_file message/${filename}-msg-${today}.log"
+	sipp_options+=" -trace_shortmsg -shortmessage_file shortmessage/${filename}-shortmsg-${today}.log"
+	sipp_options+=" -trace_err -error_file error/${filename}-error-${today}.log"
+	#sipp_options+=" -bg"
+
+	echo ${sipp_options} > options/options-${filename}-${today}
+	#echo ${sipp_options}
+}
