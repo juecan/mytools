@@ -13,3 +13,7 @@
 	config: 脚本生成的配置文件存放路径
 	csv: 脚本生成的用于场景文件的数据文件存放路径
 	message, shortmessage, log, error: 日志文件存放路径
+	
+### 注
+
+	当你把 DTD（sipp.dtd）文件与你要编写的 XML 脚本文件放在同一个目录时，JEdit 能够对 SIPp 脚本进行语法检查
