@@ -3,7 +3,7 @@
 <!-- Author: Michael.zou -->
 <!-- Date: 2014-10-24    -->
 
-<scenario name="UAC outgoing unau">
+<scenario name="SIPp UAC outgoing unau">
   <send retrans="500">
     <![CDATA[
       INVITE sip:[field1]@[remote_ip]:[remote_port];transport=[transport] SIP/2.0

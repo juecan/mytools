@@ -1,0 +1,55 @@
+#!/bin/bash
+# Author: Michael.zou
+# Date: 2014-12-19
+
+general_sipp_sample_config()
+{
+	{
+		echo -e "# CSV arguments:"
+		echo -e "#\treadtype\tSEQUENCE, RANDOM or USER"
+		echo -e "#\tfirstusername\tYour first username of SIP"
+		echo -e "#\tsipcount\tYour sip count"
+		echo -e "#\tcallee\t\tThe number that you want to call"
+		echo "readtype=SEQUENTIAL"
+		echo "firstusername=SIPp"
+		echo "sipcount=1"
+		echo "callee=10086"
+		echo
+		echo "# SIPp options"
+		echo -e "#\tmode\t\t\tserver or client"
+		echo -e "#\tmethod\t\t\tCall method: register, outgoing-au, outgoing-unau, registered, incoming-au, incoming-unau"
+		echo -e "#\tlocal_ip\t\tYour local ip (SIPp End)"
+		echo -e "#\tremote_ip\t\tRemote IP"
+		echo -e "#\tremote_port\t\tremote_port"
+		echo -e "#\tduration\t\tCall duration for every call"
+		echo -e "#\ttotal_calls\t\tTotal of all calls"
+		echo -e "#\tmax_simultaneous\tMax simultaneous calls"
+		echo -e "#\tcall_rate\t\tCalls for every period"
+		echo -e "#\tcall_rate_period\tCall rate period"
+		echo "mode=client"
+		echo "method=register"
+		echo "csv_file=csv/SIPp.csv.sample"
+		echo "local_ip=172.16.8.88"
+		echo "remote_ip=172.16.8.181"
+		echo "remote_port=5060"
+		echo "duration=10000"
+		echo "total_calls=1"
+		echo "max_simultaneous=1"
+		echo "call_rate="
+		echo "call_rate_period="
+	} > config/SIPp.conf.sample
+
+	. config/SIPp.conf.sample
+
+	{
+		echo "# csv file format:"
+		echo "#readtype"
+		echo -e "#\treadtype: SEQUENCE, RANDOM or USER"
+		echo "#field0;field1;...;fieldn;"
+		echo -e "#\tfield0: username"
+		echo -e "#\tfield1: callee"
+		echo -e "#\tfield2: authentication info"
+		echo "${readtype}"
+		echo "${firstusername};${callee};[authentication username=${firstusername} password=${firstusername}]"
+	} > ${csv_file}
+}

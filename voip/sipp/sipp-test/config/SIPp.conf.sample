@@ -1,0 +1,32 @@
+# CSV arguments:
+#	readtype	SEQUENCE, RANDOM or USER
+#	firstusername	Your first username of SIP
+#	sipcount	Your sip count
+#	callee		The number that you want to call
+readtype=SEQUENTIAL
+firstusername=SIPp
+sipcount=1
+callee=10086
+
+# SIPp options
+#	mode			server or client
+#	method			Call method: register, outgoing-au, outgoing-unau, registered, incoming-au, incoming-unau
+#	local_ip		Your local ip (SIPp End)
+#	remote_ip		Remote IP
+#	remote_port		remote_port
+#	duration		Call duration for every call
+#	total_calls		Total of all calls
+#	max_simultaneous	Max simultaneous calls
+#	call_rate		Calls for every period
+#	call_rate_period	Call rate period
+mode=client
+method=register
+csv_file=csv/SIPp.csv.sample
+local_ip=172.16.8.88
+remote_ip=172.16.8.181
+remote_port=5060
+duration=10000
+total_calls=1
+max_simultaneous=1
+call_rate=
+call_rate_period=

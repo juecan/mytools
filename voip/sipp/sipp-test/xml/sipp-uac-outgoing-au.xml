@@ -3,13 +3,13 @@
 <!-- Author: Michael.zou -->
 <!-- Date: 2014-10-24    -->
 
-<scenario name="SIPp UAC Register">
+<scenario name="SIPp UAC outgoing au">
   <send retrans="500">
     <![CDATA[
       REGISTER sip:[remote_ip]:[remote_port];transport=[transport] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
       Max-Forwards: 70
-      From: [field0] <sip:[field0]@[remote_ip]:[remote_port]>;tag=[call_number]
+      From: [field0] <sip:[field0]@[remote_ip]:[remote_port]>;tag=[pid]SIPpTag01[call_number]
       To: [field0] <sip:[field0]@[remote_ip]:[remote_port]>
       User-Agent: SIPp
       Call-ID: [call_id]
@@ -28,7 +28,7 @@
       REGISTER sip:[remote_ip]:[remote_port];transport=[transport] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
       Max-Forwards: 70
-      From: [field0] <sip:[field0]@[remote_ip]:[remote_port]>;tag=[call_number]
+      From: [field0] <sip:[field0]@[remote_ip]:[remote_port]>;tag=[pid]SIPpTag01[call_number]
       To: [field0] <sip:[field0]@[remote_ip]:[remote_port]>
       User-Agent: SIPp
       Call-ID: [call_id]
@@ -48,7 +48,7 @@
       INVITE sip:[field1]@[remote_ip]:[remote_port];transport=[transport] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
       Max-Forwards: 70
-      From: [field0] <sip:[field0]@[local_ip]:[local_port]>;tag=[call_number]
+      From: [field0] <sip:[field0]@[local_ip]:[local_port]>;tag=[pid]SIPpTag01[call_number]
       To: [field1] <sip:[field1]@[remote_ip]:[remote_port]>
       User-Agent: SIPp
       Call-ID: [call_id]
@@ -66,7 +66,7 @@
     <![CDATA[
       ACK sip:[field1]@[remote_ip]:[remote_port];transport=[transport] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
-      From: [field0] <sip:[field0]@[local_ip]:[local_port]>;tag=[call_number]
+      From: [field0] <sip:[field0]@[local_ip]:[local_port]>;tag=[pid]SIPpTag01[call_number]
       To: [field1] <sip:[field1]@[remote_ip]:[remote_port]>[peer_tag_param]
       Call-ID: [call_id]
       CSeq: 1 ACK
@@ -79,7 +79,7 @@
       INVITE sip:[field1]@[remote_ip]:[remote_port];transport=[transport] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
       Max-Forwards: 70
-      From: [field0] <sip:[field0]@[local_ip]:[local_port]>;tag=[call_number]
+      From: [field0] <sip:[field0]@[local_ip]:[local_port]>;tag=[pid]SIPpTag01[call_number]
       To: [field1] <sip:[field1]@[remote_ip]:[remote_port]>
       User-Agent: SIPp
       Call-ID: [call_id]
@@ -104,7 +104,7 @@
       ACK sip:[field1]@[remote_ip]:[remote_port];transport=[transport] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
       Max-Forwards: 70
-      From: [field0] <sip:[field0]@[local_ip]:[local_port]>;tag=[call_number]
+      From: [field0] <sip:[field0]@[local_ip]:[local_port]>;tag=[pid]SIPpTag01[call_number]
       To: [field1] <sip:[field1]@[remote_ip]:[remote_port]>[peer_tag_param]
       User-Agent: SIPp
       Call-ID: [call_id]
@@ -115,21 +115,15 @@
     ]]>
   </send>
 
-  <nop>
-    <action>
-      <exec play_pcap_audio="pcap/g711a.pcap"/>
-    </action>
-  </nop>
-
+  <nop><action><exec play_pcap_audio="pcap/demo-instruct-g711a.pcap"/></action></nop>
   <pause/>
 
   <send retrans="500">
     <![CDATA[
-
       BYE sip:[field1]@[remote_ip]:[remote_port];transport=[transport] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
       Max-Forwards: 70
-      From: [field0] <sip:[field0]@[local_ip]:[local_port]>;tag=[call_number]
+      From: [field0] <sip:[field0]@[local_ip]:[local_port]>;tag=[pid]SIPpTag01[call_number]
       To: [field1] <sip:[field1]@[remote_ip]:[remote_port]>[peer_tag_param]
       User-Agent: SIPp
       Call-ID: [call_id]
@@ -138,7 +132,6 @@
       Contact: sip:[field0]@[local_ip]:[local_port]
       Reason: SIP;description="User Hung Up"
       Content-Length: 0
-
     ]]>
   </send>
 
@@ -149,7 +142,7 @@
       REGISTER sip:[remote_ip]:[remote_port];transport=[transport] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
       Max-Forwards: 70
-      From: [field0] <sip:[field0]@[remote_ip]:[remote_port]>;tag=[call_number]
+      From: [field0] <sip:[field0]@[remote_ip]:[remote_port]>;tag=[pid]SIPpTag01[call_number]
       To: [field0] <sip:[field0]@[remote_ip]:[remote_port]>
       User-Agent: SIPp
       Call-ID: [call_id]
@@ -169,7 +162,7 @@
       REGISTER sip:[remote_ip]:[remote_port];transport=[transport] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
       Max-Forwards: 70
-      From: [field0] <sip:[field0]@[remote_ip]:[remote_port]>;tag=[call_number]
+      From: [field0] <sip:[field0]@[remote_ip]:[remote_port]>;tag=[pid]SIPpTag01[call_number]
       To: [field0] <sip:[field0]@[remote_ip]:[remote_port]>
       User-Agent: SIPp
       Call-ID: [call_id]

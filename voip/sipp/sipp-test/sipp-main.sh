@@ -9,5 +9,6 @@ filename=$1
 
 [ ! -f "config/${filename}.conf" ] && config_sipp_options ${filename}
 [ ! -f "csv/${filename}.csv" ] && general_csv_file ${filename}
-general_sipp_options ${filename}
-
+options=$(general_sipp_options ${filename})
+sipp ${options}
+#echo ${options}

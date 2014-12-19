@@ -105,7 +105,7 @@ general_sipp_options()
 	then
 		sipp_options+=" ${remote_ip}:${remote_port}"
 		[ "${max_simultaneous}" != "" ] && sipp_options+=" -l ${max_simultaneous}"
-		[ "${max_calls}" != "" ] && sipp_options+=" -m ${max_calls}"
+		[ "${total_calls}" != "" ] && sipp_options+=" -m ${total_calls}"
 		[ "${duration}" != "" ] && sipp_options+=" -d ${duration}"
 		[ "${call_rate}" != "" ] && sipp_options+=" -r ${call_rate}"
 		[ "${call_rate_period}" != "" ] && sipp_options+=" -rp ${call_rate_period}"
@@ -125,23 +125,18 @@ general_sipp_options()
 	esac
 	sipp_options+=" -inf ${csv_file}"
 
-	today=`date "+%Y%m%d%H%M%S"`
-	#sipp_options+=" -aa -default_behaviors all -oocsf xml/ooc_default.xml"
-	#sipp_options+=" -trace_stat -stf log/${filename}-$$.scv"
+	sipp_options+=" -aa -default_behaviors all -oocsf xml/ooc_default.xml"
 	[ ! -d "log" ] && mkdir log
 	[ ! -d "message" ] && mkdir message
 	[ ! -d "shortmessage" ] && mkdir shortmessage
 	[ ! -d "error" ] && mkdir error
-	#touch log/${filename}-${today}.scv
-	#touch message/${filename}-msg-${today}.log
-	#touch shortmessage/${filename}-shortmsg-${today}.log
-	#touch error/${filename}-error-${today}.log
-	sipp_options+=" -trace_stat -stf log/${filename}-${today}.scv"
-	sipp_options+=" -trace_msg -message_file message/${filename}-msg-${today}.log"
-	sipp_options+=" -trace_shortmsg -shortmessage_file shortmessage/${filename}-shortmsg-${today}.log"
-	sipp_options+=" -trace_err -error_file error/${filename}-error-${today}.log"
+	nowtime=`date "+%Y%m%d%H%M%S"`
+	sipp_options+=" -trace_stat -stf log/${filename}-${nowtime}.csv"
+	sipp_options+=" -trace_msg -message_file message/${filename}-msg-${nowtime}.log"
+	sipp_options+=" -trace_shortmsg -shortmessage_file shortmessage/${filename}-shortmsg-${nowtime}.log"
+	sipp_options+=" -trace_err -error_file error/${filename}-error-${nowtime}.log"
 	#sipp_options+=" -bg"
 
-	echo ${sipp_options} > options/options-${filename}-${today}
-	#echo ${sipp_options}
+	echo ${sipp_options}
 }
+

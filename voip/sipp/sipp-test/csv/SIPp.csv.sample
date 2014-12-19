@@ -1,0 +1,9 @@
+# csv file format:
+#readtype
+#	readtype: SEQUENCE, RANDOM or USER
+#field0;field1;...;fieldn;
+#	field0: username
+#	field1: callee
+#	field2: authentication info
+SEQUENTIAL
+SIPp;10086;[authentication username=SIPp password=SIPp]
