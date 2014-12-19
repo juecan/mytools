@@ -8,7 +8,13 @@ filename=$1
 . function/sipp-function
 
 [ ! -f "config/${filename}.conf" ] && config_sipp_options ${filename}
-[ ! -f "csv/${filename}.csv" ] && general_csv_file ${filename}
+if [ ! -f "csv/${filename}.csv" ]
+then
+	general_csv_file ${filename}
+elif [ "config/${filename}.conf" -nt "csv/${filename}.csv" ]
+then
+	general_csv_file ${filename}
+fi
 options=$(general_sipp_options ${filename})
 sipp ${options}
 #echo ${options}

@@ -81,7 +81,7 @@ general_csv_file()
 		"register"|"outgoing-au")
 			echo "${username};${callee};[authentication username=${username} password=${username}]" >> ${csv_file}
 			;;
-		"outgoing-unau") echo "${username};${callee}" >> ${csv_file} ;;
+		"outgoing-unau"|"incoming-unau") echo "${username};${callee}" >> ${csv_file} ;;
 		*) echo "Invalid value!" ;;
 		esac
 
@@ -107,8 +107,8 @@ general_sipp_options()
 		[ "${max_simultaneous}" != "" ] && sipp_options+=" -l ${max_simultaneous}"
 		[ "${total_calls}" != "" ] && sipp_options+=" -m ${total_calls}"
 		[ "${duration}" != "" ] && sipp_options+=" -d ${duration}"
-		[ "${call_rate}" != "" ] && sipp_options+=" -r ${call_rate}"
-		[ "${call_rate_period}" != "" ] && sipp_options+=" -rp ${call_rate_period}"
+		[ "${call_rate}" != "" -a "${call_rate_period}" != "" ] && sipp_options+=" -r ${call_rate} -rp ${call_rate_period}"
+		sipp_options+=" -oocsf xml/ooc_default.xml"
 	else
 		echo "[mode]: Invalid value!"
 		exit
@@ -120,12 +120,12 @@ general_sipp_options()
 	"outgoing-unau") sipp_options+=" -sf ${xml_file:=xml/sipp-uac-outgoing-unau.xml}" ;;
 	"registered") ;;
 	"incoming-au") ;;
-	"incoming-unau") ;;
+	"incoming-unau") sipp_options+=" -sf ${xml_file:=xml/sipp-uas-incoming-unau.xml}" ;;
 	*) exit 1 ;;
 	esac
 	sipp_options+=" -inf ${csv_file}"
 
-	sipp_options+=" -aa -default_behaviors all -oocsf xml/ooc_default.xml"
+	sipp_options+=" -aa -default_behaviors all"
 	[ ! -d "log" ] && mkdir log
 	[ ! -d "message" ] && mkdir message
 	[ ! -d "shortmessage" ] && mkdir shortmessage
