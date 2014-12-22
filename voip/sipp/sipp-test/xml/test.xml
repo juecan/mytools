@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE scenario SYSTEM "sipp.dtd">
+<!-- Author: Michael.zou -->
+<!-- Date: 2014-10-24    -->
+
+<scenario name="SIPp UAC outgoing au">
+	<send>
+	    <![CDATA[
+			REGISTER sip:[remote_ip] SIP/2.0
+			Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
+			Max-Forwards: 70
+			Contact: <sip:[field0]@[local_ip]:[local_port];rinstance=rinstance01>
+			To: "[field0]"<sip:[field0]@[remote_ip]>
+			From: "[field0]"<sip:[field0]@[remote_ip]>;tag=tag01
+			Call-ID: callid01
+			CSeq: 1 REGISTER
+			Expires: 3600
+			Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, NOTIFY, MESSAGE, SUBSCRIBE, INFO
+			User-Agent: SIPp Client
+			Content-Length: 0
+		]]>
+	</send>
+			REGISTER sip:[remote_ip] SIP/2.0
+			Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
+			Max-Forwards: 70
+			Contact: <sip:[field0]@[local_ip]:[local_port];rinstance=rinstance01>
+			To: "[field0]"<sip:[field0]@[remote_ip]>
+			From: "[field0]"<sip:[field0]@[remote_ip]>;tag=tag01
+			Call-ID: callid01
+			CSeq: 2 REGISTER
+			Expires: 3600
+			Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, NOTIFY, MESSAGE, SUBSCRIBE, INFO
+			User-Agent: SIPp Client
+			Authorization: Digest username="[field0]",realm="asterisk",nonce="7048efa9",uri="sip:[remote_ip]",response="3cfef444dba41313f9e17b9d69fe409b",algorithm=MD5
+			Content-Length: 0
+
+			INVITE sip:[field1]@[remote_ip] SIP/2.0
+			Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
+			Max-Forwards: 70
+			Contact: <sip:[field0]@[local_ip]:[local_port]>
+			To: "[field1]"<sip:[field1]@[remote_ip]>
+			From: "[field0]"<sip:[field0]@[remote_ip]>;tag=tag02
+			Call-ID: callid02
+			CSeq: 1 INVITE
+			Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, NOTIFY, MESSAGE, SUBSCRIBE, INFO
+			Content-Type: application/sdp
+			User-Agent: SIPp Client
+			Content-Length: 364
+
+			ACK sip:[field1]@[remote_ip] SIP/2.0
+			Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
+			To: "[field1]"<sip:[field1]@[remote_ip]>;tag=tag03
+			From: "[field0]"<sip:[field0]@[remote_ip]>;tag=tag02
+			Call-ID: callid02
+			CSeq: 1 ACK
+			Content-Length: 0
+
+			INVITE sip:[field1]@[remote_ip] SIP/2.0
+			Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
+			Max-Forwards: 70
+			Contact: <sip:[field0]@[local_ip]:[local_port]>
+			To: "[field1]"<sip:[field1]@[remote_ip]>
+			From: "[field0]"<sip:[field0]@[remote_ip]>;tag=tag02
+			Call-ID: callid02
+			CSeq: 2 INVITE
+			Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, NOTIFY, MESSAGE, SUBSCRIBE, INFO
+			Content-Type: application/sdp
+			User-Agent: SIPp Client
+			Authorization: Digest username="[field0]",realm="asterisk",nonce="65dc4d19",uri="sip:[field1]@[remote_ip]",response="4d70cfa4125fa41f5744f8526e0207b8",algorithm=MD5
+			Content-Length: 364
+
+			ACK sip:[field1]@[remote_ip]:[remote_port] SIP/2.0
+			Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
+			Max-Forwards: 70
+			Contact: <sip:[field0]@[local_ip]:[local_port]>
+			To: "[field1]"<sip:[field1]@[remote_ip]>;tag=as674bfe03
+			From: "[field0]"<sip:[field0]@[remote_ip]>;tag=tag02
+			Call-ID: callid02
+			CSeq: 2 ACK
+			User-Agent: SIPp Client
+			Authorization: Digest username="[field0]",realm="asterisk",nonce="65dc4d19",uri="sip:[field1]@[remote_ip]",response="4d70cfa4125fa41f5744f8526e0207b8",algorithm=MD5
+			Content-Length: 0
+
+			BYE sip:[field1]@[remote_ip]:[remote_port] SIP/2.0
+			Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
+			Max-Forwards: 70
+			Contact: <sip:[field0]@[local_ip]:[local_port]>
+			To: "[field1]"<sip:[field1]@[remote_ip]>;tag=as674bfe03
+			From: "[field0]"<sip:[field0]@[remote_ip]>;tag=tag02
+			Call-ID: callid02
+			CSeq: 3 BYE
+			User-Agent: SIPp Client
+			Authorization: Digest username="[field0]",realm="asterisk",nonce="65dc4d19",uri="sip:[field1]@[remote_ip]:[remote_port]",response="42733c7d22ea34c8d55447a739f950ba",algorithm=MD5
+			Reason: SIP;description="User Hung Up"
+			Content-Length: 0
+
+	<ResponseTimeRepartition value="10, 20, 30, 40, 50, 100, 150, 200"/>
+	<CallLengthRepartition value="10, 50, 100, 500, 1000, 5000, 10000"/>
+</scenario>
+

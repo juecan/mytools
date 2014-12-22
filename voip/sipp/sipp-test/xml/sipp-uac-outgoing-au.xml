@@ -6,17 +6,17 @@
 <scenario name="SIPp UAC outgoing au">
   <send retrans="500">
     <![CDATA[
-      REGISTER sip:[remote_ip]:[remote_port];transport=[transport] SIP/2.0
-      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      REGISTER sip:[remote_ip] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
       Max-Forwards: 70
-      From: [field0] <sip:[field0]@[remote_ip]:[remote_port]>;tag=[pid]SIPpTag01[call_number]
-      To: [field0] <sip:[field0]@[remote_ip]:[remote_port]>
-      User-Agent: SIPp
+      Contact: <sip:[field0]@[local_ip]:[local_port]>
+      To: "[field0]"<sip:[field0]@[remote_ip]>
+      From: "[field0]"<sip:[field0]@[remote_ip]>;tag=[pid]SIPpTag01[call_number]
       Call-ID: [call_id]
       CSeq: 1 REGISTER
-      Contact: [field0] <sip:[field0]@[local_ip]:[local_port];transport=[transport]>;expires=3600
-      Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, NOTIFY, MESSAGE, SUBSCRIBE, INFO
       Expires: 3600
+      Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, NOTIFY, MESSAGE, SUBSCRIBE, INFO
+      User-Agent: SIPp Client
       Content-Length: 0
    ]]>
   </send>
@@ -25,18 +25,18 @@
 
   <send retrans="500">
     <![CDATA[
-      REGISTER sip:[remote_ip]:[remote_port];transport=[transport] SIP/2.0
-      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      REGISTER sip:[remote_ip] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
       Max-Forwards: 70
-      From: [field0] <sip:[field0]@[remote_ip]:[remote_port]>;tag=[pid]SIPpTag01[call_number]
-      To: [field0] <sip:[field0]@[remote_ip]:[remote_port]>
-      User-Agent: SIPp
+      Contact: <sip:[field0]@[local_ip]:[local_port]>
+      To: "[field0]"<sip:[field0]@[remote_ip]>
+      From: "[field0]"<sip:[field0]@[remote_ip]>;tag=[pid]SIPpTag01[call_number]
       Call-ID: [call_id]
       CSeq: 2 REGISTER
-      Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, NOTIFY, MESSAGE, SUBSCRIBE, INFO
-      [field2]
-      Contact: [field0] <sip:[field0]@[local_ip]:[local_port];transport=[transport]>;expires=3600
       Expires: 3600
+      Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, NOTIFY, MESSAGE, SUBSCRIBE, INFO
+      User-Agent: SIPp Client
+      [field2]
       Content-Length: 0
     ]]>
   </send>                          
@@ -45,17 +45,17 @@
 
   <send retrans="500">
     <![CDATA[
-      INVITE sip:[field1]@[remote_ip]:[remote_port];transport=[transport] SIP/2.0
-      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      INVITE sip:[field1]@[remote_ip] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
       Max-Forwards: 70
-      From: [field0] <sip:[field0]@[local_ip]:[local_port]>;tag=[pid]SIPpTag01[call_number]
-      To: [field1] <sip:[field1]@[remote_ip]:[remote_port]>
-      User-Agent: SIPp
+      Contact: <sip:[field0]@[local_ip]:[local_port]>
+      To: "[field1]"<sip:[field1]@[remote_ip]>
+      From: "[field0]"<sip:[field0]@[remote_ip]>;tag=[pid]SIPpTag02[call_number]
       Call-ID: [call_id]
       CSeq: 1 INVITE
-      Contact: [field0] <sip:[field0]@[local_ip]:[local_port];transport=[transport]>
-      Allow: INVITE,ACK,BYE,CANCEL,OPTIONS,UPDATE,REFER,NOTIFY,MESSAGE,INFO
+      Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, NOTIFY, MESSAGE, SUBSCRIBE, INFO
       Content-Type: application/sdp
+      User-Agent: SIPp Client
       Content-Length: [len]
     ]]>
   </send>
@@ -64,10 +64,10 @@
 
   <send>
     <![CDATA[
-      ACK sip:[field1]@[remote_ip]:[remote_port];transport=[transport] SIP/2.0
-      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
-      From: [field0] <sip:[field0]@[local_ip]:[local_port]>;tag=[pid]SIPpTag01[call_number]
-      To: [field1] <sip:[field1]@[remote_ip]:[remote_port]>[peer_tag_param]
+      ACK sip:[field1]@[remote_ip] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
+      To: "[field1]"<sip:[field1]@[remote_ip]>;tag=[pid]SIPpTag03[call_number]
+      From: "[field0]"<sip:[field0]@[remote_ip]>;tag=[pid]SIPpTag02[call_number]
       Call-ID: [call_id]
       CSeq: 1 ACK
       Content-Length: 0
@@ -76,41 +76,39 @@
 
   <send retrans="500">
     <![CDATA[
-      INVITE sip:[field1]@[remote_ip]:[remote_port];transport=[transport] SIP/2.0
-      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      INVITE sip:[field1]@[remote_ip] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
       Max-Forwards: 70
-      From: [field0] <sip:[field0]@[local_ip]:[local_port]>;tag=[pid]SIPpTag01[call_number]
-      To: [field1] <sip:[field1]@[remote_ip]:[remote_port]>
-      User-Agent: SIPp
+      Contact: <sip:[field0]@[local_ip]:[local_port]>
+      To: "[field1]"<sip:[field1]@[remote_ip]>
+      From: "[field0]"<sip:[field0]@[remote_ip]>;tag=[pid]SIPpTag02[call_number]
       Call-ID: [call_id]
       CSeq: 2 INVITE
-      Contact: [field0] <sip:[field0]@[local_ip]:[local_port];transport=[transport]>
-      Allow: INVITE,ACK,BYE,CANCEL,OPTIONS,UPDATE,REFER,NOTIFY,MESSAGE,INFO
-      [field2]
+      Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, NOTIFY, MESSAGE, SUBSCRIBE, INFO
       Content-Type: application/sdp
+      User-Agent: SIPp Client
+      [field2]
       Content-Length: [len]
     ]]>
   </send>
 
   <recv response="100" optional="true"></recv>
-
   <recv response="180" optional="true"></recv>
   <recv response="183" optional="true"></recv>
-
-  <recv response="200" rtd="true" crlf="true"></recv>
+  <recv response="200"></recv>
 
   <send>
     <![CDATA[
-      ACK sip:[field1]@[remote_ip]:[remote_port];transport=[transport] SIP/2.0
-      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      ACK sip:[field1]@[remote_ip] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
       Max-Forwards: 70
-      From: [field0] <sip:[field0]@[local_ip]:[local_port]>;tag=[pid]SIPpTag01[call_number]
-      To: [field1] <sip:[field1]@[remote_ip]:[remote_port]>[peer_tag_param]
-      User-Agent: SIPp
+      Contact: <sip:[field0]@[local_ip]:[local_port]>
+      To: "[field1]"<sip:[field1]@[remote_ip]>;[peer_tag_param]
+      From: "[field0]"<sip:[field0]@[remote_ip]>;tag=[pid]SIPpTag02[call_number]
       Call-ID: [call_id]
       CSeq: 2 ACK
+      User-Agent: SIPp Client
       [field2]
-      Contact: [field0] <sip:[field0]@[local_ip]:[local_port];transport=[transport]>
       Content-Length: 0
     ]]>
   </send>
@@ -120,37 +118,36 @@
 
   <send retrans="500">
     <![CDATA[
-      BYE sip:[field1]@[remote_ip]:[remote_port];transport=[transport] SIP/2.0
-      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      BYE sip:[field1]@[remote_ip] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
       Max-Forwards: 70
-      From: [field0] <sip:[field0]@[local_ip]:[local_port]>;tag=[pid]SIPpTag01[call_number]
-      To: [field1] <sip:[field1]@[remote_ip]:[remote_port]>[peer_tag_param]
-      User-Agent: SIPp
+      Contact: <sip:[field0]@[local_ip]:[local_port]>
+      To: "[field1]"<sip:[field1]@[remote_ip]>;[peer_tag_param]
+      From: "[field0]"<sip:[field0]@[remote_ip]>;tag=[pid]SIPpTag02[call_number]
       Call-ID: [call_id]
       CSeq: 3 BYE
+      User-Agent: SIPp Client
       [field2]
-      Contact: sip:[field0]@[local_ip]:[local_port]
       Reason: SIP;description="User Hung Up"
       Content-Length: 0
     ]]>
   </send>
 
-  <recv response="200" crlf="true"></recv>
+  <recv response="200"></recv>
 
   <send retrans="500">
     <![CDATA[
-      REGISTER sip:[remote_ip]:[remote_port];transport=[transport] SIP/2.0
-      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      REGISTER sip:[remote_ip] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
       Max-Forwards: 70
-      From: [field0] <sip:[field0]@[remote_ip]:[remote_port]>;tag=[pid]SIPpTag01[call_number]
-      To: [field0] <sip:[field0]@[remote_ip]:[remote_port]>
-      User-Agent: SIPp
+      Contact: <sip:[field0]@[local_ip]:[local_port]>;expires=0
+      To: "[field0]"<sip:[field0]@[remote_ip]>
+      From: "[field0]"<sip:[field0]@[remote_ip]>;tag=[pid]SIPpTag01[call_number]
       Call-ID: [call_id]
       CSeq: 3 REGISTER
-      Contact: [field0] <sip:[field0]@[local_ip]:[local_port];transport=[transport]>;expires=3600
-      [field2]
       Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, NOTIFY, MESSAGE, SUBSCRIBE, INFO
-      Expires: 0
+      User-Agent: SIPp Client
+      [field2]
       Content-Length: 0
    ]]>
   </send>
@@ -159,18 +156,17 @@
 
   <send retrans="500">
     <![CDATA[
-      REGISTER sip:[remote_ip]:[remote_port];transport=[transport] SIP/2.0
-      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      REGISTER sip:[remote_ip] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
       Max-Forwards: 70
-      From: [field0] <sip:[field0]@[remote_ip]:[remote_port]>;tag=[pid]SIPpTag01[call_number]
-      To: [field0] <sip:[field0]@[remote_ip]:[remote_port]>
-      User-Agent: SIPp
+      Contact: <sip:[field0]@[local_ip]:[local_port]>;expires=0
+      To: "[field0]"<sip:[field0]@[remote_ip]>
+      From: "[field0]"<sip:[field0]@[remote_ip]>;tag=[pid]SIPpTag01[call_number]
       Call-ID: [call_id]
       CSeq: 4 REGISTER
       Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, NOTIFY, MESSAGE, SUBSCRIBE, INFO
+      User-Agent: SIPp Client
       [field2]
-      Contact: [field0] <sip:[field0]@[local_ip]:[local_port];transport=[transport]>;expires=3600
-      Expires: 0
       Content-Length: 0
     ]]>
   </send>                          

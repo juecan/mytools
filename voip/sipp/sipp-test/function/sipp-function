@@ -78,7 +78,7 @@ general_csv_file()
 	for username in `seq ${firstusername} $[${firstusername} + ${sipcount} - 1]`
 	do
 		case ${method} in
-		"register"|"outgoing-au")
+		"register"|"outgoing-au"|"incoming-au")
 			echo "${username};${callee};[authentication username=${username} password=${username}]" >> ${csv_file}
 			;;
 		"outgoing-unau"|"incoming-unau") echo "${username};${callee}" >> ${csv_file} ;;
@@ -119,7 +119,7 @@ general_sipp_options()
 	"outgoing-au") sipp_options+=" -sf ${xml_file:=xml/sipp-uac-outgoing-au.xml}" ;;
 	"outgoing-unau") sipp_options+=" -sf ${xml_file:=xml/sipp-uac-outgoing-unau.xml}" ;;
 	"registered") ;;
-	"incoming-au") ;;
+	"incoming-au") sipp_options+=" -sf ${xml_file:=xml/sipp-uas-incoming-au.xml}" ;;
 	"incoming-unau") sipp_options+=" -sf ${xml_file:=xml/sipp-uas-incoming-unau.xml}" ;;
 	*) exit 1 ;;
 	esac
