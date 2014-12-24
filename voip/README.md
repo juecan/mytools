@@ -1,5 +1,12 @@
 ## Voip Tools
 
+	http://www.siplab.cn/
+	http://www.voip-info.org/
+	http://sebug.net/
+	http://w3school.com.cn/index.html
+	http://211.72.203.62/
+	http://www.ietf.org/rfc/
+
 ### asterisk
 
 	asterisk tools, something about dahdi, dialplan, iax, sip, ss7
