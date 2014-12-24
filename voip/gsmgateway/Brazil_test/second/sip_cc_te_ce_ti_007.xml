@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE scenario SYSTEM "sipp.dtd">
+<!-- Author: Michael.zou -->
+<!-- Date: 2014-12-11    -->
+
+<scenario name="SIP_CC_TE_CE_TI_007">
+  <send retrans="500">
+    <![CDATA[
+      INVITE sip:66375@[remote_ip]:[remote_port] SIP/2.0
+      Call-ID: [call_id]
+      CSeq: 1 INVITE
+      From: 8888 <sip:8888@[local_ip]:[local_port]>;tag=[pid]SIPpTag01[call_number]
+      To: <sip:66375@[remote_ip]>
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=12345
+      Max-Forwards: 70
+      Contact: <sip:8888@[local_ip]:[local_port]>
+      User-Agent: SIPp Client
+      Content-Disposition: session
+      Content-Type: application/sdp
+      Require: unsupported
+      Content-Length: [len]
+    ]]>
+  </send>
+
+  <recv response="420"></recv>
+
+  <send>
+    <![CDATA[
+      ACK sip:66375@[remote_ip]:[remote_port] SIP/2.0
+      Call-ID: [call_id]
+      CSeq: 1 ACK
+      [last_from:]
+      [last_to:]
+      [last_via:]
+      Max-Forwards: 70
+      User-Agent: SIPp Client
+      Content-Length: 0
+    ]]>
+  </send>
+
+  <pause milliseconds="3000"/>
+
+  <send retrans="500">
+    <![CDATA[
+      INVITE sip:66375@[remote_ip]:[remote_port] SIP/2.0
+      Call-ID: [call_id]
+      CSeq: 1 INVITE
+      From: 8888 <sip:8888@[local_ip]:[local_port]>;tag=[pid]SIPpTag01[call_number]
+      To: <sip:66375@[remote_ip]>
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=12345
+      Max-Forwards: 70
+      Contact: <sip:8888@[local_ip]:[local_port]>
+      User-Agent: SIPp Client
+      Content-Disposition: session
+      Content-Type: application/sdp
+      Content-Length: [len]
+    ]]>
+  </send>
+
+  <timewait milliseconds="120000"/>
+  <ResponseTimeRepartition value="10, 20, 30, 40, 50, 100, 150, 200"/>
+  <CallLengthRepartition value="10, 50, 100, 500, 1000, 5000, 10000"/>
+
+</scenario>
+

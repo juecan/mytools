@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE scenario SYSTEM "sipp.dtd">
+<!-- Author: Michael.zou -->
+<!-- Date: 2014-12-12    -->
+
+<scenario name="SIP_CC_OE_CE_V_018">
+
+  <recv request="INVITE">
+    <action>
+      <ereg regexp="tag=.*" search_in="hdr" header="From:" check_it="true" assign_to="1" />
+    </action>
+  </recv>
+
+  <send>
+    <![CDATA[
+      SIP/2.0 200 OK
+      [last_Call-ID:]
+      [last_CSeq:]
+      [last_From:]
+      [last_To:]
+      [last_Via:]
+      Content-Type: application/sdp
+      Contact: <sip:[local_ip]:[local_port]>
+      User-Agent: SIPp Server
+      Content-Length: [len]
+    ]]>
+  </send>
+
+  <recv request="ACK"></recv>
+
+  <send retrans="500">
+    <![CDATA[
+      BYE sip:66375@[remote_ip]:[remote_port] SIP/2.0
+      Call-ID: [call_id]
+      CSeq: 2 BYE
+      From: 8888 <sip:8888@[local_ip]:[local_port]>
+      To: 66375 <sip:66375@[remote_ip]:[remote_port]>;[$1]
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      Max-Forwards: 70
+      User-Agent: SIPp
+      Content-Length: 0
+    ]]>
+  </send>
+
+  <recv response="200"></recv>
+
+  <timewait milliseconds="3000"/>
+  <ResponseTimeRepartition value="10, 20, 30, 40, 50, 100, 150, 200"/>
+  <CallLengthRepartition value="10, 50, 100, 500, 1000, 5000, 10000"/>
+
+</scenario>

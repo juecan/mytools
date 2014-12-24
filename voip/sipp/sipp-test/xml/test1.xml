@@ -6,11 +6,11 @@
 <scenario name="SIPp UAC outgoing unau">
   <send retrans="500">
     <![CDATA[
-      INVITE sip:[field1]@[remote_ip] SIP/2.0
+      INVITE sip:[field1]@[remote_ip]:[remote_port] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
       Max-Forwards: 70
       From: "[field0]" <sip:[field0]@[local_ip]>;tag=[pid]SIPpTag01[call_number]
-      To: <sip:[field1]@[remote_ip]:[remote_port]>
+      To: <sip:[field1]@[remote_port]>;
       Contact: <sip:[field0]@[local_ip]:[local_port]>
       Call-ID: [call_id]
       CSeq: 1 INVITE
@@ -25,7 +25,7 @@
   <recv response="100" optional="true"></recv>
   <recv response="180" optional="true"></recv>
   <recv response="183" optional="true"></recv>
-  <recv response="200"></recv>
+  <recv response="200" rtd="true" crlf="true"></recv>
 
   <send>
     <![CDATA[
@@ -33,7 +33,7 @@
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
       Max-Forwards: 70
       From: "[field0]" <sip:[field0]@[local_ip]>;tag=[pid]SIPpTag01[call_number]
-      To: <sip:[field1]@[remote_ip]:[remote_port]>[peer_tag_param]
+      To: <sip:[field1]@[remote_port]>;
       Contact: <sip:[field0]@[local_ip]:[local_port]>
       Call-ID: [call_id]
       CSeq: 1 ACK
@@ -42,8 +42,7 @@
     ]]>
   </send>
 
-  <!--<nop><action><exec play_pcap_audio="pcap/demo-instruct-g711a.pcap"/></action></nop>-->
-  <nop><action><exec play_pcap_audio="pcap/demo-instruct-g711u-pjsip.pcap"/></action></nop>
+  <nop><action><exec play_pcap_audio="pcap/demo-instruct-g711a.pcap"/></action></nop>
   <pause/>
 
   <send retrans="500">
@@ -52,7 +51,7 @@
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch];rport
       Max-Forwards: 70
       From: "[field0]" <sip:[field0]@[local_ip]>;tag=[pid]SIPpTag01[call_number]
-      To: <sip:[field1]@[remote_ip]:[remote_port]>[peer_tag_param]
+      To: <sip:[field1]@[remote_port]>;[peer_tag_param]
       Call-ID: [call_id]
       CSeq: 2 BYE
       User-Agent: SIPp Client

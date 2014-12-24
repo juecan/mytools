@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE scenario SYSTEM "sipp.dtd">
+<!-- Author: Michael.zou -->
+<!-- Date: 2014-12-09    -->
+
+<scenario name="SIP_CC_OE_CE_V_040">
+
+  <recv request="INVITE">
+  </recv>
+
+  <send>
+    <![CDATA[
+      SIP/2.0 500 Server Internal Error
+      [last_Call-ID:]
+      [last_CSeq:]
+      [last_From:]
+      [last_To:];tag=[pid]SIPpTag01[call_number]
+      [last_Via:]
+      Contact: <sip:[local_ip]:[local_port];transport=[transport]>
+      Content-Length: 0
+    ]]>
+  </send>
+
+  <recv request="ACK"></recv>
+
+  <send>
+    <![CDATA[
+      SIP/2.0 603 Decline
+      [last_Call-ID:]
+      CSeq: [cseq] INVITE
+      [last_From:]
+      [last_To:]
+      [last_Via:]
+      Contact: <sip:[local_ip]:[local_port];transport=[transport]>
+      Content-Length: 0
+    ]]>
+  </send>
+
+  <recv request="ACK"></recv>
+
+  <timewait milliseconds="4000"/>
+  <ResponseTimeRepartition value="10, 20, 30, 40, 50, 100, 150, 200"/>
+  <CallLengthRepartition value="10, 50, 100, 500, 1000, 5000, 10000"/>
+
+</scenario>
