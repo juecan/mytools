@@ -23,4 +23,5 @@
 
 	some voip tools, such as arping, dtmf2num, fping, sipsak, sipvicious
 	VoIP 测试工具，比如 arping，dtmf2num，fping，sipsak，sipvicious
-
+	ping: 通过 ping 命令判断 SIP 中继的线路稳定性
+	bandcalc: 计算 VOIP 带宽
