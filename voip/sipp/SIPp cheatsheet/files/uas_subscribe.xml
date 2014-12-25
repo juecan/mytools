@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-2" ?>
+<!DOCTYPE scenario SYSTEM "sipp.dtd">
+
+<scenario name="UAS SUBSCRIBE/noresource">
+  <recv request="SUBSCRIBE" crlf="true">
+  </recv>
+
+  <send>
+    <![CDATA[
+
+      SIP/2.0 200 OK
+      [last_Via:]
+      [last_Call-ID:]
+      [last_From:]
+      [last_To:];tag=[call_number]
+      [last_CSeq:]
+      Expires: 120
+      Contact: <sip:30@[local_ip]:[local_port];transport=[transport]>
+      Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, REGISTER, SUBSCRIBE, NOTIFY, PUBLISH, REFER, MESSAGE, OPTIONS
+      Supported: 100rel, norefersub
+      Content-Length: 0
+
+    ]]>
+  </send>
+
+  <send>
+    <![CDATA[
+
+NOTIFY sip:30@prima SIP/2.0
+Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+Max-Forwards: 70
+From: <sip:108@[local_ip]:[local_port]>;tag=[call_number]
+To: "30" <sip:30@[local_ip]>;tag=1
+Contact: <sip:30@[local_ip]:[local_port];transport=[transport]>
+[last_Call-ID:]
+CSeq: 15540 NOTIFY
+Event: dialog
+Subscription-State: terminated;reason=noresource
+Allow-Events: dialog, refer
+User-Agent: Prima 2.00.00
+Content-Length:  0
+
+    ]]>
+  </send>
+  
+  <recv response="200" rtd="true">
+  </recv>  
+
+
+</scenario>
+

@@ -1,0 +1,6 @@
+NOTIFY sip:192.168.0.197 SIP/2.0
+To: sip:192.168.0.197
+From: sip:sipsak@192.168.1.48
+CSeq: 10 NOTIFY
+Call-ID: 1234@192.168.1.48
+Event: check-sync;reboot=true

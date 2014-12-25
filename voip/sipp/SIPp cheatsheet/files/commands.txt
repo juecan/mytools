@@ -1,0 +1,8 @@
+sleep 2000
+M
+20
+sip:192.168.1.211
+sleep 120000
+ha
+sleep 5000
+quit

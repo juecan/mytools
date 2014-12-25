@@ -1,0 +1,114 @@
+!note: User-agent and realm are removed. 
+
+
+INVITE sip:740@192.168.0.250:5060 SIP/2.0
+Via: SIP/2.0/UDP 192.168.1.48:5060;branch=z9hG4bK-3172-1-0
+From: sipp <sip:sipp@192.168.1.48:5060>;tag=1
+To: sut <sip:740@192.168.0.250:5060>
+Call-ID: 1-3172@192.168.1.48
+CSeq: 1 INVITE
+Contact: sip:sipp@192.168.1.48:5060
+Max-Forwards: 70
+Subject: Performance Test
+Content-Type: application/sdp
+Content-Length:   135
+
+v=0
+o=user1 53655765 2353687637 IN IP4 192.168.1.48
+s=-
+c=IN IP4 192.168.1.48
+t=0 0
+m=audio 6000 RTP/AVP 0
+a=rtpmap:0 PCMU/8000
+SIP/2.0 100 Trying
+Via: SIP/2.0/UDP 192.168.1.48:5060;branch=z9hG4bK-3172-1-0
+From: sipp <sip:sipp@192.168.1.48:5060>;tag=1
+To: sut <sip:740@192.168.0.250:5060>
+Call-ID: 1-3172@192.168.1.48
+CSeq: 1 INVITE
+User-Agent: XXX
+Content-Length: 0
+
+
+
+SIP/2.0 180 Ringing
+Via: SIP/2.0/UDP 192.168.1.48:5060;branch=z9hG4bK-3172-1-0
+From: sipp <sip:sipp@192.168.1.48:5060>;tag=1
+To: sut <sip:740@192.168.0.250:5060>;tag=598791961
+Call-ID: 1-3172@192.168.1.48
+CSeq: 1 INVITE
+Contact: <sip:740@192.168.0.250:5060>
+Allow: INVITE, INFO, PRACK, ACK, BYE, CANCEL, OPTIONS, NOTIFY, REGISTER, SUBSCRIBE, REFER, PUBLISH, UPDATE, MESSAGE
+User-Agent: XXX
+Allow-Events: talk,hold,conference,refer,check-sync
+Content-Length: 0
+
+
+
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.1.48:5060;branch=z9hG4bK-3172-1-0
+From: sipp <sip:sipp@192.168.1.48:5060>;tag=1
+To: sut <sip:740@192.168.0.250:5060>;tag=598791961
+Call-ID: 1-3172@192.168.1.48
+CSeq: 1 INVITE
+Contact: <sip:740@192.168.0.250:5060>
+Content-Type: application/sdp
+Allow: INVITE, INFO, PRACK, ACK, BYE, CANCEL, OPTIONS, NOTIFY, REGISTER, SUBSCRIBE, REFER, PUBLISH, UPDATE, MESSAGE
+User-Agent: XXX
+Content-Length: 133
+
+v=0
+o=- 20157 20157 IN IP4 192.168.0.250
+s=SDP data
+c=IN IP4 192.168.0.250
+t=0 0
+m=audio 11782 RTP/AVP 0
+a=rtpmap:0 PCMU/8000
+ACK sip:740@192.168.0.250:5060 SIP/2.0
+Via: SIP/2.0/UDP 192.168.1.48:5060;branch=z9hG4bK-3172-1-4
+From: sipp <sip:sipp@192.168.1.48:5060>;tag=1
+To: sut <sip:740@192.168.0.250:5060>;tag=598791961
+Call-ID: 1-3172@192.168.1.48
+CSeq: 1 ACK
+Contact: sip:sipp@192.168.1.48:5060
+Max-Forwards: 70
+Subject: Performance Test
+Content-Length: 0
+
+
+
+BYE sip:sipp@192.168.1.48:5060 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.250:5060;branch=z9hG4bK2026128620
+From: sut <sip:740@192.168.0.250:5060>;tag=598791961
+To: sipp <sip:sipp@192.168.1.48:5060>;tag=1
+Call-ID: 1-3172@192.168.1.48
+CSeq: 2 BYE
+Contact: <sip:740@192.168.0.250:5060>
+Max-Forwards: 70
+User-Agent: XXX
+Content-Length: 0
+
+
+
+SIP/2.0 407 Proxy Authentication Required
+Via: SIP/2.0/UDP 192.168.0.250:5060;branch=z9hG4bK2026128620
+From: sut <sip:740@192.168.0.250:5060>;tag=598791961
+To: sipp <sip:sipp@192.168.1.48:5060>;tag=1
+Call-ID: 1-3172@192.168.1.48
+CSeq: 2 BYE
+WWW-Authenticate: Digest algorithm=MD5, realm="XXX", nonce="69d327e5"
+Content-Length: 0
+
+
+
+BYE sip:sipp@192.168.1.48:5060 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.250:5060;branch=z9hG4bK1940983504
+From: sut <sip:740@192.168.0.250:5060>;tag=598791961
+To: sipp <sip:sipp@192.168.1.48:5060>;tag=1
+Call-ID: 1-3172@192.168.1.48
+CSeq: 3 BYE
+Contact: <sip:740@192.168.0.250:5060>
+Authorization: Digest username="IPPhone", realm="XXX", nonce="69d327e5", uri="sip:sipp@192.168.1.48:5060", response="754da737470266d5ffa9f6e2e40f4473", algorithm=MD5
+Max-Forwards: 70
+User-Agent: XXX
+Content-Length: 0
