@@ -10,7 +10,7 @@
 	Asterisk 源码目录运行：./contrib/scripts/install_prereq install
 	yum install sqlite-devel
 	安装 pjproject: 
-		32 bit: ./configure --libdir=/usr/lib && make dep && make && make install
+		32 bit: ./configure --libdir=/usr/lib --enable-shared && make dep && make && make install
 		64 bit: ./configure --libdir=/usr/lib64 --enable-shared && make dep && make && make install
 	
 ### 安装 Asterisk
