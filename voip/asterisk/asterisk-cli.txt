@@ -1,0 +1,53 @@
+中继是否成功注册到对端
+*CLI> sip show registry
+Host	dnsmgr	Username		Refresh State	Reg.Time                 
+0 SIP registrations.
+状态：
+	Unregistered	注销或尝试多次注册后一直失败
+	Request Sent	正在发送注册或注销消息
+	Auth. Sent	正在发送注册鉴权消息
+	Registered	注册成功
+	No Authentication	注册鉴权失败
+	Rejected		对端拒绝
+	Timeout		发送请求后长时间没收到回应
+	Failed		尝试多次注销后一直失败
+
+本端 sip 用户状态（是否有用户注册到我们设备上）
+*CLI> sip show peers 
+Name/username	Host		Dyn	Forcerport	ACL Port	Status     
+61000/61000	(Unspecified)	D	N		0	Unmonitored 
+61001/61001	172.16.8.180	D	N		50190	Unmonitored 
+2 sip peers [Monitored: 0 online, 0 offline Unmonitored: 1 online, 1 offline]
+	61000 没有用户注册
+	61001 被172.16.8.180 注册
+	Status 是 Unmonitored，因为 sip.conf 中没有使用 qualify=yes 配置
+
+当前 sip 通道状态
+*CLI> sip show channels
+Peer		User/ANR	Call ID			Format		Hold	Last Message	Expiry     Peer      
+172.16.8.180	61001		ZDA4OWM1N2ViYjY	0x4 (ulaw)	No	Rx: ACK			61001     
+1 active SIP dialog
+
+	Peer		对端 IP 信息
+	User		本端用户名
+	Call ID		sip 消息中的 call id
+	Format		编码格式
+	Hold		是否被 hold
+	Last Message	最后发送或接受到的消息
+
+[~] cat /proc/dahdi/1
+Span 1: WCTDM/4 “Wildcard TDM400P REV I Board 5″ (MASTER) 
+1 WCTDM/4/0 
+2 WCTDM/4/1 FXSKS RED
+3 WCTDM/4/2 FXSKS RED
+4 WCTDM/4/3 FXSKS RED
+
+server181*CLI> dahdi show status 
+Description                              	Alarms	IRQ	bpviol	CRC	Fra 	Codi 	Options	LBO
+T4XXP (PCI) Card 0 Span 1	OK      	0      	0      	98786  	CCS 	HDB3 	CRC4     	0 db (CSU)/0-133 feet (DSX-1)
+T4XXP (PCI) Card 0 Span 2	RED     	0      	0      	0      	CCS 	HDB3 	CRC4     	0 db (CSU)/0-133 feet (DSX-1)
+T4XXP (PCI) Card 0 Span 3	OK      	0      	0      	19946  	CCS 	HDB3 	CRC4     	0 db (CSU)/0-133 feet (DSX-1)
+T4XXP (PCI) Card 0 Span 4	RED     	0      	0      	0      	CCS 	HDB3 	CRC4     	0 db (CSU)/0-133 feet (DSX-1)
+
+	OK 线路正常
+	RED 未接线或线路接线不对

@@ -1,0 +1,245 @@
+Asterisk 通道变量 
+
+${ACCOUNTCODE}：用户计费帐号 sip.conf 里的 account=XXXX 
+
+${ANSWEREDTIME}：通话时长（秒）
+${BLINDTRANSFER}：通道是否为转接类型。盲转的通道名称
+
+${CALLERID(all)}：主叫用户名(主叫ID) 格式 name(123454)
+${CALLERID(name)}：主叫用户名 sip.conf 里的 username=XXXX
+${CALLERID(num)}：主叫号码sip.conf 里的 callerid=XXXX
+
+${DNID}：用户所拨打的号码
+${EXTEN}：当前所拨打分机（被叫）号码
+
+${CHANNEL}：当前通道名称
+${CONTEXT}：当前context
+${DATETIME}：当前日期时间
+${DIALSTATUS}：当前通道状态
+
+${LANGUAGE}：提示语言
+${UNIQUEID}：当前唯一标识，当前连接的唯一 ID 值
+${TRANSFERCAPABILITY}：通道类型。是否可以转接
+
+${ENV(VARIABLENAME)}：系统环境变量 VARIABLENAME 的值
+${TRANSFER_CONTEXT}：被转移的呼叫的上下文
+${SYSTEMNAME}：定义在 /etc/asterisk/asterisk.conf 中的 systemname 的值
+${PRIORITY}：当前分机的优先级值。The current priority
+${EPOCH}：当前的 UNIX 时间。The current UNIX-style epoch (number of seconds since 1 Jan 1970)
+${HANGUPCAUSE}：拆线的原因。The last hangup return code on a Zap channel connected to a PRI interface
+
+${CALLINGPRES}：PRI Call ID Presentation variable for incoming calls (See callingpres ) 
+${DIALEDPEERNAME}：Name of the called party. Broken for now, see DIALEDPEERNAME 
+${DIALEDPEERNUMBER}：Number of the called party. Broken for now, see DIALEDPEERNUMBER 
+${DIALEDTIME}：Time since the number was dialed (only works when dialed party answers the line?!) 
+${INVALID_EXTEN}：The extension asked for when redirected to the i (invalid) extension 
+${MEETMESECS}：Number of seconds a user participated in a MeetMe conference 
+${RDNIS}：The current redirecting DNIS, Caller ID that redirected the call. Limitations apply, see RDNIS 
+${SIPDOMAIN}：SIP destination domain of an inbound call (if appropriate) 
+${SIP_CODEC}：Used to set the SIP codec for a call (apparently broken in Ver 1.0.1, ok in Ver. 1.0.3 & 1.0.4, not sure about 1.0.2) 
+${SIPCALLID}：The SIP dialog Call-ID：header 
+${SIPUSERAGENT}：The SIP user agent header 
+${TIMESTAMP}：Current date time in the format：YYYYMMDD-HHMMSS This is deprecated as of Asterisk 1.4, instead use :${STRFTIME(${EPOCH},,%Y%m%d-%H%M%S)}) 
+${TXTCIDNAME}：Result of application TXTCIDName (see below) 
+${TOUCH_MONITOR}：used for "one touch record" (see features.conf, and wW dial flags).
+
+==========
+
+Asterisk Dialplan Commands 
+常规命令
+鏌ョ湅鏂囨湰鎵撳嵃
+Authenticate:鉴别用户  
+VMAuthenticate:根据“voicemail.conf”鉴别用户  
+Bridge:连接两个专用来话 (1.6+)  
+ChannelRedirect:重定向现有的通道到拨号计划  
+Curl:允许接受外部的URLs。并且支持POSTing，不支持CURL。  
+DUNDiLookup:用DUNDi查寻号码  
+Log:向日志文件中添加文件 (1.6+)  
+JabberSend:经过Jabber发送文件消息(Jabber是一个即时通信软件)  
+Page:Page a mobile device (new in Asterisk v1.2)  
+SendDTMF:发送专用的DTMF数据  
+SendImage:发送图像文件  
+SendText:发送给客户文本消息  
+SendURL:发送给客户URL用以显示  
+System:执行系统命令  
+Transfer:将呼叫方转移到另一个分机  
+TrySystem:执行系统命令并且总是返回0  
+Wait:稍等  
+WaitExte:等待呼叫方拨打一个新的分机  
+WaitForRing:等待呼叫申请  
+WaitMusicOnHold:等待，在线拨放音乐(1.6)  
+话单与计费
+ForkCDR:将CDR分成两个独立的实体
+NoCDR:确保 asterisk没有把CRD保存为特定的呼叫
+ResetCDR:重置CDR数据
+SetAccount:设置帐簿号码
+SetAMAflags:开通AMA标志开户的渠道
+SetCDRUserField:建立CDR用户领域
+AppendCDRUserField:给CDR用户附加数据
+呼叫管理(hangup, answer, dial, etc)
+AMD:侦测自动应答机
+Answer:应答一个振铃的通道
+Busy:示忙，等待挂断
+ChanIsAvail:检测通道可用性
+Congestion:显示拥塞等待挂断
+Dial:设置一个呼叫连接当前的通道
+DISA:直接访问内部系统
+Hangup:无条件挂断
+RetryDial:一个电话，重试失败，允许可选的分机
+Ringing:显示呼叫
+呼叫方描述  (ID, Name etc)
+CallingPres:更改呼叫方的身份介绍
+LookupBlacklist:从黑名单数据库上查询访客的身份 姓名和号码
+LookupCIDName:从当地的数据库查询访客的身份和姓名
+PrivacyManager:如果没有CallerID过来，要求输入电话号码
+SetCallerID:建立CallerID，发生矛盾服从CallerID
+SetCallerPres:建立访客资料的独立信道
+SetCIDName:建立呼叫者身份 姓名，发生矛盾服从CallerID
+SetCIDNum:只建立访客的身份号码（没有姓名），发生矛盾服从CallerID
+SoftHangup:请求挂断转到另一个信道
+Zapateller:拥SIT阻止远程商人
+ADSI
+ADSIProg:将Asterisk ADSI脚本加载到电话
+GetCPEID:获得ADSI CPE ID
+数据库操作
+DBdel:从数据库中删除一个键
+DBdeltree:从数据库中删除一批数据
+DBget:从数据库中取出数值. 发生矛盾服从DB.
+DBput:在数据库中储存一个数值. 发生矛盾服从DB.
+MYSQL:执行不同的 mySQL 数据库行为
+RealTime:使用实时数据库资料填充变量
+RealTimeUpdate:使用实时数据库更新字段
+应用程序整合
+鏌ョ湅鏂囨湰鎵撳嵃
+AGI:执行一套AGI应用程序  
+DeadAGI:在中断的信道上执行AGI  
+EAGI:在音频通道上执行一套 AGI 适应程序  
+EnumLookup:在 ENUM 中查找号码  
+ExternalIVR:执行扩展IVR引擎  
+Jack:Interface to JACK audio for audio manipulation (1.6+)  
+Macro:执行宏  
+MacroExclusive:同一时间只有一个通道可呼叫这个宏，所有其他人只能等待(1.4)  
+MacroExit:退出的宏，就像它已全部完成 (1.4)  
+NoOp:不进行操作，可将数值打印到控制台进行调试  
+Perl:res perl 是Apache 的 mod_perl, 只适用于 Asterisk  
+PHP:res_php 不需要就可将PHP与进行一体化处理  
+Read:读有效的DTMF变量  
+TXTCIDName:从 TXT 记录中查找访客的姓名  
+UserEvent:发送专用事件给管理接口  
+控制流与超时设定
+鏌ョ湅鏂囨湰鎵撳嵃
+AbsoluteTimeout:设置最长呼叫时间  
+DigitTimeout:设置数字间的最长时间间隔  
+Gosub:跳到一个子程序并且返回 (new in v1.2)  
+GosubIf:有条件的跳到一个子程序并且返回 (new in v1.2)  
+Goto:跳转到特定的priority, extension, 或context(专用名词)  
+GotoIf:带条件判断的Goto  
+GotoIfTime:带时间条件判断的Goto  
+Random:在拨号栏中随机跳动  
+ResponseTimeout:设置等候回应的最长时间  
+Return:从Gosub或GosubIf返回(new in v1.2)  
+StackPop:删除返回地址，但没有返回(new in v1.2)  
+While:开始一个当循环- *1.2beta  
+EndWhile:结束一个当循环 – *1.2beta  
+ExecIf:条件执行 – *1.2beta  
+ExitWhile:退出循环  
+字符串与变化处理
+ImportVar:变量赋值
+Math:进行简单的计算
+SetGlobalVar:赋数值变量
+Set:设置通道变量和功能值
+SetVar:赋数值变量(如果不允许，使用 Set)
+DBRewrite:执行的Perl兼容正则表达式和替代了一个MySQL数据库。
+DumpChan:清除有关这个通道的呼叫信息
+语音:放音
+Background:在等待分机的时候播放声音文件
+BackgroundDetect:通话检测背景音文件
+ControlPlayback:用快进，重绕和退出当前命令控制器播放声音文件
+DateTime:报出日期/和时间(已经废了)
+Echo:重复声音回复到用户端
+Festival:使用Festival语音合成器(Festival是一个开源的TTS)朗诵课文
+Milliwatt:在0分贝产生持续的1000赫兹的音调
+MP3Player:播放MP3声音文件
+MusicOnHold:无限期地播放音乐
+Playback:播放一个声音文件
+Playtones:当执行其它命令的时候播放声音列表
+SayUnixTime:报出日期/和时间
+SayAlpha:报出字母
+SayDigits:报出阿拉伯数字
+SayNumber:报出号码
+SayPhonetic:报出语音
+SetMusicOnHold:在控制系统上设置默认的音乐
+SetLanguage:为录音重放设置语言转换
+StopPlaytones:停止播放音调列表
+语音:录音和监测
+ALSAMonitor:监测ALSA控制台
+ChangeMonitor:转换监测的路线文件名
+ChanSpy:通用的通道插话
+Dictate:录音和回放
+MixMonitor:记录和混合呼叫语音（不同于监视器）v1.2.x
+Monitor:录音电话会话到声音文件
+Record:通话录音保存到语音文件
+StopMonitor:停止监测路线
+StopMixMonitor:停止监视通道监测MixMonitor
+SIP 命令
+SIPdtmfMode:在SIP呼叫过程中转换DTMF模式
+SIP_HEADER():挑选SIP invite消息的任何header（取代了SIPGetHeader ）
+SIPAddHeader:填标题到外部的SIP邀请
+DAHDI（过去的ZAP）命令
+鏌ョ湅鏂囨湰鎵撳嵃
+Flash:刷新到Zap中继  
+DAHDIBarge:Barge in DAHDI 通道(原来的ZapBarge)  
+ZapCD:ISDN call deflection (bristuff)  
+BristuffZapEC:Echo cancellation on/off (bristuff)  
+DAHDISendKeypadFacility:Send digits out of band over a PRI  
+DAHDIRAS:提供ISDN数据服务 (原来的ZapRAS)  
+DAHDIScan:扫描DAHDI通道到监控呼叫(原来的ZapScan)  
+语音邮件和会议
+Directory:规定语音邮件扩展目录
+HasNewVoicemail:有条件的分支到优先权＋101
+MailboxExists:检查邮箱是否存在
+MeetMe:简单的 MeetMe 会议桥
+MeetMeAdmin:MeetMe 会议管理
+MeetMeCount:MeetMe参与者统计
+MiniVM:Mini-Voicemail (new in v1.6)
+VoiceMail:语音留言
+VoiceMailMain:进入语音系统
+VMAuthenticate:基于语音邮箱鉴别用户
+呼叫队列和ACD操纵
+AddQueueMember:动态添加排队成员
+AgentCallbackLogin:呼叫座席回叫注册
+AgentLogin:呼叫座席注册
+AgentMonitorOutgoing:记录座席的对外呼叫
+ParkAndAnnounce:驻留通告
+PauseQueueMemeber:暂停一个座席
+ParkedCall:回复被停放的呼叫
+Queue:排队等代呼叫
+RemoveQueueMember:动态移除列队成员
+UnpauseQueueMemeber:恢复一个座席
+警报监测/中心站
+AlarmReceiver:仿效一个Ademco 连接ID的警报接受站
+业余广播/转发连接
+Rpt:支持业余无线电广播和商业化的两种转发器连接
+外部应用（非Digium的CVS里）
+Asterisk app_dbodc:用unixODBC进行拨号方案修正
+DynExtenDB:数据库中的存储扩充
+Iconv:字符转换设置
+app Prepaid:为Postgres 所设计的
+PPPD:邮件后台程序连接器
+Bristuff & zaphfc applications
+PickUp:大多数路线是独立的；是bristuff片的一部分
+PickUpChan:接收指定路线
+BristuffPickupSIPuri
+PickDown:挂断长途电话
+Steal:接受中转电话
+Devstate:产生一种安装设备驱动程序状态来改变事件（忙，打电话…）
+Segfault:用 segfault 撞击Asterisk
+ZapEC:对于Zap能或者不能的回波消除
+Autoanswer:在指定范围内自动回话
+AutoanswerLogin:登陆到自动回话应用程序
+ISDN应用
+ISDN重叠拨号
+Sirrix通道的应用
+SrxEchoCan:不能/能回波消除
+SrxDeflect:偏转进入的电话
+SrxMWI:在Sirrix组上 设置/重新设置信息等待指示（MWI）

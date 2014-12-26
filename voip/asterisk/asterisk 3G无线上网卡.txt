@@ -1,0 +1,137 @@
+Hello
+Put the Chan _ sebi.c in Asterisk 1.4 - ADDONS folder channels
+The voice only tested with Huawei k3520 (e169 vodafonizado)
+By the way this firmware 11.314.12.02.00 (with the voice that was not gonna....)
+The web of vodafone.de is low
+Http: / / www.vodafone.de / Technischer Hilfe - support / support / 97002 _ 131991.html
+Compile and install as usual
+You need to usbserial modem ports are visible. Fedora 10 detects the running kernel 2.6.27 on something
+With older kernels for usbserial googling VMC Linux release ports
+ 
+[root@pruebas asterisk-addons-1.4.7]# lsusb
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 005 Device 018: ID 12d1:1001 Huawei Technologies Co., Ltd. E620 USB Modem
+Bus 005 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 004 Device 008: ID 12d1:1003 Huawei Technologies Co., Ltd. E220 HSDPA Modem / E270 HSDPA/HSUPA Modem
+Bus 004 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 003 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 002 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+
+
+What gives us a k3520 or e169 with usbserial ok
+ 
+usb 5-1: new full speed USB device using uhci_hcd and address 17
+usb 5-1: configuration #1 chosen from 1 choice
+scsi62 : SCSI emulation for USB Mass Storage devices
+usb-storage: device found at 17
+usb-storage: waiting for device to settle before scanning
+usb 5-1: New USB device found, idVendor=12d1, idProduct=1001
+usb 5-1: New USB device strings: Mfr=1, Product=2, SerialNumber=1
+usb 5-1: Product: HUAWEI Mobile
+usb 5-1: Manufacturer: ???????????????????
+usb 5-1: SerialNumber: ???????????????????
+usb 5-1: USB disconnect, address 17
+usb 5-1: new full speed USB device using uhci_hcd and address 18
+usb 5-1: configuration #1 chosen from 1 choice
+usb-storage: probe of 5-1:1.0 failed with error -5
+option 5-1:1.0: GSM modem (1-port) converter detected
+usb 5-1: GSM modem (1-port) converter now attached to ttyUSB0
+usb-storage: probe of 5-1:1.1 failed with error -5
+option 5-1:1.1: GSM modem (1-port) converter detected
+usb 5-1: GSM modem (1-port) converter now attached to ttyUSB1
+usb-storage: probe of 5-1:1.2 failed with error -5
+option 5-1:1.2: GSM modem (1-port) converter detected
+usb 5-1: GSM modem (1-port) converter now attached to ttyUSB2
+
+ttyUSB1  is the port of voice option 5-1:1.1
+ttyUSB2 is the data option 5-1:1.2:
+
+Now with a single SMS E270
+ 
+usb 4-1: new full speed USB device using uhci_hcd and address 7
+usb 4-1: configuration #1 chosen from 1 choice
+scsi67 : SCSI emulation for USB Mass Storage devices
+usb-storage: device found at 7
+usb-storage: waiting for device to settle before scanning
+usb 4-1: New USB device found, idVendor=12d1, idProduct=1003
+usb 4-1: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+usb 4-1: Product: HUAWEI Mobile
+usb 4-1: Manufacturer: HUAWEI Technologies
+usb 4-1: USB disconnect, address 7
+usb 4-1: new full speed USB device using uhci_hcd and address 8
+usb 4-1: configuration #1 chosen from 1 choice
+usb-storage: probe of 4-1:1.0 failed with error -5
+option 4-1:1.0: GSM modem (1-port) converter detected
+usb 4-1: GSM modem (1-port) converter now attached to ttyUSB3
+usb-storage: probe of 4-1:1.1 failed with error -5
+option 4-1:1.1: GSM modem (1-port) converter detected
+usb 4-1: GSM modem (1-port) converter now attached to ttyUSB4
+scsi70 : SCSI emulation for USB Mass Storage devices
+usb 4-1: New USB device found, idVendor=12d1, idProduct=1003
+usb 4-1: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+usb 4-1: Product: HUAWEI Mobile
+usb 4-1: Manufacturer: HUAWEI Technologies
+
+Has only two ports that have no voice
+
+For SMS use 1 = = = > USB 4 - (1 - 1: GSM modem port) converter now attached to ttyUSB4
+Eye - the user that gun asterisk must have read and write permissions in the TTY ports (googling is gerund)
+ 
+CONFIGURACION
+ 
+sebi.conf in etc/asterisk (Or where you have asterisk)
+A look at the configuration file, and is more or less clear huawei1 is a k5320 with voice and SMS
+It is only in huawei2 E270 with SMS
+The name of the channel is free. Each section is a modem
+Put the IMEI of the modems in the configuration file. If you carry the modems which can remove the pin cards or if you don't put the pin in the conf file
+ 
+Volume For the voice ==> 1 min, 5 max
+ 
+To see the State of modems Sebi show devices
+ 
+*CLI> sebi show devices
+ID              IMEI              Group           Provider        Connected State Voice SMS
+huawei2         354xxxxxxxx22   1               vodafone ES     Yes       Free  No    Yes
+huawei1         353xxxxxxxx971   1               vodafone ES     Yes       Free  Yes   Yes
+ 
+You said the configured port Voice SMS capabilities and the State
+If there is a channel in init is stuck by something
+Send logs to go watching
+ 
+To call for Dial("SIP/109-023a85b0", "sebi/huawei1/2688|300|" por ejemplo
+ 
+To send SMS from Asterisk
+ 
+SebiSendSMS  tech/channel|numero|"mensaje blabla"
+Sebisendsms Tech / channel number | "message | blabla"
+ 
+To test the rough e.g. originate SIP / 109 application sebisendsms Sebi / huawei1 | 609123456 | "works as the mqueue of sendmail?"
+As reglita received in the dialplan
+ 
+Executing [sms@from-pstn:1] NoOp("Sebi/huawei2-47a4", "Catch-All DID Match - Found sms - You probably want a DID for this.")
+ 
+Based on the system of Chan _ mobile (that and more code chunks. :) There are manuals for Chan _ mobile so that they refer to send / receive SMS to them provisionally
+The Alfa E220..... Without voice
+Keep the commands of the modems in the log. The reception of an SMS.
+ 
+[May 13 04:08:39] DEBUG[12468] chan_sebi.c: data_read() (huawei2) [+CMGR: "REC UNREAD","2215",,"09/05/13,05:08:21+08"]
+[May 13 04:08:39] DEBUG[12468] chan_sebi.c: data_read() (huawei2) [testtt]
+[May 13 04:08:39] DEBUG[12468] chan_sebi.c: data_read() (huawei2) [OK]
+[May 13 04:08:39] DEBUG[12468] chan_sebi.c: data_write() (huawei2) [AT+CMGD=1]
+ 
+Configuration errors
+The basic sing in Sebi show devices
+ 
+*CLI> sebi show devices
+ID              IMEI              Group           Provider        Connected State Voice SMS
+huawei2         *--*INVALID*--*   1                               No        Init  No    No
+huawei1         353284026023971   1               vodafone ES     Yes       Free  Yes   Yes
+ 
+Bad writing is clear IMEI
+Also goes wrong adapter - > have some without pin first the three errors (three starters ed Asterisk block adapter and put the PUK)
+Sim PUK or for those who ignore me
+If your IMEI is not correct is not trying to pass the pin so attentive with the load order of the USBs
+Prove that have modems (and win)
+And if you send a log jam grep with Sebi to see that
+Greetings
+Morning (and hopefully more ordered as well)

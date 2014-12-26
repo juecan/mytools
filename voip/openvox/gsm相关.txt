@@ -1,0 +1,137 @@
+SIP 成功注册，无法呼叫：
+	1. 两端编码
+	2. 出局前缀（如添加了国家代码，出局时应砍掉）
+
+查询 GSM 模块 SIM840W 的固件版本号：AT+CGMR
+	Revision:1116B02SIM840W16_MXIC_PCM	老版本存在无法挂断的bug，远程升级固件
+	Revision:1224B02SIM840W16_OPENVOX	44口
+
+AT 挂断原因：
+	NO CARRIER：呼叫频率高时运营商挂断，建议客户插不同运营商的 SIM 卡或用长天线
+
+呼叫忙转：Call Forwarding、Route - Forward Number
+
+网关的SMS存储在数据库中，SMS与CDR共享60MB的数据库空间，一条SMS最多占用不到200B的空间，如果拿30MB来存储SMS，可以存储30*1024*1024/200=157286条。
+网关的短信发送速率约为每通道每条短信6秒，单通道一分钟10条。
+查询接收 SMS：
+	打开 LOGS - Log Settings - AT Commands Logs (ON) - Save
+	如果 Gateway 收到 SMS
+		Log 会显示：+CMT
+		Asterisk CLI 会显示：Executing [sms@gsm-1:1] System("EXTRA-SMS/1-1", "/my_tools/process_sms "1" "+8613486900093" "2013/03/23 12:23:53" "log log log"") in new stack
+			EXTRA-SMS/1-1 表示 SIM Card in first port
+			+8613486900093 表示 source number of sender
+			log log log 表示 contest of sms
+		如果没有以上显示，说明 no SMS reached the sim card
+
+DTMF检测：
+	调节 GSM 模块和通道的 RX/TX 增益
+启用DTMF硬件检测功能的方法：
+	启用硬件检测会导致呼出时通话静音和GSM通道挂死
+	vi /etc/openvox/opvxg4xx/modules/sim840w.conf
+		AT_DTR_WAKEUP => AT  改为 AT_DTR_WAKEUP => AT+DDET=1
+	vi /etc/asterisk/extra-channels.conf
+		; Span 1: opvxg4xx/0/1 "OpenVox G400P GSM/CDMA PCI Card 0" AMI/CCS
+		hwdtmfdet=1                 //启用这一行
+	重启asterisk服务生效！
+
+回声问题：调节 GSM 模块和通道的 RX/TX Gain 增益
+	在网关中启用ECHO相关的参数：
+		vi /etc/openvox/opvxg4xx/modules/sim840w.conf
+		AT_SET_SIDE_TONE => AT+SIDET=0,0
+		AT_DTR_WAKEUP => AT+ECHO=0,128,479,8196,20488
+
+	Spk Volume 70
+	Mic Volume 3
+	DAC Gain -15	这个值设置过大会影响音质，产生回声；
+	ADC Gain -3	同上
+	修改增益值后重启网关，回声问题解决！
+	注：调节增益能够有效调试回声问题，具体的值得根据录音来调整。
+
+	Custom AT commands when start: AT+ECHO=0,128,253,8196,20488 
+
+遇到网关音质问题，一般可以查3点：
+	1. 增益；
+	2. 编码；
+	3. 频段。
+如果上述3方面无法解决问题，考虑SIM卡或其网络与网关模块不兼容，换SIM卡测试以便确认；如果换SIM卡也无法正常工作，推测为硬件故障，退回返修。
+
+音量小：调节 GSM 设置下的增益参数及其调整模块的 speaker 和 mic 参数
+
+SIP 到 GSM 的通话出局后隐藏 CID：GSM - GSM Settings - Port - Dial Prefix: #31#
+	使用特殊的拨号前缀实现 CID 隐藏的功能：
+	这个前缀是直接发AT指令实现的，不会改变现有的拨号规则
+	If you can't find your country, try generic GSM (#31#)
+	(USA used to be #67 some folks said *67 works only)
+	country and provider	prefix code	dummy number
+	USA AT&T		*67
+	Generic GSM		#31#
+	Germany                                *31#
+	Hungary			#31#		123
+	UK			141		No dummy needed
+	Australia			1831		No dummy needed
+	New zeeland, Telecom	0197		No dummy needed
+	Israel			*31
+	Hong Kong		131		No dummy needed
+	Denmark			*31*
+
+网关对接同一SIP服务器上的多条SIP中继时，配置参考如下:
+1). Create a SIP trunk on your Asterisk Server:
+[1001]
+host=dynamic
+username=1001
+secret=1001
+type=friend
+disallow=all
+allow=ulaw	Assuming you are using ulaw codec;
+fromuser=1001	If you have multiple SIP trunks in this Server, fromuser must be enabled
+		Otherwise you can NOT choose a specific SIM card to send out calls!
+dtmfmode=rfc2833
+insecure=port,invite
+context=from-pstn
+
+在网关上启用DISA功能和IVR类似功能的配置方法如下：
+1. 在modules.conf中加上如下内容：
+	load => format_gsm.so             //启用gsm格式语音播放
+	load => app_playback.so          // 启用playback应用
+	load => app_disa.so                 //启用DISA应用
+2. 在/etc/asterisk目录下创建sounds目录，并用winscp上传gsm语音到该目录下面。
+3. 在extensions_custom.conf里面定制自己的规则
+
+网关中交换板（默认slot 0）的两个网口作用是相同的，都是连接到不同模块板的第一块网卡，模块板上的第二块网卡闲置。所以两个网口只需要连接一个即可，操作的都是模块板的第一块网卡。（在网页上启用 Eth2是无效的）
+当交换板放在slot  1时，启用的第模块板的第二块网卡，第一块闲置。与上面相比，只是多了PPPoE的功能。
+
+在网关上配置不同网段的IP
+	在网关的自定义开机启动脚本中添加如下命令：
+		# vi /etc/asterisk/gw/custom.sh
+		ifconfig eth0:1 192.168.179.1 netmask 255.255.255.0 up > /dev/null 2>&1
+		上面这行命令就是为eth0添加192.168.179.1的IP地址
+
+单独禁用某一欠费的SIM卡；gsm power off spannum 命令禁用该span;
+
+配置cluster后，首页显示了20口，其中12个口是空的，页面显示很难看，让客户在集群设置的时候将不存在的 Board IP留空，然后点应用就可以了
+
+20口网关在满负载运行的时候，经常出现某些通话静音1秒的情况：
+	这是由于网关满负载载模块间的信号干扰导致误码率升高引起的，更换部分长天线并分开放置后有明显改善，如果放置的位置合理能够得到很好的效果。
+	注：如果客户反馈此问题，建议更换长天线来解决！
+
+SIP--->GSM方向的Caller ID修改后在目标终端上无法看到修改后的Caller ID的，因为运营商不允许！
+GSM----->SIP方向的Caller ID修改后可以正常看到改后的CID，填上下面两行即可：
+	Set the Caller ID Name to  ______
+	Set the Caller ID Number to ______
+注：如果需要在目标终端上既能看到源ID又能看到修改后的ID，可以只修改中一项。
+
+防封杀功能：暂时只能提供IMEI批量自动修改来防止运营商根据IMEI封锁设备，暂时没有SIM bank 或 SIM Server方案
+
+公网上进行语音传输时如何保证通话质量：公司上使用建议使用G729和g723编码
+
+SIP代理：
+	如果遇到对接的SIP服务器有proxy server 的时候，需要在新建SIP Endpoints的时候同时填写 Hostname or IP Address和Outbound Proxy两个选项；
+	网关若是置于路由器后面，那么在做好端口映射的同时，在网关的Advanced SIP Settings下面的NAT settings中，必须填写好外网的IP或相应的域名：External Address / External hostname. 
+	注：1.1.1之后的版本才能配置External Address，此前的版本没有这个参数！
+
+模块启动后会发送AT+CREG向运营商请求注册
+
+设置SIP中继的时候在elastix端指定网关IP，但网关上还是用注册模式向一直不断向elastix发注册请求，改为none不注册的方式对接
+设置SIP中继时最好不要启用qualify=yes, 不然会导致elastix误认为网关不在线而不再允许其接受呼叫。
+
+固件版本不匹配的时候很可能出现自动集群时只能集群部分模块板
