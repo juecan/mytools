@@ -1,0 +1,17 @@
+Module Parameters
+
+The kernel modules can be configured through module parameters. Module parameters can optionally be set at load time. They are normally set (if needed) by a line in a file under /etc/modprobe.d/ or in the file /etc/modprobe.conf.
+
+Example line:
+
+options dahdi debug=1
+The module parameters can normally be modified at runtime through sysfs:
+
+pungenday:~# cat /sys/module/dahdi/parameters/debug
+0
+pungenday:~# echo 1 >/sys/module/dahdi/parameters/debug
+pungenday:~# cat /sys/module/dahdi/parameters/debug
+1
+Viewing and setting parameters that way is possible as of kernel 2.6 . In kernels older than 2.6.10, the sysfs "files" for the parameters reside directly under /sys/module/module_name .
+
+Useful module parameters:

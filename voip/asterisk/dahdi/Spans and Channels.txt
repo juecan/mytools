@@ -1,0 +1,7 @@
+DAHDI provides telephony channels to the userspace applications. Those channels are channels are incorporated into logical units called spans.
+
+With digital telephony adapters (e.g: E1 or T1), a span normally represents a single port. With analog telephony a span typically represents a PCI adapter or a similar logical unit.
+
+Both channels and spans are identified by enumerating numbers (beginning with 1). The number of the channel is the lowest unused one when it is generated, and ditto for spans.
+
+There are up to 128 spans and 1024 channels. This is a hard-wired limit (see dahdi/user.h . Several places throuout the code assume a channel number fits in a 16 bits number). Channel and span numbers start at 1.

@@ -1,0 +1,11 @@
+A PBX system should generally have a single clock.
+一个 PBX 系统会产生一个单独的时钟。
+如果你通过数字卡（比如 E1、T1）连接到电话供应商，你应该使用供应商的时钟(as you get through the interface). Hence one important job of Asterisk is to provide timing to the PBX.
+
+DAHDI "ticks" once per millisecond (1000 times per second). On each tick every active DAHDI channel reads and 8 bytes of data. Asterisk also uses this for timing, through a DAHDI pseudo channel it opens.
+
+However, not all PBX systems are connected to a telephony provider via a T1 or similar connection. With an analog connection you are not synced to the other party. And some systems don’t have DAHDI hardware at all. Even a digital card may be used for other uses or is simply not connected to a provider. DAHDI cards are also capable of providing timing from a clock on card. Cheap x100P clone cards are sometimes used for that purpose.
+
+If a hardware timing source either cannot be found or stops providing timing during runtime, DAHDI will automatically use the host timer in order provide timing.
+
+You can check the DAHDI timing source with dahdi_test, which is a small utility that is included with DAHDI. It runs in cycles. In each such cycle it tries to read 8192 bytes, and sees how long it takes. If DAHDI is not loaded or you don’t have the device files, it will fail immediately. If you lack a timing device it will hang forever in the first cycle. Otherwise it will just give you in each cycle the percent of how close it was. Also try running it with the option -v for a verbose output.

@@ -1,0 +1,47 @@
+A DAHDI device (e.g. a PCI card) is represented within the DAHDI drivers as a DAHDI device. Normally (with auto_assign_spans=1 in the module dahdi, which is the default), when a device is discovered and loaded, it registers with the DAHDI core and its spans automatically become available. However if you have more than one device, you may be interested to set explicit spans and channels numbers for them. To use manual span assigment, set auto_assign_spans to 0 . e.g. in a file under /etc/modprobe.d/ include the following line:
+
+options dahdi auto_assign_spans=0
+You will then need to assign the spans manually at device startup. You will need to assign a span number and channel numbers for each available span on the system. On my test system I have one BRI PCI card and one Astribank BRI+FXS:
+
+# grep . /sys/bus/dahdi_devices/devices/*/spantype
+/sys/bus/dahdi_devices/devices/astribanks:xbus-00/spantype:1:BRI
+/sys/bus/dahdi_devices/devices/astribanks:xbus-00/spantype:2:BRI
+/sys/bus/dahdi_devices/devices/astribanks:xbus-00/spantype:3:BRI
+/sys/bus/dahdi_devices/devices/astribanks:xbus-00/spantype:4:BRI
+/sys/bus/dahdi_devices/devices/astribanks:xbus-00/spantype:5:BRI
+/sys/bus/dahdi_devices/devices/astribanks:xbus-00/spantype:6:BRI
+/sys/bus/dahdi_devices/devices/astribanks:xbus-00/spantype:7:BRI
+/sys/bus/dahdi_devices/devices/astribanks:xbus-00/spantype:8:BRI
+/sys/bus/dahdi_devices/devices/astribanks:xbus-00/spantype:9:FXS
+/sys/bus/dahdi_devices/devices/pci:0000:00:09.0/spantype:1:TE
+/sys/bus/dahdi_devices/devices/pci:0000:00:09.0/spantype:2:TE
+/sys/bus/dahdi_devices/devices/pci:0000:00:09.0/spantype:3:NT
+/sys/bus/dahdi_devices/devices/pci:0000:00:09.0/spantype:4:NT
+All spans here, except the FXS one, are BRI spans with 3 channels per span.
+
+In order to assign a span, we write three numbers separated by colns to the file assign_span in the SysFS node
+
+local_num:span_num:base_chan_num
+Thus:
+
+echo 9:5:10 >/sys/bus/dahdi_devices/devices/astribanks:xbus-00/assign_span
+echo 2:8:40 >/sys/bus/dahdi_devices/devices/pci:0000:00:09.0/assign_span
+echo 1:1:1  >/sys/bus/dahdi_devices/devices/astribanks:xbus-00/assign_span
+echo 4:6:20 >/sys/bus/dahdi_devices/devices/pci:0000:00:09.0/assign_span
+echo 3:2:5  >/sys/bus/dahdi_devices/devices/astribanks:xbus-00/assign_span
+As you can see, the order of span numbers or local span number is insignificant. However the order of channel numbers must be the same as that of span numbers.
+
+Which indeed produced:
+
+# head -n3 -q /proc/dahdi/*
+Span 1: XBUS-00/XPD-00 "Xorcom XPD [usb:LAB-0003].1: BRI_NT"
+           1 XPP_BRI_NT/00/00/0
+Span 2: XBUS-00/XPD-02 "Xorcom XPD [usb:LAB-0003].3: BRI_TE"
+           5 XPP_BRI_TE/00/02/0
+Span 5: XBUS-00/XPD-10 "Xorcom XPD [usb:LAB-0003].9: FXS" (MASTER)
+          10 XPP_FXS/00/10/0
+Span 6: B4/0/4 "B4XXP (PCI) Card 0 Span 4" RED
+          23 B4/0/4/1 YELLOW
+Span 8: B4/0/2 "B4XXP (PCI) Card 0 Span 2" RED
+40 B4/0/2/1 RED
+Likewise spans can be unassigned by writing to the unassign-span "file".

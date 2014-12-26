@@ -1,0 +1,29 @@
+一个警告表示一个端口不可用，因此不能通过它外呼
+
+Red Alarm
+	T1/E1 端口无法与远端交换机保持同步。
+	典型表现为物理线路错误，未联通或是与远端交换机的帧编码、线路编码不匹配。
+	T1/E1 端口无法同步时会向远端交换机发送一个 yellow alarm，以表示从远端交换机接收信令异常。
+	The R in red stands for "right here" and "receive"… indicating that we’re having a problem right here	receiving the signal from the remote switch.
+
+Yellow Alarm
+	RAI—Remote Alarm Indication
+	远端交换机为 red alarm 时 E1/T1 为 yellow alarm
+	表示远端交换机不能与你保持同步，或者无法接收你发送的数据
+	The Y in yellow stands for "yonder"… indicating that the remote switch (over yonder) isn’t able to see what you’re sending.
+
+Blue Alarm
+	AIS—Alarm Indication Signal
+
+Your T1/E1 port will go into blue alarm when it receives all unframed 1s on all timeslots from the remote switch.
+This is a special signal to indicate that the remote switch is having problems with its upstream connection.
+dahdi_tool and Asterisk don’t correctly indicate a blue alarm at this time.
+The easy way to remember this is that streams are blue, so a blue alarm indicates a problem upstream from the switch you’re connected to.
+
+Recovering from Alarm
+
+Loopback：Not really an alarm。表示一个 span 不可用，as the port is in either a local or remote loopback mode.
+
+Not Open
+	Something is not connected.
+	Used by e.g. the drivers of the Astribank to indicate a span that belongs to a device that has been disconnected but is still being used by userspace programs and thus can’t e destroyed.

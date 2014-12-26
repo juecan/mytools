@@ -1,0 +1,59 @@
+(most modules)
+
+Sets debug mode / debug level. With most modules debug can be either disabled (0, the default value) or enabled (any other value).
+
+wctdm and wcte1xp print several extra debugging messages if the value of debug is more than 1.
+
+Some modules have "debugging flags" bits - the value of debug is a bitmask and several messages are printed if some bits are set:
+
+To get a list of parameters supported by a module, use
+
+modinfo module_name
+Or, for a module you have just built:
+
+modinfo ./drivers/dahdi/module_name.ko
+For the xpp modules this will also include the description and default value of the module. You can find a list of useful xpp module parameters in README.Astribank .
+
+wctdm24xxp:
+
+1: DEBUG_CARD
+
+2: DEBUG_ECHOCAN
+
+wct4xxp:
+
+1: DEBUG_MAIN
+
+2: DEBUG_DTMF
+
+4: DEBUG_REGS
+
+8: DEBUG_TSI
+
+16: DEBUG_ECHOCAN
+
+32: DEBUG_RBS
+
+64: DEBUG_FRAMER
+
+xpp: See also README.Astribank:
+
+1: GENERAL - General debug comments.
+
+2: PCM - PCM-related messages. Tend to flood logs.
+
+4: LEDS - Anything related to the LEDs status control. The driver produces a lot of messages when the option is enabled.
+
+8: SYNC - Synchronization related messages.
+
+16: SIGNAL - DAHDI signalling related messages.
+
+32: PROC - Messages related to the procfs interface.
+
+64: REGS - Reading and writing to chip registers. Tends to flood logs.
+
+128: DEVICES - Device instantiation, destruction and such.
+
+256 - COMMANDS - Protocol commands. Tends to flood logs. 
+
+The script xpp_debug in the source tree can help settting them at run time.

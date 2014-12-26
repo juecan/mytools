@@ -1,0 +1,14 @@
+Dynamic spans are spans that are not represented by real hardware. Currently there are two types of them:
+
+tdmoe
+TDM over Ethernet. A remote span is identified by an ethernet (MAC) address.
+
+local
+Generates a span that is actually a loopback to a different local span.
+
+Modules that support the dynamic spans are typically loaded at the time the ioctl DAHDI_DYNAMIC_CREATE is called. This is typically called by dahdi_cfg when it has a line such as:
+
+dynamic,somename,params
+in /etc/dahdi/system.conf . In that case it will typically try to load (through modprobe) the modules dahdi_dynamic and dahdi_dynamic_¡¯somename'. It will then pass params to it.
+
+Dynamic spans are known to be tricky and are some of the least-tested parts of DAHDI.
