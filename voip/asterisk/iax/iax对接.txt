@@ -1,0 +1,130 @@
+1. iax.conf配置
+（1）机子172.16.8.209
+[general]
+register =>207:207@172.16.8.207
+[209]
+ername=209
+secret=209
+host=dynamic
+type=user
+context=209in
+[TRUNK]
+type=peer
+username=207
+secret=207
+host=172.16.8.207
+fromuser=207
+（2）机子172.16.8.207
+[general]
+[207]
+ername=207
+secret=207
+host=dynamic
+type=user
+context=207in
+[TRUNK]
+type=peer
+username=209
+secret=209
+host=172.16.8.209
+fromuser=209
+2. extension.conf 配置
+（1）机子 172.16.8.209
+[209in]
+exten => _09.,1,Dial(SIP/${EXTEN:2},,r)
+exten => 007,1,Dial(dahdi/7)
+exten => _00[45],1,Dial(dahdi/g12)
+[from-1001]
+include => default
+exten => 100,1,Dial(dahdi/1)
+from-internal]
+include => default
+[default]
+exten => _XXXX,1,Dial(IAX2/207:207TRUNK/09${EXTEN},,r)
+（2）机子 172.16.8.207
+[from-2001]
+include => default
+[207in]
+exten => _09.,1,Dial(SIP/${EXTEN:2},,r)
+[default]
+exten => _XXXX,1,Dial(IAX2/TRUNK/09${EXTEN}, ,r) 
+exten => _00[457],1,Dial(IAX2/TRUNK/${EXTEN},,r)
+*********************************************************************
+非注册方式
+1. iax.conf 配置
+（1）172.16.8.207
+[general]
+[207TRUNK]
+type=friend
+host=172.16.8.209
+secret=1111
+context=209in
+（2）172.16.8.209
+[general]
+[TRUNK]
+type=friend
+context=207in
+host=172.16.8.207
+secret=1111
+2. 拨号规则
+（1）172.16.8.207
+[from-2001]
+include => default
+[209in]
+exten => _09.,1,Dial(SIP/${EXTEN:2},,r)
+[default]
+exten => _XXXX,1,Dial(IAX2/207TRUNK/09${EXTEN},,r)
+exten => _00[457],1,Dial(IAX2/207TRUNK/${EXTEN},,r)
+（2）172.16.8.209
+[from-1001]
+include => default
+[207in]
+exten => _09.,1,Dial(SIP/${EXTEN:2},,r)
+exten => 007,1,Dial(dahdi/7)
+exten => _00[45],1,Dial(dahdi/g12)
+[default]
+exten => _XXXX,1,Dial(IAX2/TRUNK/09${EXTEN},,r)
+*********************************************************************
+guest方式
+1. iax.conf 配置
+（1）172.16.8.207
+[TRUNK1]
+type=peer
+；context=207out
+secret=secret
+host=172.16.8.209
+[TRUNK2]
+type=user
+context=from209
+host=dynamic
+;callerid="slave"
+（2） 172.16.8.209
+[TRUNK1]
+type=peer
+secret=1111
+host=172.16.8.207
+[TRUNK2]
+type=user
+context=from207
+host=dynamic
+2. 拨号规则
+（1）172.16.8.207
+[from-2001]
+include => default
+[from209]
+exten => _09.,1,Dial(SIP/${EXTEN:2},,r)
+[default]
+exten => _XXXX,1,Dial(IAX2/TRUNK1/09${EXTEN},,r)
+exten => _00[457],1,Dial(IAX2/TRUNK1/${EXTEN},,r)
+（2）172.16.8.209
+[from-1001]
+include => default
+
+[from207]
+exten => _09.,1,Dial(SIP/${EXTEN:2},,r)
+exten => 007,1,Dial(dahdi/7)
+exten => _00[45],1,Dial(dahdi/g12)
+[default]
+exten => _XXXX,1,Dial(IAX2/TRUNK1/09${EXTEN},,r)
+
+

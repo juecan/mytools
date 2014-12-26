@@ -1,0 +1,115 @@
+<开始标记 属性名="属性值"></结束标记> 标记大小写不敏感
+
+1.html：
+<html>
+<head>
+<title>网页标题</title>
+</head>
+<body>
+网页正文
+</body>
+</html>
+
+<html>网页内容</html>	网页代码的开始、结束标记
+<head></head>		首部开始、结束标记
+<title>网页标题</title>	网页标题开始、结束标记
+<body>正文内容</body>	正文开始、结束标记
+
+<!--注释内容-->
+<br>			强制换行标记
+<p></p>			分段标记，分隔开的段落间隔更大
+<center>内容</center>	居中标记
+<div>节内容</div>	节标记
+<hn></hn>		标题标记（h1定义的文本最大，即一级标题，h6定义的文本最小）
+<hr>			水品线标记，插入一条水平线，默认居中
+<font></font>		字体标记
+
+<b></b>			粗体
+<big></big>		大字体
+<i></i>			斜体
+<s></s>			删除线
+<strike></strike>	删除线
+<small></small>		小字体
+<sup></sup>		上标
+<sub></sub>		下标
+<tt></tt>		固定等宽字体
+<u></u>			下划线
+
+&nbsp;			一个空格
+&#160			一个空格
+&reg			注册符号
+&#174			注册符号
+&copy			版权符号
+&#169			版权符号
+&amp			And符号
+&#38			And符号
+&yen			元符号
+&#165			元符号
+
+<hr>属性：
+align：对齐方式，left、right、center、justify分别为左对齐、右对齐、居中对齐、两边对齐。<p></p>、水平标记线<hr>、图像标记<img>都有这个属性
+color：水平线颜色属性
+size：水平线宽度
+width：水平线长度（像素或百分比为单位）
+
+<ol></ol>		有序列表标记
+<ul></ul>		无序列表标记
+<li>			列表项标记
+
+<img></img>		图像标记，可用于多媒体文件
+<marquee></marquee>	滚动字幕标记
+<bgsound>		背景音乐标记，只能放在head部分
+
+<table></table>		表格标记
+<caption></caption>	表头标记
+<tr></tr>		行标记
+<td></td>		单元格标记
+
+<frameset></frameset>	定义框架集标记，代替body
+<frame></frame>		框架标记
+<noframe></noframe>	有些浏览器不支持框架，指定浏览器不支持时显示的内容
+
+<a></a>			超链接标记
+	<a name="锚点名称"></a> 为锚点标记
+	<a href="xxx.html#锚点名称"> 跳转到锚点
+	<a href="电子邮件协议名称mailto:邮箱地址?subject=主题">
+
+<form></form>		表单标记
+<input></input>		输入型表单
+<textarea></textarea>	多行文本框
+<select></select>	下拉菜单
+
+<fileset></fileset>	控件分组，标记以<legend>开头
+<legend></legend>	控件组标题
+
+<hn>属性：
+face：指定文字字体，可指定多个，如果第一个字体系统中没有，显示第二个
+size：指定文字大小，1-7，默认为3，值越大字体越大，+/-数字：表示相对上一行字体
+color：指定文字颜色
+
+<ol>属性：
+start：定义数字序列的起始值
+type：序列符号样式（1：阿拉伯数字，A：大写字母，a：小写字母，I：大写罗马字母，i：小写罗马字母）
+
+<ul>属性：
+type：disc使用实心圆、circle使用空心圆、square使用方块作为列表符号，IE中type的值区分大小写
+
+<li>属性：
+type：同<ol>
+value：新的数字序列起始值，可以获得不连续列表
+
+<img>属性：
+src：图像地址
+alt：替换文字，如果图像不显示，显示替换文字
+width：图片显示的宽度（单位为像素或百分值）
+height：图片显示的高度（单位为像素或百分值）
+hspace：指定图像的左右边距（像素）
+vspace：指定图像的上下边距（像素）
+border：设置图像的边框，取值为正整数，单位为像素
+align：图像与文本的对齐方式，垂直方向取值可为top图像与文本顶部对齐、middle图像与文本中央对齐、bottom图像与文本底部对齐，水平方向left图像居左文本居右、right图像居右文本居左
+	使用<br>的clear属性可以将换行后的文本移到图像的下边
+controls：视频控制按钮
+dynsrc：视频文件地址，可与src同时使用，如果计算机有多媒体功能则不显示图片
+start：播放时间，fileopen页面打开即播放，mouseover鼠标置于上方播放
+loop：指定文件播放次数，infinite为循环播放
+loopdelay：指定两次播放之间的间隔时间

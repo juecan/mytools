@@ -1,3 +1,10 @@
+## SS7
+
+### ss7.conf
+
+	opc		局端：不同运营商可能不同
+	dpc		用户端：不同运营商可能不同
+
 [linkset-siuc]
 enabled => yes
 enable_st => no

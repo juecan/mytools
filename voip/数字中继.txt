@@ -1,0 +1,301 @@
+数字中继：物理接口、信令接口
+	物理接口：E1/2M/30B+D，采用 PCI 编码
+		标准的 2M E1 线路支持两种形式的接入方式：
+			75Ω：非平衡式（BNC）
+			120Ω：平衡式（RJ45）
+		1）RJ45 的直通线。通常运营商端口是 BNC 头或者 RJ45
+		2）可利用 75/120Ω 转接盒实现接入方式的转换
+		3）如何做直通线，交叉线，回环测试线
+	信令接口：通过物理接口与对方进行信息交换的软件
+
+ * 2M 75Ω 同轴中继线最常传输距离：280M
+ * 2M 120Ω 同轴中继线最常传输距离：200M
+
+E1 线路支持的服务
+	CRC4校验
+	运营商要求的 pri 拨号规则，通常包括：
+		本地用户（local）
+		国家（national）
+		未知（unknown）
+		国际（international）
+	出局是否带需要携带 CID
+
+E1接口支持两种线路编解码格式：AMI格式和HDB3格式
+
+本地用户为用户侧（CPE）
+运营商是网络侧（NET）
+
+本地是从时钟，从运营商获得时钟。
+
+数字中继卡不要使用软回声抑制模块
+
+E1 接地：
+75Ω：
+	1）连接 E1 连接线到对端 E1 设备
+	2）用万用表测量 E1 连接线接地情况
+	3）电阻档测“TX——光端机地线（机壳）”，短路表示光端机 TX 接地
+	4）RX 同 3）
+	5）对端 TX 或 RX 接地，本端 TX、RX 不接地
+	6）对端 TX 或 RX 未接地，本端 TX 接地
+120Ω：
+	1）连接 E1 连接线到对端 E1 设备
+	2）用万用表测量 E1 连接线接地情况
+	3）只要对端设备 TX 和 RX 两条芯线对地电阻相同（接近），则本端不应接地
+
+----------------------------------------------------------------------------------------------------
+
+PRI：
+数字语音板卡支持 E1，支持 30B+D PRI（PRA），速率是 2.048Mbit/s 
+默认使用成复帧的 E1 中
+	第 0 时隙用作同步
+	第 16 时隙（D 通道）是用于传输信令的
+	第 1（B 通道）到 15，第 17 到第 31 共 30 个时隙用于传输有效数据或者语音
+
+chan_dahdi.conf：
+	; 支持PRI 拨号规则本地用户
+	pridialplan=local
+	prilocaldialplan=local
+电话能打进来不能打出去
+	pridialplan= local (or unknown, private, national, and international)
+
+TE1 时钟同步被用于 propagate a single clock source over the T1/E1 ports on a single card.
+必须确定哪个端口应该在 NORMAL (slave) 时钟模式下，哪个端口应该在 MASTER 时钟模式下
+所有连接到电信的端口都必须处于NORMAL模式下，因为电信是MASTER.
+
+阻抗/帧结构/CRC4校验出现双方不匹配，可能导致不通/误码/滑码/失步等问题，请联系运营商确认以上参数必须和本地完全匹配。
+
+E1 PRI 线路听不到彩铃或者语音提示，修改拨号规则（extensions.conf），在 dial 命令前添加 progress()：
+	exten => _X.,1, Progress()
+	exten => _X.,n, Dial(dahdi/g0/${EXTEN})
+
+Rx Level : > -2.5db // 良好的线路物理连接，值应该是-2.5db
+
+DAHDI DTMF 检测：
+	最常见的问题是运行X Windows系统
+	chan_dahdi.conf 里的 relaxdtmf 选项，可能需要打开或关闭
+	如果想强行让所有的 DTMF 检测由软件做，你可以在 wctdm24xxp.c 或者 wct4xxp.c 里设置 vpmdtmfsupport 为 0，并且重新编译，或者你可以再运行的时候指定它为内核模块的一个选项
+SIP 电话发送 DTMF 数字遇到问题
+	确认SIP电话里设置的 dtmfmode 和 Asterisk 里面设置的 dtmfmode 一致
+	确认没有同时发送 inband 和 out-of-band(rfc2833) 音
+
+PRI 环测：保证 30 路满负荷，语音清晰。
+
+PRI 信令：ISDN(30B+D) 信令、DSS1 信令、PRA 信令，为公共信令
+	B 信道：用户信道，除 0 时隙、16 时隙外的其他信道（1-15, 17-31）
+		用来传送数据、话音、图像等用户信息，速率 64kbit/s
+	D 信道：控制信道，16 时隙信道
+		用来传送公共信道信令，控制同一接口的 B 信道上的呼叫，速率 64kbit/s
+
+PRI 消息：PRI信令在E1通道16时隙中以数据包的格式传送数据，称之为消息
+	SETUP（建立）：用于呼叫发起，包含主叫号码及主叫号码的各种属性，需要占用的时隙，被叫号码（可选）等信息
+	SETUP ACK（建立确认）：对接收到 SETUP 的确认
+	CALL  PROCED（呼叫进程）：表明收到所需的全部信息，并进行呼叫处理中
+	ALERTING（提醒）：表明被叫振铃
+	CONNECT（连接）：表明被叫摘机
+	CONNECT ACK（连接证实）：对接收到 CONNECT 的确认
+	DISCONNECT（拆线）：此消息包中包含了拆线原因值，分析此原因值可以判断发送此消息的一方已挂机（已经通话情况下），或超时释放（长时间未摘机）或占线或是号码不存在或者拥塞等等
+	RELEASE（释放）：释放中继
+	RELEASE CMPLT（释放完成）：中继释放完成，一般情况下是对接收到的 RELEASE 消息进行的确认
+	INFORMATION（信息）：主要用来传送被叫号码
+
+<	表示此为该节点收到的消息
+>	表示此为该节点发出的消息
+
+协议鉴别语：Q.931
+	Q.931 的协议鉴别语的 8 位字节编码为：08
+PRI Span: 1 > Protocol Discriminator: Q.931 (8)  len=35
+
+地址字段：终端端点标识符（TEI）
+呼叫参考：Call Reference
+	一般包括 3 个 8 位字节编码
+呼叫发起方发送
+PRI Span: 1 > TEI=0 Call Ref: len= 2 (reference 1/0x1) (Sent from originator)
+
+承载能力：Bearer Capability
+	8 位字节编码：04
+	指示网络所提供的一个被请求的 I.231 承载业务
+	标识承载的业务类型、传输模式及信息传递速率等信息。
+	对主叫来说，在用户－>网络接口，网络侧将检查主叫用户通过 Bearer capability 请求的承载业务是否和网络侧提供给该用户的承载业务相匹配。若发现不匹配，将拒绝该呼叫。（Cause=57\58\63\65）
+	对被叫来说，在网络－>用户接口，网络侧为被叫提供一个承载业务，用户要检查该网络侧通过Bearer capability提供的承载业务是否和用户能所支持的承载业务相匹配，若发现不匹配，将拒绝该呼叫。（Cause=88）
+
+	编码标准：Coding standard
+		在无线市话系统中采用的是 ITU-T 标准编码
+	信息传递能力：Information transfer capability
+	传递方式：Transfer mode
+		7	6				
+		0	0	Circuit mode（电路方式）
+		1	0	Packet mode（分组方式，未使用）
+	信息传递速率：Information transfer rate
+	用户信息一层协议：User information layer 1 protocol reserved.
+PRI Span: 1 > Bearer Capability (len= 5) [ Ext: 1  Coding-Std: 0  Info transfer capability: Speech (0)
+PRI Span: 1 >                              Ext: 1  Trans mode/rate: 64kbps, circuit-mode (16)
+PRI Span: 1 >                                User information layer 1: A-Law (35)
+PRI Span: 1 > [18 03 a9 83 81]
+
+通路识别：Channel ID
+	8 位字节编码：18
+	在信令流程所控制的接口内确认一个通道
+	识别由信令流程所控制的接口范围内的通路
+	在系统中，通过该信息单元可确认一个呼叫通路占用的是那一条B通道
+		对E1链路来说是那条E1线路及那个时隙；
+		对CS和CSC间的ISDN线路来说是那个2B+D接口及那个B通道
+	在系统中，在CSC到网络侧的接口上，对主叫消息流程来说，该信息单元内容在CSC向网络侧方向所发的SETUP消息内已存在，同时在网络侧发回的CALL PROC消息内也存在；对被叫消息流程来说，虽然在网络侧发下来的SETUP消息内已经存在该信息单元，但其中的“信息通路选择”字段标识为“11”（any channel），此时还没有分配B-CH，所分配的B-CH通过CSC向网络侧方向所回的CALL PROC消息内的通路识别信息单元标识，即CSC负责分配通道的占用。
+	同样在CS和CSC的接口上，B通道的分配是由CS来负责的。
+
+	存在接口标识：IntID
+		无线市话系统采用的是接口明确标识
+		7
+		0	Interface implicitly identified (Note 1)
+		1	Interface explicitly identified in one or more octets, beginning with octet 3.1.
+	接口类型：Int. type
+		6
+		0	Basic interface
+		1	Other interface, e.g. primary rate (Note 2)
+		无线市话系统CSC和GW间采用的是其他接口，一次群速率接口（2M）；CSC和CS间采用的是基本接口。
+	优选/指定：Pref/Excl.
+		4
+		0	Indicated channel is preferred
+		1	Exclusive; only the indicated channel is acceptable
+	D通路指示：D channel（Dchan）
+		3
+		0	The channel identified is not the D-channel
+		1	The channel identified is the D-channel
+		D通路指示仅对D通路的使用有效
+	信息通路选择：Channel Selection（ChanSel）
+	接口标识：Interface identifier
+	编码标准：Coding standard
+	号码/图：Number/map
+	通路类型：Channel type
+	通路号码：Channel number/slot
+	通路的二进制码标识，对B通路，通路号码等于时隙号码
+PRI Span: 1 > Channel ID (len= 5) [ Ext: 1  IntID: Implicit  Other(PRI)  Spare: 0  Exclusive  Dchan: 0
+PRI Span: 1 >                       ChanSel: As indicated in following octets
+PRI Span: 1 >                       Ext: 1  Coding: 0  Number Specified  Channel Type: 3
+PRI Span: 1 >                       Ext: 1  Channel: 1 Type: NET]
+
+显示（长度）：主叫号码
+PRI Span: 1 > Display (len= 5) [ 18101 ]
+
+主叫号码：Calling Party Number
+	8 位字节编码：6c
+
+	号码类型：Type of number
+		Unknown、International number、National number、Network specific number
+		Subscriber number、Abbreviated number、Reserved for extension
+	编号方案标识：Numbering plan identification，NPI
+		Unknown、ISDN/telephony numbering plan、Data numbering plan
+		Telex numbering plan、National standard numbering plan
+		Private numbering plan、Reserved for extension
+PRI Span: 1 > Calling Party Number (len= 9) [ Ext: 0  TON: National Number (2)  NPI: ISDN/Telephony Numbering Plan (E.164/E.163) (1)
+PRI Span: 1 >                                 Presentation: Presentation allowed, User-provided, not screened (0)  '18101' ]
+
+被叫号码：Called Party Number
+	8 位字节编码：70
+PRI Span: 1 > Called Party Number (len= 3) [ Ext: 1  TON: Unknown Number Type (0)  NPI: Unknown Number Plan (0)  '' ]
+
+消息类型：CALL PROCEEDING
+	8 位字节编码：02
+PRI Span: 3 > Message Type: CALL PROCEEDING (2)
+PRI Span: 3 TEI=0 Transmitting N(S)=0, window is open V(A)=0 K=7
+
+通路识别：Channel ID
+	8 位字节编码：18
+PRI Span: 3 > Channel ID (len= 5) [ Ext: 1  IntID: Implicit  Other(PRI)  Spare: 0  Exclusive  Dchan: 0
+PRI Span: 3 >                       ChanSel: As indicated in following octets
+PRI Span: 3 >                       Ext: 1  Coding: 0  Number Specified  Channel Type: 3
+PRI Span: 3 >                       Ext: 1  Channel: 1 Type: CPE]
+
+进展指示：Progress indicator
+	描述呼叫进展阶段所发生的事件
+
+	编码标准：Coding
+	位置：Location
+	进展描述：Progress description
+	若收到的 SETUP 消息内的承载能力信息单元标识为“语音”、“3.1kHZ音频”或“带有信号音/录音通知的不受限的数字信息”，则网络在发送ALERT消息的同时应向主叫用户提供回铃音，而且ALERT消息内带有进展描述No.8“带内信息或适当的花样目前可用”。
+PRI Span: 3 > Progress Indicator (len= 4) [ Ext: 1  Coding: CCITT (ITU) standard (0)  0: 0  Location: Private network serving the local user (1)
+PRI Span: 3 >                               Ext: 1  Progress Description: Called equipment is non-ISDN. (2) ]
+
+呼叫中断原因：Cause
+	8 位字节编码：08
+	DISCONNECT消息必须包含该信息单元
+	说明产生某些消息的原因，在流程差错事件中提供诊断信息，指明原因产生的位置
+
+	编码标准：Coding
+	位置：Location
+	建议：Recommendation
+	原因值：Cause value
+	诊断：Diagnostic
+PRI Span: 3 > Cause (len= 4) [ Ext: 1  Coding: CCITT (ITU) standard (0)  Spare: 0  Location: Private network serving the local user (1)
+PRI Span: 3 >                  Ext: 1  Cause: Normal Clearing (16), class = Normal Event (1) ]
+
+----------------------------------------------------------------------------------------------------
+
+SS7
+
+IAM 	初始地址消息
+IAI	带有附加信息的初始地址消息
+SAM/SAO	后续地址消息
+ST	脉冲终了信令
+GRQ	一般请求消息
+GSM	一般前向建立信息消息
+ACM	地址全信令
+ADI	地址不全信令
+
+被叫用户状态信令
+SLB	用户市忙信令
+STB	用户长忙信令
+LOS	线路不工作信令
+UNN	空号
+SST	发送专用信息音信令
+
+ANN/ANC	应答信令，表示被叫用户摘机应答
+
+应答信令包括应答、计费（ANC）和应答、免费（ANN）两种信令，它根据被叫用户第一次摘机信令送出及收到的被叫号码确定。来话 No.7 信令方式交换局收到应答、计费或应答免费信令应进行转发。执行计费的交换局收到应答、计费信令时开始执行计费程序。
+
+CLF	前向拆线信令，主叫先挂机
+CBK	挂机信令，被叫用户已挂机
+
+后向拆线信令（RLG）
+
+电路复原信令（RSC）和电路群复原信令（GRS）
+
+用户忙：
+	------------------- IAM ------------------->
+	<----- SLB/STB/LOS/UNN/SST -----
+	--- 空号音或录音通知（UNN）---
+	------------------- CLF ------------------->
+	<---------------- RLG ---------------------
+
+通话：
+	A ------------------- IAM ------------------> B
+	A <---------------- ACM -------------------- B
+	A ------------ A 回铃，B 振铃 ------------ B
+	A <------------ ANN/ANC----------------- B
+	A -------------------- 通话 -------------------- B
+	A ------------------- CLF -------------------> B主叫先挂机
+	A <---------------- RLG --------------------- B
+
+通话：
+	A ------------------- IAM ------------------> B
+	A <---------------- ACM -------------------- B
+	A ------------ A 回铃，B 振铃 ------------ B
+	A <------------ ANN/ANC----------------- B
+	A -------------------- 通话 -------------------- B
+	A <---------------- CBK --------------------- B 被叫先挂机
+	A ------------------- CLF -------------------> B
+	A <---------------- RLG --------------------- B
+
+通话：
+	A ------------------- IAM ------------------> B
+	A ------------------- SAO ------------------> B
+	A ------------------- SAO ------------------> B
+	A ------------------- SAO ------------------> B
+	A <---------------- ACM -------------------- B
+	A ------------ A 回铃，B 振铃 ------------ B
+	A <------------ ANN/ANC----------------- B
+	A -------------------- 通话 -------------------- B
+	A ------------------- CLF -------------------> B主叫先挂机
+	A <---------------- RLG --------------------- B
+
+----------------------------------------------------------------------------------------------------
+

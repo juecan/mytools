@@ -1,0 +1,118 @@
+启动 sqlite：
+	[sqlite]# sqlite3 test.db
+建立自己的表：
+	sqlite> create table test (id integer primary key, value text);
+往表中插入数据：
+	sqlite> insert into test(value) values('eenie');
+	sqlite> insert into test(value) values('meenie');
+	sqlite> insert into test(value) values('miny');
+	sqlite> insert into test(value) values('mo');
+设置输出格式：
+	sqlite> .mode col
+	sqlite> .headers on
+检索信息：
+	sqlite> select * from test;
+	id          value     
+	----------  ----------
+	1           eenie     
+	2           meenie    
+	3           miny      
+	4           mo
+为数据库创建一个索引和一个视图：
+	sqlite> create index test_idx on test(value);
+	sqlite> create view schema as select * from sqlite_master;
+退出 sqlite：
+	sqlite> .exit
+获取所有表和视图的列表：
+	sqlite> .tables
+	schema  test  
+查看表的索引：
+	sqlite> .indices test
+	test_idx
+获取表和视图的定义语句：
+	sqlite> .schema test
+	CREATE TABLE test (id integer primary key, value text);
+	CREATE INDEX test_idx on test(value);
+数据导出：
+	sqlite> .output file.sql
+	sqlite> .dump 不加参数导出所有数据库
+	sqlite> .output stdout
+查询当前的数据库 sqlite_master 表：
+	sqlite> .mode col
+	sqlite> .headers on
+	sqlite> select type, name, tbl_name, sql from sqlite_master order by type;
+	type        name        tbl_name    sql                                 
+	----------  ----------  ----------  ------------------------------------
+	index       test_idx    test        CREATE INDEX test_idx on test(value)
+	table       test        test        CREATE TABLE test (id integer primar
+	view        schema      schema      CREATE VIEW schema as select * from
+数据导入：
+	sqlite> .show
+	     echo: off
+	  explain: off
+	  headers: off
+	     mode: list
+	nullvalue: ""
+	   output: stdout
+	separator: "|"
+	    width: 
+	sqlite> drop table test;导入由 .dump 命令创建的文件
+	sqlite> drop view schema; 先移除已经存在的数据库对象
+	sqlite> .read file.sql
+打开回显：输入命令后命令还会显示出来
+	sqlite> .echo on
+空串以字符显示：
+	sqlite> .nullvalue NULL
+设置命令提示符：
+	sqlite3>.prompt 'sqlite3> '
+设置输出格式：csv、column、html、insert、line、list（默认）、tabs、tcl
+	sqlite3> .mode list
+备份：
+	[sqlite]# sqlite3 test.db .dump > test.sql
+	或
+	sqlite> .output file.sql
+	sqlite> .dump
+	sqlite> .exit
+导入备份：
+	[sqlite]# sqlite3 test.db < test.sql
+得到二进制的数据库文件拷贝：
+	[sqlite]# sqlite3 test.db VACUUM 释放数据库文件中未使用的空间
+	[sqlite]# cp test.db test.backup
+将 sql 语句写入文件，从外部创建表
+	[test]# vim create_exam.sql 
+	create table exam
+	(
+	        id integer primary key,
+	        value text
+	);
+	[test]# sqlite3 exam.db < create_exam.sql
+删除表中数据：
+	sqlite> delete from exam where id=1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

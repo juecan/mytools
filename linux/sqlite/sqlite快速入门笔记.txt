@@ -1,0 +1,156 @@
+第一讲
+	自包含，没有服务器，零配置，支持事务。
+	SQLite的数据库就一个文件，包括：多表、索引、触发器、和视图； 
+	SQLite直接读写磁盘上的文件。
+
+	事务的四个特性（ACID）atomic（原子的）、consistent（一致的）、isolated（独立的）、durable（持久的） 
+
+	SQLite不支持并发，不是两个进程同时访问，独占式的 
+	代码质量高，99%的代码都经过测试； 
+	自包含的意思，就是不依赖外界的任何库；
+
+第二讲
+	通常都提供README和INSTALL文件，都是文本文件；
+
+	./configure --prefix=/opt/sqlite3 
+	--prefix 表明目标文件安装在什么目录下,不指定安装在缺省目录下/usr/local/之类的。 
+
+	sqlite3.exe是shell.c,2千多行源代码实现了简单的命令行工具； 
+	动态库是sqlite3.c
+
+	sqlite3工具的功能： 
+		创建数据库； 
+		执行SQL命令； 
+		查询数据库的表结构，或其它对象的结构； 
+		导入和导出数据； 
+		改变输出格式； 
+		使用在shell脚本中；学会shell自动化脚本编程；
+		创建数据库； 
+		sqlite3 数据库文件名
+		输入SQL语句的时候，结束一定要用分号，这也是SQL的标准；
+
+	系统表SQLITE_MASTER，存放database schema 
+	不能对SQLITE_MASTER表进行DROP TABLE,UPDATE,INSERT,DELETE操作
+	临时表存储在sqlite_temp_master中。 
+	SQLite除了数据库文件之外，在运行过程中会产生一些临时文件。
+
+	sqlite3只是一个壳，真正执行，还是会调用SQLite的库；可以研究一下。 
+	sqlite3本身的命令以“.”开始，.help；
+	SQL PLUS有三大类命令： 
+		SQL命令，提交给数据库引擎； 
+		PL SQL 命令，提交给数据库引擎； 
+		SQL PLUS本身的命令，本地执行；
+
+第三讲
+	sqlite3本身的命令 
+		.help
+
+	改变输出格式的命令； 
+		csv，以逗号分隔的记录； 
+	.mode命令在8种显示格式中进行切换； 
+		默认是list模式，默认的分隔线是“|”； 
+			list模式特别适合用于AWK； 
+		line模式，每列都单独一行，列名等于列值，记录之间有空行； 
+		column模式，与SQL PLUS中的缺省模式相同；.header on 打开头，.header off 关闭头；此模式可读性比较好； 
+		.width 3 30,第一列最长3，第二列最长30； 
+		insert模式，产生INSERT的SQL语句，挺有意思；.mode insert 目标表名； 
+		html模式，XHTML table,适合做CGI处理;
+		list模式一行一条记录，每列竖线分隔；
+
+linux，unix的设计思想是小而美，一个工具只干一件事情。通过管道把命令串联起来；
+默认查询结果是写到屏幕上，也可以写到一个文件中。使用.output命令； 
+	.output stdout，输出又回到了屏幕上；
+	查询Database Schema，就是表结构、数据库结构； 
+	.tables，可以看数据库中的所有表； 
+	.indices，可以列出一个指定表的所有索引； 
+	.schema，创建表和索引时候的create语句，也可以在后面指明表名； 
+	.databases,查看当前打开的所有数据库，通常是一个main一个temp；
+
+第四讲
+把整个数据库导成ASC文本文件的功能； 
+.dump命令；导出的SQL语句，可以放到ORACLE中去执行； 
+一个生成数据库归档copy的命令； 
+$ echo ".dump" | sqlite3 ex1 | gzip -c > ex1dmp.gz 
+重构数据库的命令： 
+zcat ex1dmp.gz | sqlite3 ex2 
+从SQLite3中提取数据，导到其它流行的数据库中；
+.explain命令 
+EXPLAIN命令，就是查询一条SQL语句最终解析出来的执行计划。ORACLE中也有，对SQL语句调优很有用； 
+一条SQL语句的处理过程：解析、分析、执行，看看SQL语句的效率； 
+> .explain 
+> explain select * from t;
+.timeout命令 
+默认超时时间是0，查询一张表或索引，发现表或索引被锁定，就立刻返回，不等待； 
+sqlite只适合一个进程访问，不适合多进程的并发访问；
+在SHELL中使用SQLite3的命令； 
+sqlite3命令的输入和输出都可以重定向，常用的使用模式； 
+SQL语句中，除了分号结束，用GO或者/也可以执行； 
+# sqlite3 demo.db "select * from t"
+一个简单的shell脚本 
+shell脚本的开头一定要有一个"#!",这是规定。 
+成对的EOF之间的东西都被原样导入sqlite中；here document技术； 
+shell里面调用交互式程序的方法；
+如何使用Perl脚本访问sqlite数据库； 
+Perl，老牌语言，有20年历史，但在走下坡路，被python或者ruby渐渐取代； 
+Perl在北美比较流行； 
+工作中使用的工具是Perl+shell； 
+把Perl形容为瑞士军刀，但可读性差； 
+ruby适合web快速开发； 
+perl对系统管理和生物信息处理比较厉害；
+windows平台下 ActiveStat Perl www.activestate.com  免费 
+Linux/Unix www.perl.org
+DBI 
+运行一段小程序，确定perl是否安装了对sqlite的支持； 
+perl需要sqlite的驱动，来访问sqlite的数据库，如果没装，还需要安装一下；
+第五讲
+本讲主题，如何使用perl和C语言访问sqlite3数据库；
+使用perl访问sqlite数据库 
+检查perl是否安装了sqlite驱动程序的代码； 
+perl访问数据库都用DBI接口，在DBI之下有DBD（数据库驱动），分别开发支持mysql，oracle等；
+一个基本的插入操作代码演示； 
+先和数据库建立连接； 
+做些准备工作； 
+执行语句； 
+判断是否出错； 
+提交； 
+断开；
+一个基本的查询操作代码演示： 
+查询语句执行的时候，先执行prepare； 
+然后执行； 
+提取结果集，先把每列绑定到变量上，然后在while循环中进行fetch； 
+完成，释放结果集； 
+断开连接；
+perl处理文本文件功能强大，又能操作数据库；
+使用C语言访问sqlite 
+两个对象 
+数据库连接对象：sqlite3；控制连接； 
+语句执行对象：sqlite3_stmt；控制SQL语句；
+常用的六个接口函数，操作sqlite的核心函数： 
+sqlite3_open() 
+sqlite3_prepare() 
+sqlite3_step()，类似fetch功能； 
+sqlite3_column() 
+sqlite3_finalize() 
+sqlite3_close()，断开连接；
+sqlitedemo.c 
+#include
+sqlite3_errmsg(db)；获得失败的原因；
+回调函数的作用； 
+执行完查询，自动调用回调函数，把查询的结果打印出来。
+编译程序要用到头文件和lib库。这次使用静态库。
+# gcc -v 看看有没有gcc 
+编译命令 
+# gcc -I/opt/sqlite3/include -L/opt/sqlite3/lib -lsqlite3 sqlite3demo.c -o dbtest 
+-I头文件搜索路径 
+-L库文件搜索路径 
+-l库文件
+sqlite的局限性： 
+官方网站上有大小的支持； 
+不支持外键约束； 
+对触发器的支持不是很完整； 
+对ALTER TABLE的支持不是很完整； 
+不支持嵌入式事务； 
+不支持有连接和FULL OUTER JOIN. 
+不支持视图的写操作； 
+不支持GRANT和REVOKE；
+sqlite作为单用户，单机版的数据库很不错。
