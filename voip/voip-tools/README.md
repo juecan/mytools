@@ -20,3 +20,11 @@
 	提取音频文件中的DTMF信号: http://aluigi.altervista.org/mytoolz.htm#dtmf2num
 
 	sipsak-0.9.6-1.tar.gz
+
+### WinSIP
+
+	Windows 下批量测试 SIP 呼叫
+	
+### SIPp
+
+	可对 SIP 进行压力测试
