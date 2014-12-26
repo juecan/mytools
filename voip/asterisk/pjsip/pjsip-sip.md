@@ -34,12 +34,12 @@
 #### 192.169.0.107: eyebeam
 
 	display name: 1001
-	username: trunk-1001
+	user name: trunk-1001
 	password: 1001
-	authentication name: user-1001
+	authentication user name: user-1001
 	domain: 192.168.0.120
-	register to domain
-
+	register with domain and receive incoming calls
+	
 ### 拨号规则
 
 #### 192.168.0.120: extensions.conf
