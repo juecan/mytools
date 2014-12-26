@@ -1,0 +1,3 @@
+公司电话服务器： 172.16.0.2
+web: admin/openvox20!!
+SSH：root/openvox20!!

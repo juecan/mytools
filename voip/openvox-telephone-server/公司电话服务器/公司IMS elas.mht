@@ -1,0 +1,151 @@
+From: WizMime<support@wiz.cn>
+Subject: =?gb2312?B?uavLvklNUyBlbGFz?=
+Date: Date: Fri, 19 Sep 2014 11:00:17 +0800
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="multipart/alternative";
+	boundary="----=_Next_Part_0020822670.467"
+
+This is a multi-part message in MIME format.
+
+------=_Next_Part_0020822670.467
+Content-Type: multipart/alternative;
+	boundary="----=_Next_Part_0006940890.334"
+
+
+------=_Next_Part_0006940890.334
+Content-Type: text/plain;
+	charset="gb2312"
+Content-Transfer-Encoding: quoted-printable
+
+This is a multi-part message in MIME format.
+
+------=_Next_Part_0006940890.334
+Content-Type: text/html;
+	charset="gb2312"
+Content-Transfer-Encoding: quoted-printable
+
+=0A<style type=3D"text/css" id=3D"wiz_custom_css">=0Abody=0A{=0A=20=
+   font-family: "Microsoft YaHei UI","Microsoft YaHei",SimSun,"Se=
+goe UI",Tahoma,Helvetica,Sans-Serif,"Microsoft YaHei", Georgia,He=
+lvetica,Arial,sans-serif,=CB=CE=CC=E5, PMingLiU,serif;=0A    font=
+-size: 10.5pt;=0A    line-height: 1.5;=0A}=0Ahtml, body=0A{=0A  =20=
+ =0A    =0A}=0Ah1 {=0A    font-size:1.5em;=0A    font-weight:bold=
+;=0A}=0Ah2 {=0A    font-size:1.4em;=0A    font-weight:bold;=0A}=0A=
+h3 {=0A    font-size:1.3em;=0A    font-weight:bold;=0A}=0Ah4 {=0A=
+    font-size:1.2em;=0A    font-weight:bold;=0A}=0Ah5 {=0A    fon=
+t-size:1.1em;=0A    font-weight:bold;=0A}=0Ah6 {=0A    font-size:=
+1.0em;=0A    font-weight:bold;=0A}=0Aimg {=0A    border:0;=0A   =20=
+max-width: 100%;=0A}=0Ablockquote {=0A    margin-top:0px;=0A    m=
+argin-bottom:0px;=0A}=0Atable {=0A    border-collapse:collapse;=0A=
+    border:1px solid #bbbbbb;=0A}=0Atd {=0A    border-collapse:co=
+llapse;=0A    border:1px solid #bbbbbb;=0A}=0A</style>=0A<!DOCTYP=
+E HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">=0A<HTML><H=
+EAD>=0D=0A<meta http-equiv=3D"Content-Type" content=3D"text/html;=
+ charset=3Dgb2312"><meta http-equiv=3D"X-UA-Compatible" content=3D=
+"IE=3D8" /><TITLE>=B9=AB=CB=BEIMS elas</TITLE>=0A=0A<!--defaultCS=
+S-->=0A<style type=3D"text/css">=0A=0Aimg{=0A	border:0px;=0A	max-=
+width:90%;=0A}=0A</style>=0A<BODY>=0A=0A=0A<div><span style=3D=0A=
+"border-bottom:0px; border-left:0px;border-top:0px;border-right:0=
+px;"=0A></span></div>=0A<div>=B9=AB=CB=BEIMS elastix =C5=E4=D6=C3=
+=A3=BA</div>=0A<div><br></div>=0A<div>1. =D7=BC=B1=B8=D2=BB=BF=E9=
+=CD=F8=BF=A8=B2=E5=C8=EBelastix=B7=FE=CE=F1=C6=F7=A3=AC=BE=DF=CC=E5=
+=CD=F8=BF=A8=C5=E4=D6=C3=D0=C5=CF=A2=C8=E7=CF=C2</div>=0A<div>IP:=
+ 10.211.86.133</div>=0A<div>NETMASK: 255.255.255.192&nbsp;</div>=0A=
+<div>gateway: 10.211.86.129</div>=0A<div><br></div>=0A<div>2. =D4=
+=DAlinux shell=D6=D0=D0=E8=D2=AA=BC=D3=C8=EB=CC=D8=B6=A8=B5=C4=C2=
+=B7=D3=C9=D0=C5=CF=A2=A3=BA</div>=0A<div>route add -net 10.211.0.=
+0/16 gw 10.211.86.129</div>=0A<div><br></div>=0A<div>3. =D4=DAsip=
+.conf [gerenal]=D6=D0=BC=D3=C8=EB:</div>=0A<div>=0A<div>externip=3D=
+10.211.86.133</div>=0A<div>localnet=3D172.16.0.0/255.255.0.0</div=
+>=0A</div>=0A<div>dtmfmode=3Dinband</div>=0A<div><br></div>=0A<di=
+v>4. =C5=E4=D6=C3=CE=C4=BC=FEsip_additional.conf=BC=D3=C8=EBsip=C5=
+=E4=D6=C3=A3=BA</div>=0A<div>=0A<div>[8675561828725]</div>=0A<div=
+>disallow=3Dall</div>=0A<div>host=3D10.211.0.241</div>=0A<div>use=
+rname=3D8675561828725@ims.gd.chinamobile.com</div>=0A<div>secret=3D=
+123456</div>=0A<div>type=3Dfriend</div>=0A<div>insecure=3Dport,in=
+vite</div>=0A<div>fromdomain=3Dims.gd.chinamobile.com</div>=0A<di=
+v>fromuser=3D+8675561828725</div>=0A<div>allow=3Dalaw</div>=0A<di=
+v>context=3Dfrom-trunk-sip-8675561828725</div>=0A<div><br></div>=0A=
+<div>[8675561828726]</div>=0A<div>disallow=3Dall</div>=0A<div>hos=
+t=3D10.211.0.241</div>=0A<div>username=3D8675561828726@ims.gd.chi=
+namobile.com</div>=0A<div>secret=3D123456:q!</div>=0A<div>type=3D=
+friend</div>=0A<div>insecure=3Dport,invite</div>=0A<div>fromdomai=
+n=3Dims.gd.chinamobile.com</div>=0A<div>fromuser=3D+8675561828726=
+</div>=0A<div>allow=3Dalaw</div>=0A<div>context=3Dfrom-trunk-sip-=
+8675561828726</div>=0A<div><br></div>=0A<div>[8675561828727]</div=
+>=0A<div>disallow=3Dall</div>=0A<div>host=3D10.211.0.241</div>=0A=
+<div>username=3D8675561828727@ims.gd.chinamobile.com</div>=0A<div=
+>secret=3D123456</div>=0A<div>type=3Dfriend</div>=0A<div>dtmfmode=
+=3Dinband</div>=0A<div>insecure=3Dport,invite</div>=0A<div>fromdo=
+main=3Dims.gd.chinamobile.com</div>=0A<div>fromuser=3D+8675561828=
+727</div>=0A<div>allow=3Dalaw</div>=0A<div>dtmfmode=3Dinband</div=
+>=0A<div>context=3Dfrom-trunk-sip-8675561828727</div>=0A</div>=0A=
+<div><br></div>=0A<div>=0A<div>[8675561828729]</div>=0A<div>disal=
+low=3Dall</div>=0A<div>host=3D10.211.0.241</div>=0A<div>username=3D=
+8675561828729@ims.gd.chinamobile.com</div>=0A<div>secret=3D123456=
+</div>=0A<div>type=3Dfriend</div>=0A<div>insecure=3Dport,invite</=
+div>=0A<div>fromdomain=3Dims.gd.chinamobile.com</div>=0A<div>from=
+user=3D+8675561828729</div>=0A<div>allow=3Dalaw</div>=0A<div>cont=
+ext=3Dfrom-trunk-sip-8675561828729</div>=0A</div>=0A<div><br></di=
+v>=0A<div>4.&nbsp;&nbsp;=C5=E4=D6=C3=CE=C4=BC=FEsip_registrations=
+.conf=BC=D3=C8=EBsip=C5=E4=D6=C3=A3=BA</div>=0A<div>=0A<div>=0Are=
+gister=3D+8675561828725@ims.gd.chinamobile.com:123456:86755618287=
+25@ims.gd.chinamobile.com@10.211.0.241/+8675561828725</div>=0A<di=
+v>=0Aregister=3D+8675561828726@ims.gd.chinamobile.com:123456:8675=
+561828726@ims.gd.chinamobile.com@10.211.0.241/+8675561828726</div=
+>=0A<div>=0Aregister=3D+8675561828727@ims.gd.chinamobile.com:1234=
+56:8675561828727@ims.gd.chinamobile.com@10.211.0.241/+86755618287=
+27</div>=0A<div>=0Aregister=3D+8675561828729@ims.gd.chinamobile.c=
+om:123456:8675561828729@ims.gd.chinamobile.com@10.211.0.241/+8675=
+561828729</div>=0A</div>=0A<div><br></div>=0A<div><br></div>=0A<d=
+iv>0755-66630978=B5=C4=C5=E4=D6=C3=A3=BA</div>=0A<div><br></div>=0A=
+<div>=D3=C9=D3=DA=B4=CB=CC=F5=CF=DF=C2=B7=B5=C4IP=B5=D8=D6=B7=BA=CD=
+=CD=F8=B9=D8=BA=CD=B9=AB=CB=BE=D6=AE=C7=B0=CB=C4=B8=F6=BA=C5=C2=EB=
+=D4=DA=D2=BB=B8=F6=CD=F8=B6=CE=A3=AC=B6=F8=C7=D2=CD=F8=B9=D8=B5=D8=
+=D6=B7=D3=D6=D2=BB=D1=F9=A3=AC=B5=BC=D6=C2</div>=0A<div>=D6=BB=C4=
+=DC=CA=B9=D3=C3=C1=ED=CD=E2=D2=BB=CC=A8IX110=B5=C4=D6=F7=B0=E5=C0=
+=B4=D7=F6SIP=D6=D0=BC=CC=A3=AC=BE=DF=CC=E5=C5=E4=D6=C3=C8=E7=CF=C2=
+=A3=BA</div>=0A<div><br></div>=0A<div>=0A<div>1. IX110=B7=FE=CE=F1=
+=C6=F7=A3=AC=BE=DF=CC=E5=CD=F8=BF=A8=C5=E4=D6=C3=D0=C5=CF=A2=C8=E7=
+=CF=C2</div>=0A<div>eth0:</div>=0A<div>IP: 172.16.0.11</div>=0A<d=
+iv>NETMASK: 255.255.0.0</div>=0A<div>gateway:172.16.0.1</div>=0A<=
+div><br></div>=0A<div>eth1</div>=0A<div>IP: 10.211.86.136</div>=0A=
+<div>NETMASK: 255.255.255.192&nbsp;</div>=0A<div>gateway: 10.211.=
+86.129</div>=0A<div><br></div>=0A<div>2. =D4=DAlinux shell=D6=D0=D0=
+=E8=D2=AA=BC=D3=C8=EB=CC=D8=B6=A8=B5=C4=C2=B7=D3=C9=D0=C5=CF=A2=A3=
+=BA</div>=0A<div>route add -net 10.211.0.0/16 gw 10.211.86.129</d=
+iv>=0A</div>=0A<div><br></div>=0A<div>=0A<div>3. =D4=DAsip.conf [=
+gerenal]=D6=D0=BC=D3=C8=EB:</div>=0A<div>=0A<div>externip=3D10.21=
+1.86.136</div>=0A<div>localnet=3D172.16.0.0/255.255.0.0</div>=0A<=
+/div>=0A<div>dtmfmode=3Dinband</div>=0A</div>=0A<div><br></div>=0A=
+<div>=0A<div>4. =C5=E4=D6=C3=CE=C4=BC=FEsip_additional.conf=BC=D3=
+=C8=EBsip=C5=E4=D6=C3=A3=BA</div>=0A<div>[8675566630978]</div>=0A=
+</div>=0A<div>disallow=3Dall</div>=0A<div>host=3D10.211.0.241</di=
+v>=0A<div>username=3D8675566630978@ims.gd.chinamobile.com</div>=0A=
+<div>secret=3D123456</div>=0A<div>type=3Dfriend</div>=0A<div>inse=
+cure=3Dport,invite</div>=0A<div>fromdomain=3Dims.gd.chinamobile.c=
+om</div>=0A<div>fromuser=3D+8675566630978</div>=0A<div>allow=3Dal=
+aw</div>=0A<div>context=3Dfrom-openvox</div>=0A<div><br></div>=0A=
+<div>[openvox]</div>=0A<div>host=3D172.16.0.2</div>=0A<div>insecu=
+re=3Dinvite</div>=0A<div>canreinvite=3Dno</div>=0A<div>context=3D=
+from-internal</div>=0A<div>type=3Dfriend</div>=0A<div><br></div>=0A=
+<div>4.&nbsp;&nbsp;=C5=E4=D6=C3=CE=C4=BC=FEsip_registrations.conf=
+=BC=D3=C8=EBsip=C5=E4=D6=C3=A3=BA</div>=0A<div>=0Aregister=3D+867=
+5566630978@ims.gd.chinamobile.com:123456:8675566630978@ims.gd.chi=
+namobile.com@10.211.0.241/+8675566630978</div>=0A<div><br></div>=0A=
+<div>5. =D4=DAextensions.conf=D6=D0=BC=D3=C8=EB=A3=BA</div>=0A<di=
+v>[from-openvox]</div>=0A<div>exten =3D&gt; _., 1, Dial(SIP/openv=
+ox/88998)</div>=0A<div>exten =3D&gt; _., n, Hangup</div>=0A<div><=
+br></div>=0A<div>6. =D4=DA=B9=AB=CB=BE=B5=C4elastix=B7=FE=CE=F1=C6=
+=F7=D6=D0=BC=D3=C8=EB=D2=BB=B8=F6sip trunk=B6=D4=BD=D3</div>=0A<d=
+iv>[8675566630978]</div>=0A<div>host=3D172.16.0.11</div>=0A<div>i=
+nsecure=3Dinvite</div>=0A<div>disallow=3Dall</div>=0A<div>allow=3D=
+ulaw,alaw</div>=0A<div>canreinvite=3Dno</div>=0A<div>context=3Dfr=
+om-pstn</div>=0A<div>type=3Dfriend</div>=0A=0A=0A=0A=0A</BODY>=0A=
+</HTML>
+
+------=_Next_Part_0006940890.334--
+
+------=_Next_Part_0020822670.467--
+
