@@ -21,3 +21,7 @@
 ### Navicat for MySQL
 
 	MySQL 客户端
+	
+### WinSIP
+
+	批量测试 SIP
