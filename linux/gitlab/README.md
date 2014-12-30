@@ -1,5 +1,7 @@
 ## Config Gitlab
 
+	检查 GITLAB: gitlab-rake gitlab:check
+
 ### BUG
 
 	gitlab-7.4.3 BUG：备份文件中如有空项目，恢复时会失败
@@ -14,4 +16,3 @@
 	For crond job:
 		Save crontab to /etc/crontab
 		systemctl restart crond
-
