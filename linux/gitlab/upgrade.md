@@ -1,7 +1,8 @@
 ## GITLAB 升级
 
 	omnibus gitlab
-	[omnibus-gitlab-update](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/update.md)
+
+[omnibus-gitlab-update](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/update.md)
 
 ### 从 7.4.3 升级至 7.6.1
 
