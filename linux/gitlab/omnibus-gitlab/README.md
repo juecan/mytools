@@ -1,6 +1,7 @@
 ## Config Gitlab
 
 	检查 GITLAB: gitlab-rake gitlab:check
+	gitlabctl start|stop|status
 
 ### BUG
 
