@@ -1,0 +1,33 @@
+# kali 官方源
+deb http://http.kali.org/kali kali main non-free contrib
+deb-src http://http.kali.org/kali kali main non-free contrib
+deb http://security.kali.org/kali-security kali/updates main contrib non-free
+
+# debain 源
+deb http://mirrors.163.com/debian/ wheezy main contrib
+deb http://mirrors.163.com/debian/ wheezy-proposed-updates main contrib
+deb-src http://mirrors.163.com/debian/ wheezy main contrib
+deb-src http://mirrors.163.com/debian/ wheezy-proposed-updates main contrib
+
+# debian 安全更新源
+deb http://security.debian.org/ wheezy/updates main contrib
+deb-src http://security.debian.org/ squeeze/updates main contrib non-free
+
+# 163 源的地址
+deb-src http://mirrors.163.com/debian-security wheezy/updates main non-free contrib
+deb http://mirrors.163.com/debian-security wheezy/updates main non-free contrib
+deb http://mirrors.163.com/debian/ wheezy-updates contrib main
+
+# 激进源，新手不推荐使用这个软件源
+deb http://repo.kali.org/kali kali-bleeding-edge main
+deb-src http://repo.kali.org/kali kali-bleeding-edge main
+
+# 中科大 kali 源
+deb http://mirrors.ustc.edu.cn/kali kali main non-free contrib
+deb-src http://mirrors.ustc.edu.cn/kali kali main non-free contrib
+deb http://mirrors.ustc.edu.cn/kali-security kali/updates main contrib non-free
+
+# 阿里云 kali 源
+deb http://mirrors.aliyun.com/kali kali main non-free contrib
+deb-src http://mirrors.aliyun.com/kali kali main non-free contrib
+deb http://mirrors.aliyun.com/kali-security kali/updates main contrib non-free
