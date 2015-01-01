@@ -1,16 +1,29 @@
 ## Kali Network
 
-	/etc/network/interfaces
+### 动态 IP 设置
 
-	# The loopback network interface
-	auto lo
-	iface lo inet loopback
-	# The primary network interface
-	allow-hotplug eth0 eth1
-	iface eth0 inet dhcp
-	iface eth1 inet static
-        address 192.168.0.123
-        netmask 255.255.255.0
+	ifconfig eth0 172.16.8.188/16		设置 IP 和子网掩码
+	route add default gw 172.16.0.1		设置网关
+	echo nameserver 172.16.0.1 > /etc/resolv.conf			设置 DNS 地址
+	/etc/init.d/networking restart		重启网卡
+
+### 静态 IP 设置
+
+	ifconfig -a 查看所有网卡
+
+	/etc/network/interfaces
+		# The loopback network interface
+		auto lo
+		iface lo inet loopback
+		# The primary network interface
+		allow-hotplug eth0 eth1
+		iface eth0 inet dhcp
+		iface eth1 inet static
+			address 192.168.0.123	IP 地址
+			netmask 255.255.255.0	子网掩码
+			network 192.168.0.0		网络地址
+			broadcase 192.168.0.255	广播地址
+			gateway 192.168.0.1		网关地址
 
 ### auto allow-hotplug
 		
