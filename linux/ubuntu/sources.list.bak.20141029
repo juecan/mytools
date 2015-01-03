@@ -1,0 +1,194 @@
+# deb cdrom:[Ubuntu-Kylin 14.04.1 LTS _Trusty Tahr_ - Release amd64 (20140722.1)]/ trusty main multiverse restricted universe
+
+# See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to
+# newer versions of the distribution.
+deb http://ubuntu.01link.hk/ trusty main restricted
+deb-src http://ubuntu.01link.hk/ trusty main restricted
+
+## Major bug fix updates produced after the final release of the
+## distribution.
+
+## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu
+## team. Also, please note that software in universe WILL NOT receive any
+## review or updates from the Ubuntu security team.
+deb http://ubuntu.01link.hk/ trusty universe
+deb-src http://ubuntu.01link.hk/ trusty universe
+
+## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu 
+## team, and may not be under a free licence. Please satisfy yourself as to 
+## your rights to use the software. Also, please note that software in 
+## multiverse WILL NOT receive any review or updates from the Ubuntu
+## security team.
+deb http://ubuntu.01link.hk/ trusty multiverse
+deb-src http://ubuntu.01link.hk/ trusty multiverse
+
+## N.B. software from this repository may not have been tested as
+## extensively as that contained in the main release, although it includes
+## newer versions of some applications which may provide useful features.
+## Also, please note that software in backports WILL NOT receive any review
+## or updates from the Ubuntu security team.
+
+
+## Uncomment the following two lines to add software from Canonical's
+## 'partner' repository.
+## This software is not part of Ubuntu, but is offered by Canonical and the
+## respective vendors as a service to Ubuntu users.
+deb http://archive.canonical.com/ubuntu trusty partner
+deb-src http://archive.canonical.com/ubuntu trusty partner
+
+## Uncomment the following two lines to add software from Ubuntu's
+## 'extras' repository.
+## This software is not part of Ubuntu, but is offered by third-party
+## developers who want to ship their latest software.
+deb http://extras.ubuntu.com/ubuntu trusty main
+deb-src http://extras.ubuntu.com/ubuntu trusty main
+
+# Trusty(14.04)版本
+
+# 网易163更新服务器（广东广州电信/联通千兆双线接入），包含其他开源镜像：
+deb http://ubuntu.01link.hk/ trusty restricted multiverse
+deb-src http://ubuntu.01link.hk/ trusty restricted multiverse
+
+# 搜狐
+deb http://ubuntu.01link.hk/ trusty restricted multiverse
+deb-src http://ubuntu.01link.hk/ trusty restricted multiverse
+
+# oschina
+deb http://mirrors.oschina.net/ubuntu/ trusty main restricted universe multiverse
+deb http://mirrors.oschina.net/ubuntu/ trusty-backports main restricted universe multiverse
+deb http://mirrors.oschina.net/ubuntu/ trusty-proposed main restricted universe multiverse
+deb http://mirrors.oschina.net/ubuntu/ trusty-security main restricted universe multiverse
+deb http://mirrors.oschina.net/ubuntu/ trusty-updates main restricted universe multiverse
+deb-src http://mirrors.oschina.net/ubuntu/ trusty main restricted universe multiverse
+deb-src http://mirrors.oschina.net/ubuntu/ trusty-backports main restricted universe multiverse
+deb-src http://mirrors.oschina.net/ubuntu/ trusty-proposed main restricted universe multiverse
+deb-src http://mirrors.oschina.net/ubuntu/ trusty-security main restricted universe multiverse
+deb-src http://mirrors.oschina.net/ubuntu/ trusty-updates main restricted universe multiverse
+
+# 中科大
+deb http://ubuntu.01link.hk/ trusty restricted multiverse
+deb http://ubuntu.01link.hk/ trusty-security main restricted universe multiverse
+deb http://ubuntu.01link.hk/ trusty-updates main restricted universe multiverse
+deb http://ubuntu.01link.hk/ trusty-proposed main restricted universe multiverse
+deb http://ubuntu.01link.hk/ trusty-backports main restricted universe multiverse
+deb-src http://ubuntu.01link.hk/ trusty restricted multiverse
+deb-src http://ubuntu.01link.hk/ trusty-security main restricted universe multiverse
+deb-src http://ubuntu.01link.hk/ trusty-updates main restricted universe multiverse
+deb-src http://ubuntu.01link.hk/ trusty-proposed main restricted universe multiverse
+deb-src http://ubuntu.01link.hk/ trusty-backports main restricted universe multiverse
+
+## NVIDIA GTX760M、bumblebee
+deb http://ppa.launchpad.net/xorg-edgers/ppa/ubuntu trusty main
+deb-src http://ppa.launchpad.net/xorg-edgers/ppa/ubuntu trusty main
+#
+## prime-indicator、audacious、gthumb
+deb http://ppa.launchpad.net/nilarimogard/webupd8/ubuntu trusty main
+deb-src http://ppa.launchpad.net/nilarimogard/webupd8/ubuntu trusty main
+#
+## linux deepin
+deb http://ppa.launchpad.net/noobslab/deepin-sc/ubuntu trusty main
+deb-src http://ppa.launchpad.net/noobslab/deepin-sc/ubuntu trusty main
+#
+## VLC
+deb http://ppa.launchpad.net/videolan/stable-daily/ubuntu trusty main
+deb-src http://ppa.launchpad.net/videolan/stable-daily/ubuntu trusty main
+#
+## Blender
+deb http://ppa.launchpad.net/irie/blender/ubuntu trusty main
+deb-src http://ppa.launchpad.net/irie/blender/ubuntu trusty main
+#
+## GIMP
+deb http://ppa.launchpad.net/otto-kesselgulasch/gimp/ubuntu trusty main
+deb-src http://ppa.launchpad.net/otto-kesselgulasch/gimp/ubuntu trusty main
+#
+## wine
+deb http://ppa.launchpad.net/ubuntu-wine/ppa/ubuntu trusty main
+deb-src http://ppa.launchpad.net/ubuntu-wine/ppa/ubuntu trusty main
+#
+## pidgin
+deb http://ppa.launchpad.net/pidgin-developers/ppa/ubuntu trusty main
+deb-src http://ppa.launchpad.net/pidgin-developers/ppa/ubuntu trusty main
+#
+## OpenShot
+deb http://ppa.launchpad.net/openshot.developers/libopenshot-daily/ubuntu trusty main
+deb-src http://ppa.launchpad.net/openshot.developers/libopenshot-daily/ubuntu trusty main
+#
+## compiz
+deb http://ppa.launchpad.net/townsend/compiz-nvidia-refresh-test/ubuntu trusty main
+deb-src http://ppa.launchpad.net/townsend/compiz-nvidia-refresh-test/ubuntu trusty main
+#
+## unity-tweak-tool
+deb http://ppa.launchpad.net/tribaal/unity-tweak-tool/ubuntu trusty main
+deb-src http://ppa.launchpad.net/tribaal/unity-tweak-tool/ubuntu trusty main
+## 或
+deb http://ppa.launchpad.net/whoopie79/trusty/ubuntu trusty main
+deb-src http://ppa.launchpad.net/whoopie79/trusty/ubuntu trusty main
+#
+## Inkscape
+deb http://ppa.launchpad.net/inkscape.dev/stable/ubuntu trusty main
+deb-src http://ppa.launchpad.net/inkscape.dev/stable/ubuntu trusty main
+#
+## Skype
+deb http://ppa.launchpad.net/gunnarhj/skype-translation/ubuntu trusty main
+deb-src http://ppa.launchpad.net/gunnarhj/skype-translation/ubuntu trusty main
+# 
+
+##################################################
+# For Kali linux
+##################################################
+
+# deb cdrom:[Debian GNU/Linux 7.0 _Kali_ - Official Snapshot amd64 LIVE/INSTALL Binary 20140721-22:25]/ kali contrib main non-free
+
+## Security updates
+# deb http://security.kali.org/kali-security kali/updates main contrib non-free
+
+# 官方源
+# deb http://http.kali.org/kali kali main non-free contrib
+# deb-src http://http.kali.org/kali kali main non-free contrib
+# deb http://security.kali.org/kali-security kali/updates main contrib non-free
+
+# deb http://http.kali.org/kali kali main non-free contrib
+# deb-src http://http.kali.org/kali kali main non-free contrib
+# deb http://security.kali.org/kali-security kali/updates main contrib non-free
+# deb-src http://security.kali.org/kali-security kali/updates main contrib non-free
+
+# 中科大kali源
+# deb http://mirrors.ustc.edu.cn/kali kali main non-free contrib
+# deb-src http://mirrors.ustc.edu.cn/kali kali main non-free contrib
+# deb http://mirrors.ustc.edu.cn/kali-security kali/updates main contrib non-free
+
+# 新加坡kali源
+# deb http://mirror.nus.edu.sg/kali/kali/ kali main non-free contrib
+# deb-src http://mirror.nus.edu.sg/kali/kali/ kali main non-free contrib
+# deb http://security.kali.org/kali-security kali/updates main contrib non-free
+# deb http://mirror.nus.edu.sg/kali/kali-security kali/updates main contrib non-free
+# deb-src http://mirror.nus.edu.sg/kali/kali-security kali/updates main contrib non-free
+
+# debian_wheezy国内源
+# deb http://ftp.sjtu.edu.cn/debian wheezy main non-free contrib
+# deb-src http://ftp.sjtu.edu.cn/debian wheezy main non-free contrib
+# deb http://ftp.sjtu.edu.cn/debian wheezy-proposed-updates main non-free contrib
+# deb-src http://ftp.sjtu.edu.cn/debian wheezy-proposed-updates main non-free contrib
+# deb http://ftp.sjtu.edu.cn/debian-security wheezy/updates main non-free contrib
+# deb-src http://ftp.sjtu.edu.cn/debian-security wheezy/updates main non-free contrib
+# deb http://mirrors.163.com/debian wheezy main non-free contrib
+# deb-src http://mirrors.163.com/debian wheezy main non-free contrib
+# deb http://mirrors.163.com/debian wheezy-proposed-updates main non-free contrib
+# deb-src http://mirrors.163.com/debian wheezy-proposed-updates main non-free contrib
+# deb-src http://mirrors.163.com/debian-security wheezy/updates main non-free contrib
+# deb http://mirrors.163.com/debian-security wheezy/updates main non-free contrib
+
+# 激进源，新手不推荐使用这个软件源
+# deb http://repo.kali.org/kali kali-bleeding-edge main
+# deb-src http://repo.kali.org/kali kali-bleeding-edge main
+
+# 阿里云kali源
+# deb http://mirrors.aliyun.com/kali kali main non-free contrib
+# deb-src http://mirrors.aliyun.com/kali kali main non-free contrib
+# deb http://mirrors.aliyun.com/kali-security kali/updates main contrib non-free
+
+##################################################
+deb http://security.ubuntu.com/ubuntu/ trusty-security restricted main universe multiverse
+deb http://ubuntu.01link.hk/ trusty-updates main multiverse
+deb http://ubuntu.01link.hk/ trusty-proposed main multiverse
+deb http://ubuntu.01link.hk/ trusty-backports main multiverse

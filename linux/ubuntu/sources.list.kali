@@ -1,0 +1,48 @@
+# 
+
+# deb cdrom:[Debian GNU/Linux 7.0 _Kali_ - Official Snapshot amd64 LIVE/INSTALL Binary 20140721-22:25]/ kali contrib main non-free
+
+#deb cdrom:[Debian GNU/Linux 7.0 _Kali_ - Official Snapshot amd64 LIVE/INSTALL Binary 20140721-22:25]/ kali contrib main non-free
+
+## Security updates
+deb http://security.kali.org/kali-security kali/updates main contrib non-free
+
+# 官方源
+deb http://http.kali.org/kali kali main non-free contrib
+deb-src http://http.kali.org/kali kali main non-free contrib
+deb http://security.kali.org/kali-security kali/updates main contrib non-free 
+
+# 中科大kali源
+deb http://mirrors.ustc.edu.cn/kali kali main non-free contrib
+deb-src http://mirrors.ustc.edu.cn/kali kali main non-free contrib
+deb http://mirrors.ustc.edu.cn/kali-security kali/updates main contrib non-free
+
+# 新加坡kali源
+deb http://mirror.nus.edu.sg/kali/kali/ kali main non-free contrib
+deb-src http://mirror.nus.edu.sg/kali/kali/ kali main non-free contrib
+deb http://security.kali.org/kali-security kali/updates main contrib non-free
+deb http://mirror.nus.edu.sg/kali/kali-security kali/updates main contrib non-free
+deb-src http://mirror.nus.edu.sg/kali/kali-security kali/updates main contrib non-free
+
+# debian_wheezy国内源
+deb http://ftp.sjtu.edu.cn/debian wheezy main non-free contrib
+deb-src http://ftp.sjtu.edu.cn/debian wheezy main non-free contrib 
+deb http://ftp.sjtu.edu.cn/debian wheezy-proposed-updates main non-free contrib 
+deb-src http://ftp.sjtu.edu.cn/debian wheezy-proposed-updates main non-free contrib 
+deb http://ftp.sjtu.edu.cn/debian-security wheezy/updates main non-free contrib 
+deb-src http://ftp.sjtu.edu.cn/debian-security wheezy/updates main non-free contrib 
+deb http://mirrors.163.com/debian wheezy main non-free contrib 
+deb-src http://mirrors.163.com/debian wheezy main non-free contrib 
+deb http://mirrors.163.com/debian wheezy-proposed-updates main non-free contrib 
+deb-src http://mirrors.163.com/debian wheezy-proposed-updates main non-free contrib 
+deb-src http://mirrors.163.com/debian-security wheezy/updates main non-free contrib 
+deb http://mirrors.163.com/debian-security wheezy/updates main non-free contrib
+
+# 激进源，新手不推荐使用这个软件源
+deb http://repo.kali.org/kali kali-bleeding-edge main
+deb-src http://repo.kali.org/kali kali-bleeding-edge main
+
+# 阿里云kali源
+deb http://mirrors.aliyun.com/kali kali main non-free contrib
+deb-src http://mirrors.aliyun.com/kali kali main non-free contrib
+deb http://mirrors.aliyun.com/kali-security kali/updates main contrib non-free

@@ -1,0 +1,182 @@
+# 特效工具
+#deb file:///home/along/sources_packages compizconfig-settings-manager/
+#deb file:///home/along/sources_packages compiz-plugins-extra/
+deb file:///home/along/sources_packages docky/
+deb file:///home/along/sources_packages unity-tweak-tool/
+#deb file:///home/along/sources_packages unity-tweak-tool_old/
+deb file:///home/along/sources_packages xscreensaver/
+deb file:///home/along/sources_packages xscreensaver-data-extra/
+deb file:///home/along/sources_packages xscreensaver-gl-extra/
+
+#deb file:///home/along/sources_packages dpkg-dev/
+# 图片浏览器
+deb file:///home/along/sources_packages gthumb/
+
+# CPU 频率检测
+deb file:///home/along/sources_packages indicator-cpufreq/
+# 笔记本模式工具
+deb file:///home/along/sources_packages laptop-mode-tools/
+# NVIDIA 驱动
+#deb file:///home/along/sources_packages nvidia-331/
+#deb file:///home/along/sources_packages nvidia-331.38/
+#deb file:///home/along/sources_packages nvidia-340_old/
+# 显卡工具
+#deb file:///home/along/sources_packages prime-indicator_old/
+
+# 通讯工具
+deb file:///home/along/sources_packages openfetion/
+#deb file:///home/along/sources_packages pidgin-skype/
+deb file:///home/along/sources_packages pidgin-openfetion/
+deb file:///home/along/sources_packages pidgin-lwqq/
+#deb file:///home/along/sources_packages skype/
+# 压缩解压工具
+deb file:///home/along/sources_packages p7zip_p7zip-rar_p7zip-full/
+
+deb file:///home/along/sources_packages ttf-ancient-fonts/
+deb file:///home/along/sources_packages vim/
+deb file:///home/along/sources_packages virtualbox/
+#deb file:///home/along/sources_packages vlc/
+deb file:///home/along/sources_packages wireshark/
+deb file:///home/along/sources_packages qbittorrent/
+deb file:///home/along/sources_packages wine1.7/
+deb file:///home/along/sources_packages curl/
+deb file:///home/along/sources_packages libxtst6:i386/
+deb file:///home/along/sources_packages alltray/
+deb file:///home/along/sources_packages goldendict/
+deb file:///home/along/sources_packages gstreamer0.10-ffmpeg/
+deb file:///home/along/sources_packages deepin-music-player/
+deb file:///home/along/sources_packages deepin-media-player/
+deb file:///home/along/sources_packages libgtk2.0-0:i386/
+deb file:///home/along/sources_packages openjdk-6-jre/
+deb file:///home/along/sources_packages cython/
+deb file:///home/along/sources_packages git/
+deb file:///home/along/sources_packages libwebkitgtk-dev/
+deb file:///home/along/sources_packages smc/
+#deb file:///home/along/sources_packages chromium-bsu/
+deb file:///home/along/sources_packages unity-webapps-launchpad/
+deb file:///home/along/sources_packages kscope/
+# FTP 工具
+deb file:///home/along/sources_packages filezilla/
+# 软电话
+deb file:///home/along/sources_packages yate-qt4/
+deb file:///home/along/sources_packages twinkle/
+deb file:///home/along/sources_packages linphone/
+# 电驴
+deb file:///home/along/sources_packages amule/
+# Adobe Flash
+deb file:///home/along/sources_packages adobe-flashplugin_11/
+# 设备管理器
+deb file:///home/along/sources_packages udev-discover/
+# SWF 视频
+deb file:///home/along/sources_packages swfdec-mozilla/
+deb file:///home/along/sources_packages stardict/
+deb file:///home/along/sources_packages sysv-rc-conf/
+deb file:///home/along/sources_packages cairo-dock/
+deb file:///home/along/sources_packages languages/
+deb file:///home/along/sources_packages mac-ithemes-v3/
+deb file:///home/along/sources_packages mac-icons-v3/
+deb file:///home/along/sources_packages mbuntu-lightdm-v3/
+deb file:///home/along/sources_packages mbuntu-bscreen-v3/
+deb file:///home/along/sources_packages indicator-synapse/
+deb file:///home/along/sources_packages xrdp/
+deb file:///home/along/sources_packages tightvncserver/
+deb file:///home/along/sources_packages dconf-editor/
+deb file:///home/along/sources_packages mcu8051ide/
+deb file:///home/along/sources_packages sdcc/
+deb file:///home/along/sources_packages nmap/
+deb file:///home/along/sources_packages zenmap/
+deb file:///home/along/sources_packages plymouth-x11/
+deb file:///home/along/sources_packages wallch/
+deb file:///home/along/sources_packages dconf-tools/
+deb file:///home/along/sources_packages plymouth-theme-ubuntu-logo/
+deb file:///home/along/sources_packages plymouth-theme-ubuntu-text/
+deb file:///home/along/sources_packages bum/
+deb file:///home/along/sources_packages xubuntu-desktop/
+deb file:///home/along/sources_packages xbmc/
+deb file:///home/along/sources_packages fusion-icon/
+deb file:///home/along/sources_packages tasksel/
+deb file:///home/along/sources_packages mysql-server/
+deb file:///home/along/sources_packages apache2/
+deb file:///home/along/sources_packages php5/
+deb file:///home/along/sources_packages php5-mysql/
+deb file:///home/along/sources_packages openssh-server/
+deb file:///home/along/sources_packages apt-show-versions/
+deb file:///home/along/sources_packages libauthen-pam-perl/
+deb file:///home/along/sources_packages php5-xcache/
+deb file:///home/along/sources_packages php5-intl/
+deb file:///home/along/sources_packages vym/
+deb file:///home/along/sources_packages bluefish/
+deb file:///home/along/sources_packages php5-gd/
+deb file:///home/along/sources_packages qt4-dev-tools/
+deb file:///home/along/sources_packages libqt4-core/
+deb file:///home/along/sources_packages automake/
+deb file:///home/along/sources_packages gawk/
+deb file:///home/along/sources_packages texinfo/
+deb file:///home/along/sources_packages gperf/
+deb file:///home/along/sources_packages cvs/
+deb file:///home/along/sources_packages libncurses5-dev/
+deb file:///home/along/sources_packages nasm/
+deb file:///home/along/sources_packages autopoint/
+deb file:///home/along/sources_packages libtool/
+deb file:///home/along/sources_packages byacc/
+deb file:///home/along/sources_packages gettext/
+deb file:///home/along/sources_packages git-core/
+deb file:///home/along/sources_packages liblzo2-2/
+deb file:///home/along/sources_packages oracle-java7-installer/
+deb file:///home/along/sources_packages libxpm-dev/
+deb file:///home/along/sources_packages texi2html/
+deb file:///home/along/sources_packages skyeye/
+deb file:///home/along/sources_packages tftp/
+deb file:///home/along/sources_packages tftpd/
+deb file:///home/along/sources_packages tftpd-hpa/
+deb file:///home/along/sources_packages subversion/
+deb file:///home/along/sources_packages synaptic/
+deb file:///home/along/sources_packages bleachbit/
+#deb file:///home/along/sources_packages audacity/
+deb file:///home/along/sources_packages python3-leveldb/
+deb file:///home/along/sources_packages conky-all/
+deb file:///home/along/sources_packages conky-manager/
+deb file:///home/along/sources_packages ttf-liberation/
+deb file:///home/along/sources_packages hddtemp/
+deb file:///home/along/sources_packages lm-sensors/
+deb file:///home/along/sources_packages ubuntu-kylin-software-center/
+#deb file:///home/along/sources_packages nvidia-settings_343.13/
+deb file:///home/along/sources_packages chinese-calendar_1.0.0/
+#deb file:///home/along/sources_packages pidgin_1/
+#deb file:///home/along/sources_packages youker-assistant_1/
+deb file:///home/along/sources_packages uget_1.10.4/
+deb file:///home/along/sources_packages ppstream_1.0.2/
+deb file:///home/along/sources_packages pidgin-plugin-pack/
+
+# https://launchpad.net/ubuntu/+ppas
+#
+deb file:///home/along/sources_packages dpkg-dev/
+deb file:///home/along/sources_packages nvidia-331-updates_331.38/
+deb file:///home/along/sources_packages fcitx/
+deb file:///home/along/sources_packages fcitx-ui-qimpanel/
+deb file:///home/along/sources_packages boot-repair/
+deb file:///home/along/sources_packages grub/
+deb file:///home/along/sources_packages compizconfig-settings-manager/
+deb file:///home/along/sources_packages compiz-plugins-extra/
+deb file:///home/along/sources_packages pidgin/
+
+#wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+#sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+deb file:///home/along/sources_packages google-chrome-stable/
+deb file:///home/along/sources_packages unity-launcher-folders/
+deb file:///home/along/sources_packages vlc/
+deb file:///home/along/sources_packages skype/
+deb file:///home/along/sources_packages nautilus-open-as-root/
+deb file:///home/along/sources_packages nautilus-open-terminal-here/
+deb file:///home/along/sources_packages nautilus-refresh/
+deb file:///home/along/sources_packages nautilus-search/
+deb file:///home/along/sources_packages kwplayer_preinstall/
+deb file:///home/along/sources_packages audacious/
+deb file:///home/along/sources_packages audacity/
+deb file:///home/along/sources_packages laptop-mode-tools/
+deb file:///home/along/sources_packages indicator-cpufreq/
+deb file:///home/along/sources_packages adobe-flashplugin/
+deb file:///home/along/sources_packages samba/
+deb file:///home/along/sources_packages system-config-samba/
+deb file:///home/along/sources_packages thunderbird-locale-zh-hans/
+deb file:///home/along/sources_packages thunderbird-locale-zh-cn/
