@@ -244,3 +244,23 @@
 		192.168.1.120 为攻击者 IP
 		
 ### settoolkit
+
+## metasploit
+
+	Metasploit 使用 PostgreSQL 作为数据库：
+		root@kali:~# /etc/init.d/postgresql start
+	用 ss -ant 的输出来检验 PostgreSQL 是否在运行，然后确认 5432 端口处于 listening 状态：
+		root@kali:~# ss -ant
+	启动 Kali 的 Metasploit 服务：
+		第一次运行服务会创建一个 msf3 数据库用户和一个叫 msf3 的数据库。
+		还会运行 Metasploit RPC 和它需要的 WEB 服务端。
+		root@kali:~# /etc/init.d/metasploit start
+	在 Kali 运行 msfconsole：
+		root@kali:~# msfconsole
+	用 db_status 命令检验数据库的连通性
+		msf > db_status 
+		[*] postgresql connected to msf3
+		
+	PostgreSQL 和 Metasploit 开机启动：
+		update-rc.d postgresql enable
+		update-rc.d metasploit enable
