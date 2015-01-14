@@ -9,7 +9,7 @@
 
 ### Config E-mail
 
-	For Gmail: Save smtp_settings.rb.gmail to opt/gitlab/embedded/service/gitlab-rails/config/initializers/smtp_settings.rb
+	For Gmail: Save smtp_settings.rb.gmail to /opt/gitlab/embedded/service/gitlab-rails/config/initializers/smtp_settings.rb
 
 ### Backup
 
