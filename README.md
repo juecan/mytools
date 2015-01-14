@@ -10,15 +10,14 @@
 
 	Tools for OpenELEC
 
-## raspberrypi
+## Raspberrypi
 
-	raspberrypi tools
+	Raspberrypi tools
 
-## voip
+## VoIP
 
 	VOIP tools
 
-## windows
+## Windows
 
 	Tools for windows
-	
