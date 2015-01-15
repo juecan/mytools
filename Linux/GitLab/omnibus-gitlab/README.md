@@ -34,16 +34,16 @@
 	vi /opt/gitlab/embedded/service/gitlab-rails/config/gitlab.yml
 		email_from: Git@openvox.cn
 
-![email_from](image/email_from.png)
+![email_from](images/email_from.png)
 
 	vi /opt/gitlab/embedded/service/gitlab-rails/config/environments/production.rb
 		config.action_mailer.delivery_method = :smtp
 
-![smtp](image/smtp.png)
+![smtp](images/smtp.png)
 
 	vi /opt/gitlab/embedded/service/gitlab-rails/config/initializers/smtp_settings.rb
 
-![email_settings](image/email_settings.png)
+![email_settings](images/email_settings.png)
 
 ### 从 7.4.3 升级至 7.6.1
 
