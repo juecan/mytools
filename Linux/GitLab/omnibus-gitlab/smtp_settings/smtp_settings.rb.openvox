@@ -11,7 +11,7 @@ if Rails.env.production?
     port: 25,
     user_name: "Michael.zou@openvox.cn",
     password: "6(SlFkely7d[",
-    domain: "openvox.com",
+    domain: "openvox.cn",
     authentication: :login,
     enable_starttls_auto: false
   }
