@@ -22,7 +22,7 @@
 	
 ### 发送短信
 
-	1. Settings - Manage gateway and SMSC - openvox - add
+	1. Settings - Manage gateway and SMSC - openvox - add（注意，不是 edit 按钮）
 		SMSC name: openvox
 		Gateway host: 172.16.179.1
 		Gateway port: 80
