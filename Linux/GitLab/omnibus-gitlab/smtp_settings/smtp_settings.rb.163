@@ -10,7 +10,7 @@ if Rails.env.production?
     address: "smtp.163.com",
     port: 25,
     user_name: "zouhualong1012@163.com",
-    password: "A0623Long",
+    password: "The E-mail Password",
     domain: "163.com",
     authentication: :plain,
     enable_starttls_auto: true
