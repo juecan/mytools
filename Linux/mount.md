@@ -111,3 +111,22 @@
 		   Quirks:
 
 	函数：fstatfs/statfs
+
+### Ubuntu 上挂载 LVM2_member
+
+	sudo apt-get install lvm2
+
+	[~]$ sudo vgscan 
+	  Reading all physical volumes.  This may take a while...
+	  Found volume group "VolGroup00" using metadata type lvm2
+
+	[~]$ sudo vgchange -ay VolGroup00
+	  2 logical volume(s) in volume group "VolGroup00" now active
+
+	[~]$ sudo lvs
+	  LV       VG         Attr      LSize  Pool Origin Data%  Move Log Copy%  Convert
+	  LogVol00 VolGroup00 -wi-a---- 70.47g
+	  LogVol01 VolGroup00 -wi-a----  3.94g
+
+	现在可以挂载上了
+
