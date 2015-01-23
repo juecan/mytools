@@ -65,7 +65,7 @@
 
 ![blink_sip_advanced_tls_certification](images/blink_sip_advanced_tls_certification.png)
 
-	5. 设置 Asterisk 服务器生成的服务器验证文件
+	5. 设置 Asterisk 服务器生成的服务器验证文件（可忽略此步骤）
 
 ![blink_advanced_tls_certification](images/blink_advanced_tls_certification.png)
 
