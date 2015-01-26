@@ -1,0 +1,10 @@
+## Ubuntu Windows 双系统启动顺序修改
+
+	默认 Grub 启动，进入 Ubuntu 系统，编辑 /etc/default/grub
+	GRUB_DEFAULT 代表的就是启动项的顺序，从数字 0 开始，依次代表如下启动项
+		ubuntu 14.04
+		ubuntu 14.04 高级选项
+		windows 8.1
+		Setup
+	0 表示 ubuntu 14.04，改成 2 表示默认从 win8.1 启动
+	然后运行 sudo update-grub
