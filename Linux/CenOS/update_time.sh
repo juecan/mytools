@@ -9,6 +9,8 @@
 #	tUTC=true
 #	ARC=false
 
+# 日期不对可能导致编译时出现：make: warning:  Clock skew detected.  Your build may be incomplete.
+
 function update_sys_time()
 {
 	# 关闭 ntpd 服务

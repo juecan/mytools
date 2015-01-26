@@ -1,0 +1,20 @@
+## DAHDI 常见问题
+
+### driver should be 'wctdm' but is actually 'netjet'
+
+	Tiger ISDN内核模块被当成 Digium 语音卡，即驱动被占用
+	设置黑名单：
+		cat "blacklist netjet" >> /etc/modprobe.d/dahdi.blacklist.conf
+
+### 检测 EC 模块
+
+	执行命令 dmesg，如果有以下信息输出则表示已经识别到 EC（硬件回声消除）模块：
+	板卡为DE430P
+	[~]# dmesg | grep "VPM"
+		VPM450: echo cancellation for 128 channels
+		VPM450: hardware DTMF disabled.
+		VPM450: Present and operational servicing 4 span(s)
+
+	[~]# dmesg | grep "VPM"
+	wct4xxp 0000:02:09.0: VPM450: Not Present
+	表示没有识别到 EC 模块，即未加载硬件回声消除模块
