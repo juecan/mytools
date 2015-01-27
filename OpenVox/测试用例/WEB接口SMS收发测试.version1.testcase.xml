@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testcases>
+<testcase internalid="32" name="WEB接口SMS收发测试">
+	<node_order><![CDATA[1]]></node_order>
+	<externalid><![CDATA[2]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[<p>
+	WEB接口短信收发测试</p>
+]]></summary>
+	<preconditions><![CDATA[<p>
+	SMS Settings中开启SMS Received和SMS Local Stored</p>
+<p>
+	PDU解码：http://www.diafaan.com/sms-tutorials/gsm-modem-tutorial/online-sms-pdu-decoder/</p>
+]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[2]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	单个GSM端口向手机发送短信，查看AT log</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	AT log正常显示发送的AT指令，手机能接收短信</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[<p>
+	多个GSM端口向手机发送短信，查看AT log</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	AT log正常显示发送的AT指令，手机正常接收到短信</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[3]]></step_number>
+	<actions><![CDATA[<p>
+	用手机向单个GSM端口发送短信，查看AT log</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	AT log正常显示接收短信的pud码，收件箱正常收取短信</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[4]]></step_number>
+	<actions><![CDATA[<p>
+	用手机向多个GSM端口发送短信，查看AT log</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	AT log正常显示接收短信的PDU码，收件箱正常收取短信</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[5]]></step_number>
+	<actions><![CDATA[<p>
+	勾选 Flash SMS 发送短信</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	手机接收到弹窗式短信，关闭后短信不保存</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[6]]></step_number>
+	<actions><![CDATA[<p>
+	使用&nbsp;Load numbers from text file 加载目的号码发送短信</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	AT log正常显示发送的AT指令，手机能接收到短信</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testcases>
