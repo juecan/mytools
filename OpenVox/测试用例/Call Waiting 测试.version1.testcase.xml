@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testcases>
+<testcase internalid="50" name="Call Waiting 测试">
+	<node_order><![CDATA[103]]></node_order>
+	<externalid><![CDATA[4]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[<p>
+	呼叫等待功能测试</p>
+]]></summary>
+	<preconditions><![CDATA[<div>
+	网关SIP（SIP注册到网关）：A</div>
+<div>
+	外部电话：B、C</div>
+<div>
+	SIP Phone：Zoiper，使用 A 注册到网关</div>
+<div>
+	&nbsp;</div>
+<div>
+	注：使用 Zoiper 的两种皮肤进行测试</div>
+<div>
+	&nbsp; &nbsp; Zoiper Phone Interface 2（默认皮肤）：可同时hold所有通话</div>
+<div>
+	&nbsp; &nbsp; Zoiper Black Skin</div>
+<div>
+	&nbsp;</div>
+<div>
+	注：A 关联主板或从板 SIM 卡，B 拨打 A（第一路），接通后，C 拨打 A（第二路）并接通</div>
+<div>
+	&nbsp; &nbsp; 测试挂断时分别测试主叫挂断和被叫挂断</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[2]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	使用 B 拨打 A，接通后再使用 C 拨打 A</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	可正常收到第二路呼叫，且通话声音正常</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[<p>
+	测试直接切换通话，点击状态为hold的一方的接听按钮</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	主从板均可正常切换通话，且通话声音正常</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[3]]></step_number>
+	<actions><![CDATA[<p>
+	测试先hold再切换，先将正在通话的一路hold，点击原来一路的接听键，切换回原来的通话</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	主从板均可正常切换通话，且通话声音正常</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[4]]></step_number>
+	<actions><![CDATA[<p>
+	测试先hold再切换，先将正在通话的一路hold，点击另一路的接听按钮，切换至另一路通话</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	主从板均可正常切换通话，且通话声音正常</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[5]]></step_number>
+	<actions><![CDATA[<p>
+	挂断第一路（其状态为：正在通话）</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	主从板主被叫均可正常挂断</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[6]]></step_number>
+	<actions><![CDATA[<p>
+	挂断第一路（其状态为：通话保持）</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	主从板主被叫均可正常挂断</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[7]]></step_number>
+	<actions><![CDATA[<p>
+	挂断第二路（其状态为：正在通话）</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	主从板主被叫均可正常挂断</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[8]]></step_number>
+	<actions><![CDATA[<p>
+	挂断第二路（其状态为：通话保持）</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	主从板主被叫均可正常挂断</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testcases>

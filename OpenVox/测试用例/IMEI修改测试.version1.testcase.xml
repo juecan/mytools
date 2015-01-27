@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testcases>
+<testcase internalid="155" name="IMEI修改测试">
+	<node_order><![CDATA[104]]></node_order>
+	<externalid><![CDATA[5]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[<p>
+	手动、自动修改IMEI测试</p>
+]]></summary>
+	<preconditions><![CDATA[]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[2]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	手动修改IMEI：通过 GSM - GSM Settings - Edit -&nbsp;GSM Module IMEI - Modify 修改某端口的 IMEI</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	2-3 分钟后再次进入查看该端口的 IMEI 是否被修改</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[<p>
+	自动修改 IMEI：进入 http://网关地址/cgi-bin/php/gsm-autoimei.php，选中所有端口，使能 Enable 为 on，设置&nbsp;Interval 值，如 3600，勾选&nbsp;Immediately 和 Force，Save</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	勾选端口处是否显示混乱</p>
+<p>
+	Auto-IMEI Advanced 处是否每个端口都有某人的设置</p>
+<p>
+	10 分钟后查看端口的 IMEI 是否被修改</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testcases>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testcases>
+<testcase internalid="24" name="基本通话测试">
+	<node_order><![CDATA[100]]></node_order>
+	<externalid><![CDATA[1]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[<p>
+	基本通话测试</p>
+]]></summary>
+	<preconditions><![CDATA[<p>
+	1. 创建2个SIP分机SIP1、SIP2（SIP注册到网关）</p>
+<p>
+	2. 创建两条呼叫路由：SIP1 -&gt; GSM，GSM -&gt; SIP2</p>
+]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[2]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	SIP1外呼手机测试</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	有声音，挂断正常，声音质量良好</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[<p>
+	SIP2接收外部手机呼叫测试</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	有声音，挂断正常，声音质量良好</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[3]]></step_number>
+	<actions><![CDATA[<p>
+	SIP1通过GSM端口呼叫SIP2</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	有声音，挂断正常，声音质量良好</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[4]]></step_number>
+	<actions><![CDATA[<p>
+	SIP1不通过GSM端口呼叫SIP2</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	有声音，挂断正常，声音质量良好</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testcases>

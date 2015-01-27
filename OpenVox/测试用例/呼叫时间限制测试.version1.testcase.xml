@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testcases>
+<testcase internalid="159" name="呼叫时间限制测试">
+	<node_order><![CDATA[105]]></node_order>
+	<externalid><![CDATA[6]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[<p>
+	呼叫时间限制测试，GSM - GSM Settings - Edit -&nbsp;Call Duration Limit Settings 处设置</p>
+]]></summary>
+	<preconditions><![CDATA[]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[2]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<div>
+	使能 Enable Single Call Duration Limit 为 on</div>
+<div>
+	设置计时步长 step 为 60s（60s 内均按 60s 计）</div>
+<div>
+	设置 Single Call Duration Limitation 的值</div>
+<div>
+	Save To Other Ports 中勾选所有端口，同步所有设置</div>
+]]></actions>
+	<expectedresults><![CDATA[<div>
+	用软电话注册到网关做呼出，检查通话是否在通话时间达到设置的 Single Call Duration Limitation 的值时挂断</div>
+<div>
+	Save To Other Ports 显示是否混乱</div>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[<div>
+	使能 Enable Call Duration Limitation 为 on</div>
+<div>
+	设置计时步长 step 为 60s（60s 内均按 60s 计）</div>
+<div>
+	设置 Call Duration Limitation 的值</div>
+<div>
+	使能 Enable Auto Reset 为 on</div>
+<div>
+	设置 Next Reset Time</div>
+<div>
+	Save To Other Ports 中勾选所有端口，同步所有设置</div>
+]]></actions>
+	<expectedresults><![CDATA[<div>
+	用软电话注册到网关做呼出，检查通话是否在总通话时间达到设置的 Call Duration Limitation 的值时挂断，Remain Time 是否在达到 Next Reset Time 时重置</div>
+<div>
+	Save To Other Ports 显示是否混乱</div>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testcases>

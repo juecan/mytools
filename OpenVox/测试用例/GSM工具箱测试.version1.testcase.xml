@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testcases>
+<testcase internalid="166" name="GSM工具箱测试">
+	<node_order><![CDATA[107]]></node_order>
+	<externalid><![CDATA[8]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[<p>
+	GSM - Toolkit</p>
+<p>
+	测试 Get USSD 功能，SIM 卡必须支持 USSD 服务</p>
+]]></summary>
+	<preconditions><![CDATA[]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[2]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	设置 Function 为 Send AT Command，选中需测试的端口，在 Action 栏中填入要测试的 AT 指令，点击 Copy to Selected，点击 Execute</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	查看 Output 栏中显示的输出是否为想要的输出，而不是如 span failed 等错误信息</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[<p>
+	设置 Function 为 Get USSD，选中需测试的端口，在 Action 栏中填入要测试的 USSD 指令，点击 Copy to Selected，点击 Execute</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	查看 Output 栏中是否接受到来自运营商的菜单或其他功能信息</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[3]]></step_number>
+	<actions><![CDATA[<p>
+	设置 Function 为 Check Number，在需测试的端口的 Input 栏中填入要检查的号码（每个端口最好使用不同的号码），点击 Execute</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	查看 Output 栏中是否出现类似 PHONE:xxx RING 的信息，出现则表示功能正常</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testcases>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testcases>
+<testcase internalid="38" name="Call Forwarding测试">
+	<node_order><![CDATA[102]]></node_order>
+	<externalid><![CDATA[3]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[<p>
+	呼叫转移测试</p>
+]]></summary>
+	<preconditions><![CDATA[<p>
+	创建一个SIP分机，使用软电话注册到网关，创建呼叫路由将所有呼入呼叫转至该SIP分机</p>
+]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[2]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	设置某端口Call Forwarding Unconditional，使用手机拨打该端口</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	设置OK，呼叫正常转入设置的手机号</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[<p>
+	设置某端口Call Forwarding No Reply，使用手机拨打该端口</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	设置OK，无应答时正常转入设置的手机号</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[3]]></step_number>
+	<actions><![CDATA[<p>
+	设置某端口Call Forwarding Busy，使用手机拨打该端口</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	设置OK，该通道忙时正常转入设置的手机号</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[4]]></step_number>
+	<actions><![CDATA[<p>
+	设置某端口Call Forwarding on Not Reachable，使用手机拨打该端口</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	设置OK，呼叫不可达时正常转入设置的手机号</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[5]]></step_number>
+	<actions><![CDATA[<p>
+	设置某端口Cancel All，再Query</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	设置OK，可正常清除端口的所有Call Forwarding设置</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testcases>
