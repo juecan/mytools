@@ -1,21 +1,23 @@
-## GSM 网关配置 SSH 反向连接
+# GSM 网关配置 SSH 反向连接
 
 	作用：使公司内网工作机透过公网服务器访问客户内网的 GSM 网关，以便调试
 
-### （一）服务器配置
+## （一）服务器配置
 
 	Openvox-Wireless-Gateway
 		IP: 172.16.8.186
 		Port: SSH 12345, Web Port 80
 		Username: Web admin, SSH super
+
 	公网服务器
 		IP: 106.185.43.194
 		SSH Port: 22
 		SSH Username: root
+
 	工作机
 		IP: 172.16.8.180
 
-### （二）配置步骤
+## （二）配置步骤
 
 	1）端口映射（在 GSM 网关上进行操作）
 		1.	将网关上的 80 端口映射到公网服务器的 10241 端口
@@ -34,7 +36,7 @@
 
 ![configssh](images/configssh.jpg)
 		
-### （三）使用 SSH 隧道
+## （三）使用 SSH 隧道
 
 	1）从工作机透过公网服务器访问 GSM 网关（在内网工作机上进行操作）
 		访问 Web：浏览器使用 106.185.43.194:10241 登陆，输入 GSM 网关 Web端用户名和密码

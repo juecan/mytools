@@ -1,12 +1,14 @@
-### Asterisk TLS
-	
+# Asterisk TLS
+
+	配置 Asterisk TLS 传输，以下三个为网络上的教程：
+
 [Configuring Asterisk with TLS enabled](http://m.osslab.com.tw/VoIP/IP_PBX/%E8%BB%9F%E9%AB%94%E5%BC%8F_IP_PBX/Asterisk/Tips/%E8%A8%AD%E7%BD%AE_Asterisk_%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7_(security)/Configuring_Asterisk_with_TLS_enabled)
 
 [SIP TLS Transport](https://wiki.asterisk.org/wiki/display/AST/SIP+TLS+Transport)
 
 [Secure Calling Tutorial](https://wiki.asterisk.org/wiki/display/AST/Secure+Calling+Tutorial)
 
-### Asterisk Configuration
+## Asterisk 配置
 
 	1. 使用 Asterisk 源码中的工具生成 Asterisk 服务器及 SIP Phone 相关的验证文件：
 		mkdir /etc/asterisk/tls
@@ -44,9 +46,9 @@
 
 ![asterisk_sip_account_tls](images/asterisk_sip_account_tls.png)
 
-### SIP Phone Configuration
+## SIP 软电话配置
 
-#### Blink
+### Blink 软电话
 
 	1. 创建 SIP 账号 10001
 
@@ -54,7 +56,7 @@
 
 	2. 设置 SRTP Encryption，默认为 optional
 
-#### 注意：如果 Asterisk 的 SIP 账号使用了 encryption=yes，要将其设为 mandatory，且 asterisk 必须加载 res_srtp.so 模块
+**注意：如果 Asterisk 的 SIP 账号使用了 encryption=yes，要将其设为 mandatory，且 asterisk 必须加载 res_srtp.so 模块**
 
 ![blink_sip_media_srtp](images/blink_sip_media_srtp.png)
 
@@ -70,7 +72,7 @@
 
 ![blink_advanced_tls_certification](images/blink_advanced_tls_certification.png)
 
-#### Zoiper
+### Zoiper 软电话
 
 	1. 创建 SIP 账号 10001，使用 5061 端口
 
