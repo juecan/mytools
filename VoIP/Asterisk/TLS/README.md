@@ -6,6 +6,9 @@
 	
 	https://wiki.asterisk.org/wiki/display/AST/Secure+Calling+Tutorial
 	
+	[Configuring_Asterisk_with_TLS_enabled](http://m.osslab.com.tw/VoIP/IP_PBX/%E8%BB%9F%E9%AB%94%E5%BC%8F_IP_PBX/Asterisk/Tips/%E8%A8%AD%E7%BD%AE_Asterisk_%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7_(security)/Configuring_Asterisk_with_TLS_enabled)
+	[SIP+TLS+Transport](https://wiki.asterisk.org/wiki/display/AST/SIP+TLS+Transport)
+	[Secure+Calling+Tutorial](https://wiki.asterisk.org/wiki/display/AST/Secure+Calling+Tutorial)
 
 ### Asterisk Configuration
 
@@ -53,7 +56,9 @@
 
 ![blink_sip_account](images/blink_sip_account.png)
 
-	2. 设置 SRTP Encryption，默认为 optional，如果 Asterisk 的 SIP 账号使用了 encryption=yes，要将其设为 mandatory
+	2. 设置 SRTP Encryption，默认为 optional
+
+#### 注意：如果 Asterisk 的 SIP 账号使用了 encryption=yes，要将其设为 mandatory，且 asterisk 必须加载 res_srtp.so 模块
 
 ![blink_sip_media_srtp](images/blink_sip_media_srtp.png)
 
