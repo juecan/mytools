@@ -1,8 +1,8 @@
 # Asterisk TTS
 
 	TTS: Text to Speech，文字转语音
-	
-	[OSSLAB TTS](http://www.osslab.org.tw/VoIP/IP_PBX/%E8%BB%9F%E9%AB%94%E5%BC%8F_IP_PBX/Asterisk_-_%E5%85%8D%E8%B2%BB_IP_PBX_%E7%B6%B2%E8%B7%AF%E9%9B%BB%E8%A9%B1%E4%BA%A4%E6%8F%9B%E5%B9%B3%E5%8F%B0/Addons/TTS_-_%E6%96%87%E5%AD%97%E8%BD%89%E8%AA%9E%E9%9F%B3)
+
+[OSSLAB TTS](http://www.osslab.org.tw/VoIP/IP_PBX/%E8%BB%9F%E9%AB%94%E5%BC%8F_IP_PBX/Asterisk_-_%E5%85%8D%E8%B2%BB_IP_PBX_%E7%B6%B2%E8%B7%AF%E9%9B%BB%E8%A9%B1%E4%BA%A4%E6%8F%9B%E5%B9%B3%E5%8F%B0/Addons/TTS_-_%E6%96%87%E5%AD%97%E8%BD%89%E8%AA%9E%E9%9F%B3)
 
 ## eSpeak
 
@@ -23,10 +23,6 @@
 	cp portaudio.h portaudio.h.bak
 	cp portaudio19.h portaudio.h
 	make
-		如果出现：wavegen.cpp:(.text+0x21c9): undefined reference to `Pa_StreamActive'
-		cp portaudio.h portaudio.h.bak
-		cp portaudio19.h portaudio.h
-		再 make
 	make install
 
 	下载安装 Asterisk-eSpeak：https://github.com/zaf/Asterisk-eSpeak
@@ -35,6 +31,14 @@
 	make
 	make install
 	make samples
+
+> 编译 espeak 过程中如果出现：wavegen.cpp:(.text+0x21c9): undefined reference to `Pa_StreamActive'，配置方法如下：
+> 
+> cp portaudio.h portaudio.h.bak
+> 
+> cp portaudio19.h portaudio.h
+> 
+> 再 make
 
 ### 使用
 
