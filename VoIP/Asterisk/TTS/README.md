@@ -86,6 +86,3 @@
 		exten => _2X.,n,Playback(/tmp/festival)                       
 		exten => _2X.,n,System(rm -f /tmp/festival.wav)               
 		exten => _2X.,n,Hangup()
-
-echo "It's such a beautiful day! Why are you in front of the computer?" | text2wave -scale 50 -eval \(voice_cmu_us_bdl_arctic_clunits\) -o beautiful_day_with_voice_cmu_us_bdl_arctic_clunits.wa
-
