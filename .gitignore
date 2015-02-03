@@ -1,3 +1,6 @@
 # ubuntu vim
 *~
 *.swp
+
+# Python
+*.pyc

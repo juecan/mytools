@@ -24,7 +24,17 @@
 	配置共享目录信息，编辑文件 /etc/exports：
 		vi /etc/exports
 		/nfs-share 172.16.210.1(rw,sync,all_squash,anonuid=0,anongid=0)
-		
+
+	注意：
+		id root
+			uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel)
+
+		rw: read and write
+		sync: sync your change to disk
+		all_squash: all users chage to nobody
+		anonuid: allow uid
+		anongid: allow gid
+
  ![exports](images/exports.jpg)
  
 	使共享目录设置生效：
@@ -53,7 +63,7 @@
 		cd /etc/asterisk
 		mkdir nfs
 		mount -o nolock -t nfs 172.16.8.61:/nfs-share nfs
-		
+
 ![mount](images/mount.jpg)
 
 	在 NFS 服务器中查看创建的文件：
@@ -74,37 +84,22 @@
 
 	1) mount: 172.16.8.88:/root failed, reason given by server: Permission denied
 		all_squash,anonuid=0,anongid=0
+
 	2) mount clntudp_create : RPC Program not registered
 		/etc/hosts.allow
 			portmap:172.16.8.88
+
 	3) mount: mount to NFS server '172.16.8.88' failed: System Error: No route to host.
 		server: service iptables start
+
 	4) /usr/sbin/start-statd: line 8: systemctl: command not found
 		mount.nfs: rpc.statd is not running but is required for remote locking.
 		mount.nfs: Either use '-o nolock' to keep locks local, or start statd.
 		mount.nfs: an incorrect mount option was specified
 		client: mount -o nolock -t nfs 172.16.8.61:/root nfs
 					   |-------|
+
 	5) CentOS 7:
 		[~]# service iptables start
 		[~]# service rpcbind restart
 		[~]# service nfs restart
-
-## /etc/exports 说明
-
-	Directory Client_IP(rw,sync,all_squash,anonuid=0,anongid=0)
-		rw: read and write
-		sync: sync your change to disk
-		all_squash: all users chage to nobody
-		anonuid: allow uid
-		anongid: allow gid
-
-## id
-
-	id root
-		uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel)
-
-## OpenVox GsmGateway
-	cd /etc/asterisk
-	mkdir nfs
-	mount -o nolock -t nfs 172.16.8.88:/root nfs
