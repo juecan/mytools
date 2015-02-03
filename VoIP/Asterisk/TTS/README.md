@@ -59,6 +59,7 @@
 	yum install festival
 
 	在文件 /usr/share/festival/lib/festival.scm 末尾添加如下内容，以使 Asterisk 连接 Festival 服务
+	（此步骤应可省略）
 		(define (tts_textasterisk string mode)
 		"(tts_textasterisk STRING MODE)
 		Apply tts to STRING. This function is specifically designed for
