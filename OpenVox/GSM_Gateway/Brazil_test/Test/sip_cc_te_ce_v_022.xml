@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE scenario SYSTEM "sipp.dtd">
+<!-- Author: Michael.zou -->
+<!-- Date: 2014-12-11    -->
+
+<scenario name="SIP_CC_TE_CE_V_022">
+  <send retrans="500">
+    <![CDATA[
+      INVITE sip:10086@[remote_ip]:[remote_port] SIP/2.0
+      Call-ID: [call_id]
+      CSeq: 1 INVITE
+      From: 8888 <sip:8888@[local_ip]:[local_port]>;tag=[call_number]
+      To: <sip:10086@[remote_ip]>
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=82535362
+      Max-Forwards: 70
+      Contact: <sip:8888@[local_ip]:[local_port]>
+      Content-Disposition: session
+      Content-Type: application/sdp
+      Content-Length: 170
+    ]]>
+  </send>
+
+  <recv response="100" optional="true"></recv>
+  <recv response="180" optional="true"></recv>
+  <recv response="183"></recv>
+
+  <send retrans="500">
+    <![CDATA[
+      INVITE sip:10086@[remote_ip]:[remote_port] SIP/2.0
+      Call-ID: [call_id]
+      CSeq: 1 INVITE
+      From: 8888 <sip:8888@[local_ip]:[local_port]>;tag=[call_number]
+      To: <sip:10086@[remote_ip]>
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=82535362
+      Max-Forwards: 70
+      Contact: <sip:8888@[local_ip]:[local_port]>
+      Content-Disposition: session
+      Content-Type: application/sdp
+      Content-Length: 170
+    ]]>
+  </send>
+
+  <recv response="100" optional="true"></recv>
+  <recv response="180" optional="true"></recv>
+  <recv response="183"></recv>
+  <recv response="200"></recv>
+
+  <send>
+    <![CDATA[
+      ACK sip:10086@[remote_ip]:[remote_port] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      Max-Forwards: 70
+      From: 8888 <sip:8888@[local_ip]:[local_port]>;tag=[call_number]
+      To: 10086 <sip:10086@[remote_ip]>[peer_tag_param]
+      User-Agent: SIPp
+      Call-ID: [call_id]
+      CSeq: 1 ACK
+      Contact: 8888 <sip:8888@[local_ip]:[local_port];transport=[transport]>
+      Content-Length: 0
+    ]]>
+  </send>
+
+  <send>
+    <![CDATA[
+      BYE sip:10086@[remote_ip] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      Max-Forwards: 70
+      From: 8888 <sip:8888@[local_ip]:[local_port]>;tag=[call_number]
+      To: 10086 <sip:10086@[remote_ip]>[peer_tag_param]
+      User-Agent: SIPp
+      Call-ID: [call_id]
+      CSeq: 1 BYE
+      Contact: 8888 <sip:8888@[local_ip]:[local_port];transport=[transport]>
+      Content-Length: 0
+    ]]>
+  </send>
+
+  <recv response="200"></recv>
+
+  <timewait milliseconds="120000"/>
+  <ResponseTimeRepartition value="10, 20, 30, 40, 50, 100, 150, 200"/>
+  <CallLengthRepartition value="10, 50, 100, 500, 1000, 5000, 10000"/>
+
+</scenario>
+

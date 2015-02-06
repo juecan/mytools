@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE scenario SYSTEM "sipp.dtd">
+<!-- Author: Michael.zou -->
+<!-- Date: 2014-12-10    -->
+
+<scenario name="SIP_CC_OE_CE_V_019">
+
+  <recv request="INVITE">
+    <action>
+      <ereg regexp="[0-9]{1,3}[.][0-9]{1,3}[.][0-9]{1,3}[.][0-9]{1,3}[:][0-9]{1,5};branch=(.*);rport" search_in="msg" check_it="true" assign_to="1" />
+    </action>
+  </recv>
+
+  <send>
+    <![CDATA[
+      SIP/2.0 200 OK
+      [last_Call-ID:]
+      [last_CSeq:]
+      [last_From:]
+      To: <sip:8888@[local_ip]>;tag=[pid]SIPpTag01[call_number]
+      [last_Via:]
+      Contact: <sip:[local_ip]:[local_port];transport=[transport]>
+      Content-Length: [len]
+    ]]>
+  </send>
+
+  <recv request="ACK"></recv>
+  <!--<pause milliseconds="1000"/>-->
+
+  <send>
+    <![CDATA[
+      SIP/2.0 200 OK
+      [last_Call-ID:]
+      CSeq: [cseq] INVITE
+      [last_From:]
+      To: <sip:8888@[local_ip]>;tag=[pid]SIPpTag02[call_number]
+      Via: SIP/2.0/[transport] [$1]
+      Contact: <sip:[local_ip]:[local_port];transport=[transport]>
+      Content-Length: [len]
+    ]]>
+  </send>
+
+  <recv request="ACK"></recv>
+
+  <timewait milliseconds="120000"/>
+  <ResponseTimeRepartition value="10, 20, 30, 40, 50, 100, 150, 200"/>
+  <CallLengthRepartition value="10, 50, 100, 500, 1000, 5000, 10000"/>
+
+</scenario>
