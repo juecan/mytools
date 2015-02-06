@@ -24,6 +24,7 @@
 			Mobile -> GSM -> 8888 -> SIPp
 
 	SIPp Server: 172.16.8.181
+		注意：此目录内只有 alaw 的 SIPp 语音包
 
 ## 以下为测试场景
 
