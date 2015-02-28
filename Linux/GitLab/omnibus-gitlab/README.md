@@ -73,7 +73,9 @@
 	3. 升级
 		rpm -Uvh gitlab-7.6.1_omnibus.5.3.0.ci.1-1.el6.x86_64.rpm
 	4. 配置
+		mv /opt/gitlab/embedded/service/gitlab-rails/config/initializers/smtp_settings.rb .
 		gitlab-ctl reconfigure
+		cp smtp_settings.rb /opt/gitlab/embedded/service/gitlab-rails/config/initializers/
 	5. 重启 GITLAB
 		gitlab-ctl restart
 		
