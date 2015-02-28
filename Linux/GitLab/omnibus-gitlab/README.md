@@ -60,8 +60,8 @@
 
 	GitLab 7.8.1
 
-![gitlab-jira](gitlab-jira.png)
-![jira-address](jira-address.png)
+![gitlab-jira](images/gitlab-jira.png)
+![jira-address](images/jira-address.png)
 
 ### 从 7.4.3 升级至 7.6.1，7.6.1 升级至 7.8.1
 
