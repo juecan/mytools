@@ -56,7 +56,14 @@
 
 ![email_settings](images/email_settings.png)
 
-### 从 7.4.3 升级至 7.6.1
+### 配置 GITLAB+JIRA
+
+	GitLab 7.8.1
+
+![jira-address](images/jira-address.png)
+![gitlab-jira](images/gitlab-jira.png)
+
+### 从 7.4.3 升级至 7.6.1，7.6.1 升级至 7.8.1
 
 	官方升级文档：
 
@@ -73,7 +80,9 @@
 	3. 升级
 		rpm -Uvh gitlab-7.6.1_omnibus.5.3.0.ci.1-1.el6.x86_64.rpm
 	4. 配置
+		mv /opt/gitlab/embedded/service/gitlab-rails/config/initializers/smtp_settings.rb .
 		gitlab-ctl reconfigure
+		cp smtp_settings.rb /opt/gitlab/embedded/service/gitlab-rails/config/initializers/
 	5. 重启 GITLAB
 		gitlab-ctl restart
 		
