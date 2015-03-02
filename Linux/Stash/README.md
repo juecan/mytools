@@ -71,3 +71,19 @@
 		./bin/start-stash.sh
 	15. 然后等2分钟左右. web 进入, 可以看到. 已经变成企业版了.
 
+### 连接 MySQL 数据库
+
+	在 MySQL 上建立数据库：
+
+>CREATE DATABASE stash CHARACTER SET utf8 COLLATE utf8_bin;
+>GRANT ALL PRIVILEGES ON stash.* TO 'stash'@'localhost' IDENTIFIED BY 'stash';
+>FLUSH PRIVILEGES;
+
+### 修改 HTTP 端口号
+
+	vim /opt/atlassian-stash-3.7.0/conf/server.xml
+		<Connector port="7990" protocol="HTTP/1.1" 修改为 <Connector port="80" protocol="HTTP/1.1"
+
+### 配置邮件
+
+[stash-mail](images/stash-mail.png)
