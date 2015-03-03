@@ -51,12 +51,7 @@
 	5. cd /opt/atlassian-stash-2.12.1/bin/
 	6. 修改默认的 git 库, 就是保存代码库的目录. 我这里设置为 /opt/gitdata. 根据自己的情况修改即可. 如下
 		vim setenv.sh
->
->#
-># One way to set the STASH HOME path is here via this variable. Simply uncomment it and set a valid path like
-># /stash/home. You can of course set it outside in the command terminal; that will also work.
->#
->STASH_HOME=”/opt/gitdata”
+			STASH_HOME=”/opt/gitdata”
 
 	7. 创建 gitdata 目录,并启动 mkdir /opt/gitdata , ./bin/start-stash.sh
 	8. 好了, 这个地方要等1-2分钟, 我也不知道为什么要等. 反正这个时候,系统 cpu 一直 100%. 等2分钟就好了.
@@ -74,10 +69,9 @@
 ### 连接 MySQL 数据库
 
 	在 MySQL 上建立数据库：
-
->CREATE DATABASE stash CHARACTER SET utf8 COLLATE utf8_bin;
->GRANT ALL PRIVILEGES ON stash.* TO 'stash'@'localhost' IDENTIFIED BY 'stash';
->FLUSH PRIVILEGES;
+		mysql> CREATE DATABASE stash CHARACTER SET utf8 COLLATE utf8_bin;
+		mysql> GRANT ALL PRIVILEGES ON stash.* TO 'stash'@'localhost' IDENTIFIED BY 'stash';
+		mysql> FLUSH PRIVILEGES;
 
 ### 修改 HTTP 端口号
 
@@ -86,4 +80,4 @@
 
 ### 配置邮件
 
-[stash-mail](images/stash-mail.png)
+![stash-mail](images/stash-mail.png)
