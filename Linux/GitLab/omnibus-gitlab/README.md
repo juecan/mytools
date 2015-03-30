@@ -2,6 +2,8 @@
 
 ## 安装 omnibus-gitlab
 
+[install_gitlab](https://about.gitlab.com/downloads/)
+
 	sudo yum install openssh-server
 	sudo yum install postfix
 	sudo yum install cronie
